@@ -36,17 +36,26 @@ Whether you're a scientist, researcher, or simply curious about the mysteries of
 - **Comprehensive Resources**: Curated collection of links to official resources, research organizations, and educational materials
 - **Live Mars Feed**: Real-time video feed from NASA's Mars missions and up-to-the-minute mission data
 - **Interactive Mars Experience**: 3D visualization, virtual rover driving, and Mars soundscape
+- **Progressive Web App (PWA)**: Offline functionality and installable experience on mobile and desktop devices
+- **Expanded Mars Anomalies Content**: Detailed information about additional structures beyond the Face on Mars
+- **Interactive Mars Map**: Explore the Cydonia region with toggleable data layers and points of interest
+- **Enhanced Accessibility**: ARIA attributes, keyboard navigation, and high contrast mode support
 
 ## 🛠️ Technologies Used
 
-- **HTML5**: Modern semantic markup
-- **CSS3**: Advanced styling with animations and responsive design
-- **JavaScript**: Interactive elements and dynamic content
-- **Font Awesome 6.4.0**: Icon library for enhanced visual elements and interactive features
-- **Google Fonts**: Typography optimization with Roboto font family
-- **YouTube API**: Integration for Mars live feed video streaming
-- **Open Graph Protocol**: Enhanced social media sharing capabilities
-- **CSS Grid & Flexbox**: Advanced layout techniques for responsive design
+- <img src="img/logo_html.png" alt="HTML5" width="20" height="20"> **HTML5**: Modern semantic markup
+- <img src="img/logo_css.png" alt="CSS3" width="20" height="20"> **CSS3**: Advanced styling with animations and responsive design
+- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" width="20" height="20"> **JavaScript**: Interactive elements and dynamic content
+- <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Font_Awesome_logomark.svg" alt="Font Awesome" width="20" height="20"> **Font Awesome 6.4.0**: Icon library for enhanced visual elements and interactive features
+- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google Fonts" width="20" height="20"> **Google Fonts**: Typography optimization with Roboto font family
+- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/youtube/youtube-original.svg" alt="YouTube API" width="20" height="20"> **YouTube API**: Integration for Mars live feed video streaming
+- <img src="https://img.shields.io/badge/Open%20Graph-Protocol-blue?style=flat-square&logo=opengraph" alt="Open Graph Protocol" height="20"> **Open Graph Protocol**: Enhanced social media sharing capabilities
+- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS Grid & Flexbox" width="20" height="20"> **CSS Grid & Flexbox**: Advanced layout techniques for responsive design
+- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/chrome/chrome-original.svg" alt="Service Workers" width="20" height="20"> **Service Workers**: Offline functionality and caching strategies for PWA support
+- <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Pwa-logo.svg" alt="Web App Manifest" width="20" height="20"> **Web App Manifest**: Metadata for installable web application experience
+- <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Accessibility.svg" alt="ARIA Attributes" width="20" height="20"> **ARIA Attributes**: Enhanced accessibility for screen readers and assistive technologies
+- <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Lightningjs-logo.svg" alt="Lazy Loading" width="20" height="20"> **Lazy Loading**: Performance optimization for image loading
+- <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Three.js_Icon.svg" alt="Three.js" width="20" height="20"> **Three.js**: 3D model visualization for Mars surface features
 
 <div align="center">
   <p><em>This website was designed and developed using:</em></p>
@@ -83,6 +92,9 @@ Cydonia-Project/
 ├── services.html         # Redirect to services page
 ├── links.html            # Redirect to resources page
 ├── live.html             # Redirect to live feed page
+├── manifest.json         # Web app manifest for PWA functionality
+├── service-worker.js     # Service worker for offline capabilities
+├── implementation-summary.md # Summary of implemented changes
 └── README.md             # Project documentation
 ```
 
@@ -120,6 +132,10 @@ Cydonia-Project/
 - **Read Articles**: Gain insights into Mars geology and the significance of Cydonia
 - **Join the Community**: Subscribe to the newsletter and connect with fellow researchers
 - **Contact the Team**: Reach out with questions or to contribute research
+- **Install as PWA**: Add the website to your home screen for offline access on mobile or desktop
+- **Use Accessibility Features**: Navigate with keyboard, use the skip-to-content link, and enjoy high contrast mode
+- **Explore the Interactive Map**: Toggle different data layers and discover points of interest in the Cydonia region
+- **Discover Additional Anomalies**: Learn about structures beyond the Face, including the D&M Pyramid, The Fort, and more
 
 ## 🤝 Contributing
 

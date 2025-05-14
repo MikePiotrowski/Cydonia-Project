@@ -1,0 +1,21 @@
+{
+  "name": "Mars Cydonia Connection",
+  "short_name": "Mars Cydonia",
+  "description": "Explore the mysteries of Cydonia on Mars - home to the famous Face and Pyramid structures",
+  "start_url": "/html/index.html",
+  "display": "standalone",
+  "background_color": "#f8f4f1",
+  "theme_color": "#e8491d",
+  "icons": [
+    {
+      "src": "/img/Martian_face_viking_cropped.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "/img/Martian_face_viking_cropped.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
