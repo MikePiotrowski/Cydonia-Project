@@ -105,19 +105,44 @@
                <div class="model-container">
                    <div id="mars-3d-model"></div>
                    <div class="model-controls">
-                       <button id="reset-view" class="button">Reset View</button>
-                       <div class="view-options">
-                           <button id="view-viking" class="button view-btn active">Viking View</button>
-                           <button id="view-enhanced" class="button view-btn">Enhanced View</button>
-                           <button id="view-wireframe" class="button view-btn">Wireframe</button>
-                       </div>
-                   </div>
+                    <div class="model-selector">
+                        <label for="structure-select">Select Structure:</label>
+                        <select id="structure-select" class="structure-dropdown">
+                            <option value="face">Face on Mars</option>
+                            <option value="pyramid">D&M Pyramid</option>
+                            <option value="fort">The Fort</option>
+                            <option value="city">City Complex</option>
+                        </select>
+                    </div>
+                    <button id="reset-view" class="button">Reset View</button>
+                    <div class="view-options">
+                        <button id="view-viking" class="button view-btn active">Viking View</button>
+                        <button id="view-enhanced" class="button view-btn">Enhanced View</button>
+                        <button id="view-wireframe" class="button view-btn">Wireframe</button>
+                        <button id="view-textured" class="button view-btn">Textured</button>
+                    </div>
+                </div>
                </div>
 
                <div class="model-info">
-                   <h3>About This 3D Model</h3>
-                   <p>This interactive 3D model was created using digital terrain mapping data from various Mars missions. The model allows you to examine the topography of the Face formation from any angle, helping to distinguish between natural geological features and potentially artificial characteristics.</p>
-                   <p>Use your mouse to rotate the model (click and drag), zoom in/out (scroll), and pan (right-click and drag). The control buttons allow you to reset the view or switch between different visualization modes.</p>
+                   <h3>About These 3D Models</h3>
+                   <p>These interactive 3D models were created using digital terrain mapping data from various Mars missions. The models allow you to examine the topography of various Cydonia formations from any angle, helping to distinguish between natural geological features and potentially artificial characteristics.</p>
+                   <p>Use your mouse to rotate the models (click and drag), zoom in/out (scroll), and pan (right-click and drag). The control buttons allow you to reset the view or switch between different visualization modes. Select different structures from the dropdown menu to explore the Face, D&M Pyramid, The Fort, and the City Complex.</p>
+                   <h4>Visualization Modes:</h4>
+                   <ul>
+                       <li><strong>Viking View:</strong> Simulates how the structures appeared in the original Viking mission photos</li>
+                       <li><strong>Enhanced View:</strong> Highlights potential geometric features with enhanced contrast</li>
+                       <li><strong>Wireframe:</strong> Shows the underlying geometric structure</li>
+                       <li><strong>Textured:</strong> Applies realistic Mars surface textures for a more immersive view</li>
+                   </ul>
+                   <h4>Keyboard Controls:</h4>
+                   <ul>
+                       <li><strong>Arrow Keys:</strong> Rotate the model</li>
+                       <li><strong>+/- Keys:</strong> Zoom in/out</li>
+                       <li><strong>R Key:</strong> Reset view</li>
+                       <li><strong>1-4 Keys:</strong> Switch between structures (1=Face, 2=Pyramid, 3=Fort, 4=City)</li>
+                       <li><strong>V, E, W, T Keys:</strong> Switch visualization modes (Viking, Enhanced, Wireframe, Textured)</li>
+                   </ul>
                </div>
            </div>
        </section>
