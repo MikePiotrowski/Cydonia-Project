@@ -93,6 +93,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    min-height: 250px;
 }
 
 .link-card:hover {
@@ -137,6 +138,8 @@
     text-decoration: none;
     font-size: 16px;
     display: inline-block;
+    margin-bottom: 10px;
+    height: auto;
 }
 
 .link-card .button:hover {
@@ -223,19 +226,20 @@
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap: 15px;
     }
-    
+
     .links-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .category-card {
         padding: 20px;
     }
-    
+
     .link-card {
         padding: 20px;
+        min-height: 220px;
     }
-    
+
     .suggest-form-container {
         padding: 20px;
     }
@@ -245,12 +249,16 @@
     .categories-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .category-icon {
         font-size: 30px;
     }
-    
+
     .category-card h3 {
         font-size: 18px;
+    }
+
+    .link-card {
+        min-height: 200px;
     }
 }
