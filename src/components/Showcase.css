@@ -1,0 +1,133 @@
+/* Showcase section */
+#showcase {
+  min-height: 500px;
+  background: url('/img/showcase.jpg') no-repeat center center/cover;
+  text-align: center;
+  color: white;
+  padding: 100px 0;
+  position: relative;
+}
+
+#showcase::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+#showcase .container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#showcase h1 {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  animation: fadeInDown 1s ease-out;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#showcase p {
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeInUp 1s ease-out;
+  line-height: 1.8;
+}
+
+.showcase-btn {
+  animation: fadeIn 1.5s ease-out;
+  font-size: 1.1rem;
+  padding: 12px 30px;
+  border-radius: 30px;
+  background: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.showcase-btn:hover {
+  background: var(--accent-color);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.showcase-btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  #showcase {
+    min-height: 400px;
+    padding: 80px 0;
+  }
+
+  #showcase h1 {
+    font-size: 2.5rem;
+  }
+
+  #showcase p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  #showcase {
+    min-height: 350px;
+    padding: 60px 0;
+  }
+
+  #showcase h1 {
+    font-size: 2rem;
+  }
+
+  #showcase p {
+    font-size: 1rem;
+    padding: 0 15px;
+  }
+
+  .showcase-btn {
+    font-size: 1rem;
+    padding: 10px 25px;
+  }
+}

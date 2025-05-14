@@ -1,0 +1,180 @@
+:root {
+  /* Light theme (default) */
+  --scroll-speed-color: #8b4513; /* Default scrollbar color, will be updated by JS */
+  --scrollbar-cursor-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='%23e8491d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 19V5'%3E%3C/path%3E%3Cpath d='M5 12l7-7 7 7'%3E%3C/path%3E%3C/svg%3E");
+  --primary-color: #e8491d;
+  --secondary-color: #8b4513;
+  --background-color: #f8f4f1;
+  --text-color: #333;
+  --accent-color: #c1440e;
+  --header-bg: #35424a;
+  --header-text: #fff;
+  --footer-bg: #35424a;
+  --footer-text: #fff;
+  --card-bg: #fff;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+  --border-color: #ddd;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --primary-color: #ff6b35;
+  --secondary-color: #f8c630;
+  --background-color: #1a1a1a;
+  --text-color: #f0f0f0;
+  --accent-color: #ff8c42;
+  --header-bg: #121212;
+  --header-text: #fff;
+  --footer-bg: #121212;
+  --footer-text: #fff;
+  --card-bg: #2a2a2a;
+  --card-shadow: rgba(0, 0, 0, 0.3);
+  --border-color: #444;
+  --scroll-speed-color: #f8c630;
+}
+
+/* High contrast theme */
+.high-contrast {
+  --primary-color: #ff0000;
+  --secondary-color: #ffff00;
+  --background-color: #000000;
+  --text-color: #ffffff;
+  --accent-color: #ff0000;
+  --header-bg: #000000;
+  --header-text: #ffffff;
+  --footer-bg: #000000;
+  --footer-text: #ffffff;
+  --card-bg: #000000;
+  --card-shadow: rgba(255, 255, 255, 0.3);
+  --border-color: #ffffff;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  padding: 0;
+  margin: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* Scrollbar Customization */
+/* For Webkit browsers (Chrome, Safari, newer versions of Opera) */
+::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-color);
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+  cursor: var(--scrollbar-cursor-url), pointer;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--secondary-color), #a0522d);
+  border-radius: 10px;
+  border: 2px solid var(--background-color);
+  box-shadow: 0 0 8px rgba(0,0,0,0.3), 0 0 5px var(--scroll-speed-color);
+  transition: all 0.3s ease, box-shadow 0.1s ease;
+  cursor: grab;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, var(--accent-color), var(--primary-color));
+  border: 2px solid var(--background-color);
+  box-shadow: 0 0 12px rgba(232, 73, 29, 0.5);
+  cursor: grabbing;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(to bottom, var(--primary-color), #ff6b35);
+  cursor: grabbing;
+  transform: scale(0.98);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--background-color);
+}
+
+/* Scrollbar button styles (arrows at the ends) */
+::-webkit-scrollbar-button {
+  display: block;
+  height: 10px;
+  width: 10px;
+  background: var(--secondary-color);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+::-webkit-scrollbar-button:hover {
+  background: var(--accent-color);
+  transform: scale(1.2);
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary-color) var(--background-color);
+}
+
+/* Global styles */
+.container {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.button:hover {
+  background: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.highlight {
+  color: var(--primary-color);
+}
+
+/* Skip link for accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--primary-color);
+  color: white;
+  padding: 8px;
+  z-index: 100;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Visually hidden elements for screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}

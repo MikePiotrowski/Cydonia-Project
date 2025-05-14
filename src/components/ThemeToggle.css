@@ -1,0 +1,78 @@
+/* Theme Toggle Button */
+.theme-toggle {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 99;
+}
+
+.theme-toggle-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: var(--primary-color);
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.theme-toggle-btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle-btn.light {
+  background: #35424a;
+}
+
+.theme-toggle-btn.dark {
+  background: #f8c630;
+  color: #333;
+}
+
+/* Animation for icon */
+.theme-toggle-btn i {
+  transition: transform 0.5s ease;
+}
+
+.theme-toggle-btn:hover i {
+  transform: rotate(30deg);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .theme-toggle {
+    bottom: 15px;
+    left: 15px;
+  }
+  
+  .theme-toggle-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 576px) {
+  .theme-toggle {
+    bottom: 10px;
+    left: 10px;
+  }
+  
+  .theme-toggle-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+}

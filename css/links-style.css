@@ -1,0 +1,264 @@
+/* Styles for the Mars & Cydonia Links Page */
+
+/* Category Cards Section */
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.category-card {
+    background: linear-gradient(to bottom right, #f8f4f1, #f1ece5);
+    border-radius: 10px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid rgba(139, 69, 19, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, #8b4513, #e8491d);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    border-color: rgba(139, 69, 19, 0.3);
+}
+
+.category-card:hover::before {
+    transform: scaleX(1);
+}
+
+.category-icon {
+    font-size: 40px;
+    color: #e8491d;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.category-card:hover .category-icon {
+    transform: scale(1.2);
+}
+
+.category-card h3 {
+    color: #8b4513;
+    margin-bottom: 10px;
+    font-size: 22px;
+}
+
+.category-card p {
+    color: #666;
+    font-size: 16px;
+}
+
+/* Links Sections */
+.links-section {
+    padding: 60px 0;
+    border-top: 1px solid rgba(139, 69, 19, 0.1);
+}
+
+.links-section:nth-child(odd) {
+    background-color: #f8f4f1;
+}
+
+.links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.link-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(139, 69, 19, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 250px;
+}
+
+.link-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-color: rgba(139, 69, 19, 0.3);
+}
+
+.link-icon {
+    font-size: 30px;
+    color: #e8491d;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.link-card:hover .link-icon {
+    transform: scale(1.1);
+}
+
+.link-card h3 {
+    color: #8b4513;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.link-card p {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.link-card .button {
+    align-self: flex-start;
+    background: #8b4513;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-size: 16px;
+    display: inline-block;
+    margin-bottom: 10px;
+    height: auto;
+}
+
+.link-card .button:hover {
+    background: #e8491d;
+    transform: translateY(-2px);
+}
+
+/* Book Cards */
+.book-card .link-icon {
+    color: #8b4513;
+}
+
+/* Suggest Link Form */
+#suggest-link {
+    background: linear-gradient(rgba(139, 69, 19, 0.8), rgba(160, 82, 45, 0.8)), url('https://mars.nasa.gov/system/resources/detail_files/25640_PIA24937-web.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    padding: 60px 0;
+}
+
+#suggest-link .section-title,
+#suggest-link .section-description {
+    color: #fff;
+    text-align: center;
+}
+
+.suggest-form-container {
+    max-width: 700px;
+    margin: 40px auto 0;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+#suggest-link-form .form-group {
+    margin-bottom: 20px;
+}
+
+#suggest-link-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #8b4513;
+}
+
+#suggest-link-form input,
+#suggest-link-form select,
+#suggest-link-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+#suggest-link-form textarea {
+    resize: vertical;
+}
+
+#suggest-link-form button {
+    background: #8b4513;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    display: block;
+    margin: 0 auto;
+}
+
+#suggest-link-form button:hover {
+    background: #e8491d;
+    transform: translateY(-2px);
+}
+
+/* Responsive Styles */
+@media(max-width: 768px) {
+    .categories-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+    }
+
+    .links-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .category-card {
+        padding: 20px;
+    }
+
+    .link-card {
+        padding: 20px;
+        min-height: 220px;
+    }
+
+    .suggest-form-container {
+        padding: 20px;
+    }
+}
+
+@media(max-width: 480px) {
+    .categories-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .category-icon {
+        font-size: 30px;
+    }
+
+    .category-card h3 {
+        font-size: 18px;
+    }
+
+    .link-card {
+        min-height: 200px;
+    }
+}
