@@ -14,6 +14,9 @@
     <meta property="og:url" content="https://www.cydonia-project.net">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="../img/Martian_face_viking_cropped.jpg" type="image/jpeg">
+    <!-- PWA Support -->
+    <meta name="theme-color" content="#e8491d">
+    <link rel="manifest" href="../manifest.json">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
@@ -23,14 +26,15 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
    </head>
    <body>
-    <header>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header role="banner">
      <div class="container">
        <div id="branding">
            <h1><span class="highlight">Mars</span> Cydonia Connection</h1>
        </div>
-         <nav>
+         <nav role="navigation" aria-label="Main navigation">
              <ul>
-                 <li><a href="index.html" class="highlight current">HOME</a></li>
+                 <li><a href="index.html" class="highlight current" aria-current="page">HOME</a></li>
                  <li><a href="about.html">ABOUT MARS</a></li>
                  <li><a href="services.html">ABOUT CYDONIA</a></li>
                  <li><a href="links.html">LINKS</a></li>
@@ -39,9 +43,10 @@
          </nav>
      </div>
    </header>
-       <section id="showcase">
+       <main id="main-content">
+       <section id="showcase" role="region" aria-labelledby="showcase-heading">
            <div class="container">
-               <h1>The Mysteries of Cydonia on Mars</h1>
+               <h1 id="showcase-heading">The Mysteries of Cydonia on Mars</h1>
                <p>Discover the enigmatic region on Mars where NASA's Viking 1 orbiter captured images of what appears to be a humanoid face and pyramid-like structures in 1976. These formations have sparked decades of scientific debate and public fascination about possible ancient civilizations on the Red Planet.</p>
                <a href="#cydonia-info" class="button showcase-btn">Explore Cydonia</a>
            </div>
@@ -49,9 +54,10 @@
        <section id="newsletter">
             <div class="container">
            <h1>Subscribe to our newsletter</h1>
-                <form>
-                 <input type="email" placeholder="Enter email...">
-                 <button type="submit" class="button">Subscribe</button>
+                <form aria-label="Newsletter subscription form">
+                 <label for="newsletter-email" class="visually-hidden">Email address</label>
+                 <input type="email" id="newsletter-email" placeholder="Enter email..." aria-required="true">
+                 <button type="submit" class="button" aria-label="Subscribe to newsletter">Subscribe</button>
                 </form>
            </div>
        </section>
@@ -65,17 +71,26 @@
        <section id="boxes">
            <div class="container">
                <div class="box">
-                   <img src="../img/Martian_face_viking_cropped.jpg" alt="Face on Mars">
+                   <img src="../img/Martian_face_viking_cropped.jpg" 
+                        alt="Face on Mars"
+                        loading="lazy"
+                        width="400" height="300">
                    <h3>The Face on Mars</h3>
                    <p>Discovered in 1976 by NASA's Viking 1 mission, the "Face on Mars" is a mesa in the Cydonia region that resembles a human face when viewed from above. While initially dismissed as a trick of light and shadow, higher resolution images have continued to show intriguing facial features that some researchers believe may be evidence of intelligent design.</p>
                </div>
                <div class="box">
-                   <img src="../img/Sheep2_small.jpg" alt="Pyramids on Mars">
+                   <img src="../img/Sheep2_small.jpg" 
+                        alt="Pyramids on Mars"
+                        loading="lazy"
+                        width="400" height="300">
                    <h3>The Cydonia Pyramids</h3>
                    <p>Near the Face structure, researchers have identified pyramid-shaped formations that appear to have geometric precision. These structures are arranged in patterns that some analysts suggest may have astronomical significance, similar to ancient monuments on Earth like the Giza pyramids.</p>
                </div>
                <div class="box">
-                   <img src="https://www.americaspace.com/wp-content/uploads/2015/03/Curiosity-Sol-926_1a_Ken-Kremer-.jpg" alt="City on Mars">
+                   <img src="https://www.americaspace.com/wp-content/uploads/2015/03/Curiosity-Sol-926_1a_Ken-Kremer-.jpg" 
+                        alt="City on Mars"
+                        loading="lazy"
+                        width="400" height="300">
                    <h3>The Potential City Complex</h3>
                    <p>Beyond the Face and Pyramids, the Cydonia region contains what some researchers call "The City" - a collection of formations that appear to be arranged in a geometric pattern consistent with urban planning. These structures have sparked debate about whether they could be remnants of an ancient Martian civilization.</p>
                </div>
@@ -248,16 +263,130 @@
            </div>
        </section>
 
+       <section id="mars-anomalies">
+           <div class="container">
+               <h2 class="section-title">Mars Anomalies: Beyond the Face</h2>
+               <p class="section-description">The Cydonia region contains numerous intriguing formations beyond the famous Face. Explore these additional anomalies that have captured researchers' attention.</p>
+
+               <div class="anomalies-grid">
+                   <div class="anomaly-card">
+                       <h3>The D&M Pyramid</h3>
+                       <img src="https://www.bibliotecapleyades.net/imagenes_marte/cydonia_pyramids01.jpg" 
+                            alt="D&M Pyramid on Mars" 
+                            loading="lazy"
+                            width="400" height="300">
+                       <p>Located approximately 20 kilometers south of the Face, the D&M Pyramid (named after its discoverers DiPietro and Molenaar) is a five-sided structure with apparent geometric precision. Some researchers have noted that its angles and proportions appear to encode mathematical constants.</p>
+                   </div>
+
+                   <div class="anomaly-card">
+                       <h3>The Fort</h3>
+                       <img src="https://www.bibliotecapleyades.net/imagenes_marte/marte_cydonia_pyramids02.jpg" 
+                            alt="The Fort structure on Mars" 
+                            loading="lazy"
+                            width="400" height="300">
+                       <p>This rectangular formation in Cydonia has been nicknamed "The Fort" due to its apparent right angles and straight edges. The structure shows what some interpret as walls and internal chambers, though NASA attributes these features to natural geological processes.</p>
+                   </div>
+
+                   <div class="anomaly-card">
+                       <h3>The Cliff</h3>
+                       <img src="https://www.bibliotecapleyades.net/imagenes_marte/marte_cydonia_pyramids03.jpg" 
+                            alt="The Cliff formation on Mars" 
+                            loading="lazy"
+                            width="400" height="300">
+                       <p>This unusual formation appears to be an extremely straight cliff face with regular indentations along its length. Some researchers have suggested these could be openings or entrances to an artificial structure, while others point to similar natural formations on Earth created by geological fracturing.</p>
+                   </div>
+
+                   <div class="anomaly-card">
+                       <h3>The Tholus</h3>
+                       <img src="https://www.bibliotecapleyades.net/imagenes_marte/marte_cydonia_pyramids04.jpg" 
+                            alt="The Tholus on Mars" 
+                            loading="lazy"
+                            width="400" height="300">
+                       <p>The Tholus is a dome-shaped formation with what appears to be a spiral pattern on its surface. While NASA classifies it as a natural hill or small mountain (the term "tholus" is used in planetary geology for such features), some researchers point to the unusual regularity of its spiral pattern as potentially artificial.</p>
+                   </div>
+               </div>
+
+               <div class="anomalies-note">
+                   <p><strong>Note:</strong> While these formations have sparked significant interest in the research community, scientific consensus generally attributes them to natural geological processes combined with particular lighting conditions and the human tendency to recognize patterns (pareidolia). However, ongoing analysis with increasingly sophisticated imaging technology continues to fuel debate about their origins.</p>
+               </div>
+           </div>
+       </section>
+
+       <section id="interactive-mars-map">
+           <div class="container">
+               <h2 class="section-title">Interactive Mars Map</h2>
+               <p class="section-description">Explore the Cydonia region of Mars with this interactive map. Toggle different data layers to view elevation, mineral composition, and points of interest.</p>
+
+               <div class="map-container">
+                   <div id="mars-map" aria-label="Interactive map of Mars Cydonia region" role="application" tabindex="0"></div>
+
+                   <div class="map-controls">
+                       <div class="map-layers">
+                           <h3>Map Layers</h3>
+                           <div class="layer-toggle">
+                               <input type="checkbox" id="layer-elevation" checked>
+                               <label for="layer-elevation">Elevation Data</label>
+                           </div>
+                           <div class="layer-toggle">
+                               <input type="checkbox" id="layer-minerals">
+                               <label for="layer-minerals">Mineral Composition</label>
+                           </div>
+                           <div class="layer-toggle">
+                               <input type="checkbox" id="layer-anomalies" checked>
+                               <label for="layer-anomalies">Points of Interest</label>
+                           </div>
+                       </div>
+
+                       <div class="map-navigation">
+                           <h3>Navigation</h3>
+                           <button id="zoom-in" class="map-button" aria-label="Zoom in">
+                               <i class="fas fa-plus"></i>
+                           </button>
+                           <button id="zoom-out" class="map-button" aria-label="Zoom out">
+                               <i class="fas fa-minus"></i>
+                           </button>
+                           <button id="reset-map" class="map-button" aria-label="Reset map view">
+                               <i class="fas fa-sync-alt"></i>
+                           </button>
+                       </div>
+                   </div>
+
+                   <div class="map-info-panel">
+                       <h3>Location Information</h3>
+                       <div id="location-info">
+                           <p>Click on any point of interest to view detailed information.</p>
+                       </div>
+                   </div>
+               </div>
+
+               <div class="map-legend">
+                   <h3>Map Legend</h3>
+                   <div class="legend-item">
+                       <span class="legend-color" style="background-color: #e8491d;"></span>
+                       <span class="legend-label">Major Anomalies</span>
+                   </div>
+                   <div class="legend-item">
+                       <span class="legend-color" style="background-color: #8b4513;"></span>
+                       <span class="legend-label">Secondary Structures</span>
+                   </div>
+                   <div class="legend-item">
+                       <span class="legend-color" style="background-color: #3498db;"></span>
+                       <span class="legend-label">NASA Landing Sites</span>
+                   </div>
+               </div>
+           </div>
+       </section>
+
        <section id="faq-section">
            <div class="container">
                <h2 class="section-title">Frequently Asked Questions</h2>
                <div class="faq-container">
                    <div class="faq-item">
-                       <div class="faq-question">
+                       <div class="faq-question" tabindex="0" aria-expanded="false" aria-controls="faq-answer-1">
                            <h3>What exactly is Cydonia?</h3>
-                           <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                           <span class="faq-toggle" aria-hidden="true"><i class="fas fa-plus"></i></span>
                        </div>
-                       <div class="faq-answer">
+                       <div class="faq-answer" id="faq-answer-1">
                            <p>Cydonia is a region on Mars located in the planet's northern hemisphere, in the transition zone between the heavily cratered southern highlands and the smooth northern plains. It's approximately 950 km from the Martian north pole and is most famous for containing several unusual surface features, including what appears to be a humanoid face and pyramid-like structures.</p>
                        </div>
                    </div>
@@ -365,8 +494,24 @@
                <p>Mars Cydonia Connection &copy; 2025 | Created by Michael Piotrowski</p>
              </div>
            </footer>
+      </main>
 
      <!-- JavaScript -->
      <script src="../js/app.js"></script>
+
+     <!-- Service Worker Registration -->
+     <script>
+       if ('serviceWorker' in navigator) {
+         window.addEventListener('load', () => {
+           navigator.serviceWorker.register('../service-worker.js')
+             .then(registration => {
+               console.log('Service Worker registered with scope:', registration.scope);
+             })
+             .catch(error => {
+               console.error('Service Worker registration failed:', error);
+             });
+         });
+       }
+     </script>
    </body>
-</html>
+ </html>
