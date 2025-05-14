@@ -33,34 +33,56 @@ Whether you're a scientist, researcher, or simply curious about the mysteries of
 - **FAQ Section**: Answers to common questions about Cydonia and Mars research
 - **Newsletter**: Stay updated with the latest discoveries and research
 - **Responsive Design**: Optimized viewing experience across all devices
+- **Comprehensive Resources**: Curated collection of links to official resources, research organizations, and educational materials
+- **Live Mars Feed**: Real-time video feed from NASA's Mars missions and up-to-the-minute mission data
+- **Interactive Mars Experience**: 3D visualization, virtual rover driving, and Mars soundscape
 
 ## 🛠️ Technologies Used
 
 - **HTML5**: Modern semantic markup
 - **CSS3**: Advanced styling with animations and responsive design
 - **JavaScript**: Interactive elements and dynamic content
-- **Font Awesome**: Icon library for enhanced visual elements
+- **Font Awesome 6.4.0**: Icon library for enhanced visual elements and interactive features
 - **Google Fonts**: Typography optimization with Roboto font family
+- **YouTube API**: Integration for Mars live feed video streaming
+- **Open Graph Protocol**: Enhanced social media sharing capabilities
+- **CSS Grid & Flexbox**: Advanced layout techniques for responsive design
+
+<div align="center">
+  <p><em>This website was designed and developed using:</em></p>
+  <a href="https://www.jetbrains.com/webstorm/" target="_blank">
+    <img src="https://resources.jetbrains.com/storage/products/webstorm/img/meta/webstorm_logo_300x300.png" alt="WebStorm IDE" width="100"/>
+  </a>
+  <p><strong>JetBrains WebStorm IDE</strong></p>
+</div>
 
 ## 📋 Project Structure
 
 ```
 Cydonia-Project/
 ├── css/
-│   └── style.css         # Main stylesheet
+│   ├── style.css         # Main stylesheet
+│   └── links-style.css   # Stylesheet for resources page
 ├── html/
 │   ├── index.html        # Main content page
 │   ├── about.html        # About Mars page
-│   └── services.html     # About Cydonia page
+│   ├── services.html     # About Cydonia page
+│   ├── links.html        # Resources and links page
+│   └── live.html         # Live Mars feed and real-time data
 ├── img/
 │   ├── Mars.jpg          # Main Mars background image
-│   ├── face_mars.png     # Face on Mars image
+│   ├── Martian_face_viking_cropped.jpg # Face on Mars image
+│   ├── MarsSurface.jpg   # Mars surface imagery
+│   ├── Marswater.jpg     # Mars water evidence imagery
+│   ├── Olympusmons.png   # Olympus Mons volcano image
 │   └── ...               # Other project images
 ├── js/
 │   └── app.js            # JavaScript functionality
 ├── index.html            # Redirect to main page
 ├── about.html            # Redirect to about page
 ├── services.html         # Redirect to services page
+├── links.html            # Redirect to resources page
+├── live.html             # Redirect to live feed page
 └── README.md             # Project documentation
 ```
 
