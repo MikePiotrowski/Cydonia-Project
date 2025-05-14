@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeImageComparison(); // Initialize the image comparison slider
     initializeMarsLiveData(); // Initialize the Mars live data section
     initializeInteractiveMarsMap(); // Initialize the interactive Mars map
+    initializeMarsSounds(); // Initialize the Mars sounds section with Web Audio API
+    initializeAccessibilityControls(); // Initialize accessibility controls
 });
 
 // Scroll to Top Button
@@ -2573,5 +2575,539 @@ function initializeMarsLiveData() {
                 weatherGrid.appendChild(card);
             }
         }
+    }
+}
+
+/**
+ * Initialize the Mars Sounds section with Web Audio API
+ */
+function initializeMarsSounds() {
+    // Check if the Mars sounds section exists
+    const marsSoundsSection = document.getElementById('mars-sounds');
+    if (!marsSoundsSection) return;
+
+    // Audio players initialization
+    const audioPlayers = document.querySelectorAll('.audio-player');
+
+    audioPlayers.forEach(player => {
+        const audio = player.querySelector('audio');
+        const playButton = player.querySelector('.play-button');
+        const progressBar = player.querySelector('.progress-bar');
+        const progressContainer = player.querySelector('.progress-container');
+        const timeDisplay = player.querySelector('.time-display');
+        const volumeButton = player.querySelector('.volume-button');
+        const volumeSlider = player.querySelector('.volume-slider');
+
+        if (!audio || !playButton || !progressBar || !progressContainer || !timeDisplay) return;
+
+        // Play/Pause functionality
+        playButton.addEventListener('click', () => {
+            if (audio.paused) {
+                // Pause all other audio elements first
+                document.querySelectorAll('audio').forEach(a => {
+                    if (a !== audio && !a.paused) {
+                        a.pause();
+                        const otherButton = a.parentElement.querySelector('.play-button i');
+                        if (otherButton) otherButton.className = 'fas fa-play';
+                    }
+                });
+
+                audio.play().catch(error => {
+                    console.error('Error playing audio:', error);
+                });
+                playButton.querySelector('i').className = 'fas fa-pause';
+            } else {
+                audio.pause();
+                playButton.querySelector('i').className = 'fas fa-play';
+            }
+        });
+
+        // Update progress bar as audio plays
+        audio.addEventListener('timeupdate', () => {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            progressBar.style.width = `${progress}%`;
+
+            // Update time display
+            const minutes = Math.floor(audio.currentTime / 60);
+            const seconds = Math.floor(audio.currentTime % 60);
+            timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        });
+
+        // Allow seeking by clicking on progress bar
+        progressContainer.addEventListener('click', (e) => {
+            const rect = progressContainer.getBoundingClientRect();
+            const pos = (e.clientX - rect.left) / rect.width;
+            audio.currentTime = pos * audio.duration;
+        });
+
+        // Volume control
+        if (volumeButton && volumeSlider) {
+            volumeButton.addEventListener('click', () => {
+                if (audio.volume > 0) {
+                    audio.volume = 0;
+                    volumeButton.querySelector('i').className = 'fas fa-volume-mute';
+                    volumeSlider.value = 0;
+                } else {
+                    audio.volume = volumeSlider.value;
+                    updateVolumeIcon(audio.volume);
+                }
+            });
+
+            volumeSlider.addEventListener('input', () => {
+                audio.volume = volumeSlider.value;
+                updateVolumeIcon(audio.volume);
+            });
+
+            function updateVolumeIcon(volume) {
+                const icon = volumeButton.querySelector('i');
+                if (volume === 0) {
+                    icon.className = 'fas fa-volume-mute';
+                } else if (volume < 0.5) {
+                    icon.className = 'fas fa-volume-down';
+                } else {
+                    icon.className = 'fas fa-volume-up';
+                }
+            }
+        }
+
+        // Reset when audio ends
+        audio.addEventListener('ended', () => {
+            progressBar.style.width = '0%';
+            playButton.querySelector('i').className = 'fas fa-play';
+            timeDisplay.textContent = '0:00';
+        });
+    });
+
+    // Interactive Mars Soundscape with Web Audio API
+    const startSoundscapeBtn = document.getElementById('start-soundscape');
+    const soundscapeVisual = document.getElementById('soundscape-visual');
+    const windIntensitySlider = document.getElementById('wind-intensity');
+    const roverSoundsSlider = document.getElementById('rover-sounds');
+    const dustStormSlider = document.getElementById('dust-storm');
+
+    if (!startSoundscapeBtn || !soundscapeVisual || !windIntensitySlider || !roverSoundsSlider || !dustStormSlider) return;
+
+    let audioContext;
+    let analyser;
+    let windOscillator;
+    let roverOscillator;
+    let dustStormNoise;
+    let visualizationActive = false;
+    let animationFrame;
+
+    startSoundscapeBtn.addEventListener('click', () => {
+        if (!visualizationActive) {
+            initAudioContext();
+            startVisualization();
+            startSoundscapeBtn.textContent = 'Stop Experience';
+            visualizationActive = true;
+        } else {
+            stopVisualization();
+            startSoundscapeBtn.textContent = 'Start Experience';
+            visualizationActive = false;
+        }
+    });
+
+    function initAudioContext() {
+        // Create audio context if it doesn't exist
+        if (!audioContext) {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            analyser = audioContext.createAnalyser();
+            analyser.fftSize = 256;
+            analyser.connect(audioContext.destination);
+
+            // Create wind sound (filtered noise)
+            createWindSound();
+
+            // Create rover sound (oscillator with modulation)
+            createRoverSound();
+
+            // Create dust storm sound (heavy noise with filter sweep)
+            createDustStormSound();
+        }
+
+        // Resume audio context if it was suspended
+        if (audioContext.state === 'suspended') {
+            audioContext.resume();
+        }
+    }
+
+    function createWindSound() {
+        // Create noise source for wind
+        const bufferSize = 2 * audioContext.sampleRate;
+        const noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+        const output = noiseBuffer.getChannelData(0);
+
+        for (let i = 0; i < bufferSize; i++) {
+            output[i] = Math.random() * 2 - 1;
+        }
+
+        const whiteNoise = audioContext.createBufferSource();
+        whiteNoise.buffer = noiseBuffer;
+        whiteNoise.loop = true;
+
+        // Create filter for wind sound
+        const windFilter = audioContext.createBiquadFilter();
+        windFilter.type = 'lowpass';
+        windFilter.frequency.value = 500;
+        windFilter.Q.value = 1;
+
+        // Create gain node for wind volume
+        const windGain = audioContext.createGain();
+        windGain.gain.value = parseFloat(windIntensitySlider.value) * 0.3;
+
+        // Connect nodes
+        whiteNoise.connect(windFilter);
+        windFilter.connect(windGain);
+        windGain.connect(analyser);
+
+        // Start the noise
+        whiteNoise.start();
+
+        // Store references
+        windOscillator = {
+            source: whiteNoise,
+            filter: windFilter,
+            gain: windGain
+        };
+
+        // Update wind sound when slider changes
+        windIntensitySlider.addEventListener('input', () => {
+            windGain.gain.value = parseFloat(windIntensitySlider.value) * 0.3;
+        });
+    }
+
+    function createRoverSound() {
+        // Create oscillator for rover sounds
+        const oscillator = audioContext.createOscillator();
+        oscillator.type = 'sawtooth';
+        oscillator.frequency.value = 100;
+
+        // Create filter for rover sound
+        const roverFilter = audioContext.createBiquadFilter();
+        roverFilter.type = 'bandpass';
+        roverFilter.frequency.value = 800;
+        roverFilter.Q.value = 2;
+
+        // Create LFO for filter modulation
+        const lfo = audioContext.createOscillator();
+        lfo.type = 'sine';
+        lfo.frequency.value = 0.2;
+
+        const lfoGain = audioContext.createGain();
+        lfoGain.gain.value = 200;
+
+        // Create gain node for rover volume
+        const roverGain = audioContext.createGain();
+        roverGain.gain.value = parseFloat(roverSoundsSlider.value) * 0.2;
+
+        // Connect nodes
+        oscillator.connect(roverFilter);
+        roverFilter.connect(roverGain);
+        roverGain.connect(analyser);
+
+        lfo.connect(lfoGain);
+        lfoGain.connect(roverFilter.frequency);
+
+        // Start oscillators
+        oscillator.start();
+        lfo.start();
+
+        // Store references
+        roverOscillator = {
+            source: oscillator,
+            filter: roverFilter,
+            gain: roverGain,
+            lfo: lfo
+        };
+
+        // Update rover sound when slider changes
+        roverSoundsSlider.addEventListener('input', () => {
+            roverGain.gain.value = parseFloat(roverSoundsSlider.value) * 0.2;
+        });
+    }
+
+    function createDustStormSound() {
+        // Create noise source for dust storm
+        const bufferSize = 2 * audioContext.sampleRate;
+        const noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+        const output = noiseBuffer.getChannelData(0);
+
+        for (let i = 0; i < bufferSize; i++) {
+            output[i] = Math.random() * 2 - 1;
+        }
+
+        const stormNoise = audioContext.createBufferSource();
+        stormNoise.buffer = noiseBuffer;
+        stormNoise.loop = true;
+
+        // Create filter for dust storm sound
+        const stormFilter = audioContext.createBiquadFilter();
+        stormFilter.type = 'highpass';
+        stormFilter.frequency.value = 2000;
+        stormFilter.Q.value = 5;
+
+        // Create LFO for filter sweep
+        const stormLfo = audioContext.createOscillator();
+        stormLfo.type = 'sine';
+        stormLfo.frequency.value = 0.1;
+
+        const stormLfoGain = audioContext.createGain();
+        stormLfoGain.gain.value = 1000;
+
+        // Create gain node for dust storm volume
+        const stormGain = audioContext.createGain();
+        stormGain.gain.value = parseFloat(dustStormSlider.value) * 0.4;
+
+        // Connect nodes
+        stormNoise.connect(stormFilter);
+        stormFilter.connect(stormGain);
+        stormGain.connect(analyser);
+
+        stormLfo.connect(stormLfoGain);
+        stormLfoGain.connect(stormFilter.frequency);
+
+        // Start the noise and LFO
+        stormNoise.start();
+        stormLfo.start();
+
+        // Store references
+        dustStormNoise = {
+            source: stormNoise,
+            filter: stormFilter,
+            gain: stormGain,
+            lfo: stormLfo
+        };
+
+        // Update dust storm sound when slider changes
+        dustStormSlider.addEventListener('input', () => {
+            stormGain.gain.value = parseFloat(dustStormSlider.value) * 0.4;
+        });
+    }
+
+    function startVisualization() {
+        // Create visualization
+        const bufferLength = analyser.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
+
+        function draw() {
+            animationFrame = requestAnimationFrame(draw);
+
+            // Get frequency data
+            analyser.getByteFrequencyData(dataArray);
+
+            // Clear canvas
+            const canvas = soundscapeVisual.querySelector('canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw visualization
+            const barWidth = (canvas.width / bufferLength) * 2.5;
+            let x = 0;
+
+            for (let i = 0; i < bufferLength; i++) {
+                const barHeight = dataArray[i] / 2;
+
+                // Use colors based on the Mars theme
+                const r = 232 + (dataArray[i] / 255) * 23;
+                const g = 73 + (dataArray[i] / 255) * 20;
+                const b = 29 + (dataArray[i] / 255) * 10;
+
+                ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+                ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+
+                x += barWidth + 1;
+            }
+        }
+
+        // Create canvas if it doesn't exist
+        if (!soundscapeVisual.querySelector('canvas')) {
+            const canvas = document.createElement('canvas');
+            canvas.width = soundscapeVisual.clientWidth;
+            canvas.height = soundscapeVisual.clientHeight;
+            soundscapeVisual.appendChild(canvas);
+        }
+
+        // Start animation
+        draw();
+    }
+
+    function stopVisualization() {
+        // Stop animation
+        if (animationFrame) {
+            cancelAnimationFrame(animationFrame);
+            animationFrame = null;
+        }
+
+        // Stop audio
+        if (audioContext) {
+            if (windOscillator && windOscillator.source) {
+                windOscillator.source.stop();
+                windOscillator = null;
+            }
+
+            if (roverOscillator && roverOscillator.source) {
+                roverOscillator.source.stop();
+                roverOscillator.lfo.stop();
+                roverOscillator = null;
+            }
+
+            if (dustStormNoise && dustStormNoise.source) {
+                dustStormNoise.source.stop();
+                dustStormNoise.lfo.stop();
+                dustStormNoise = null;
+            }
+
+            audioContext.close();
+            audioContext = null;
+        }
+
+        // Clear visualization
+        const canvas = soundscapeVisual.querySelector('canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    }
+
+    // Clean up when leaving the page
+    window.addEventListener('beforeunload', () => {
+        if (visualizationActive) {
+            stopVisualization();
+        }
+    });
+}
+
+/**
+ * Initialize accessibility controls for high contrast mode and text size
+ */
+function initializeAccessibilityControls() {
+    // Get control elements
+    const highContrastToggle = document.getElementById('high-contrast-toggle');
+    const textDecreaseBtn = document.getElementById('text-decrease');
+    const textResetBtn = document.getElementById('text-reset');
+    const textIncreaseBtn = document.getElementById('text-increase');
+
+    if (!highContrastToggle || !textDecreaseBtn || !textResetBtn || !textIncreaseBtn) return;
+
+    // High Contrast Mode
+    // Check if high contrast mode was previously enabled
+    const highContrastEnabled = localStorage.getItem('highContrastMode') === 'enabled';
+
+    // Apply high contrast mode if it was enabled
+    if (highContrastEnabled) {
+        document.body.classList.add('high-contrast');
+        highContrastToggle.classList.add('active');
+    }
+
+    // Toggle high contrast mode
+    highContrastToggle.addEventListener('click', () => {
+        document.body.classList.toggle('high-contrast');
+        highContrastToggle.classList.toggle('active');
+
+        // Save preference to localStorage
+        if (document.body.classList.contains('high-contrast')) {
+            localStorage.setItem('highContrastMode', 'enabled');
+            // Announce to screen readers
+            announceToScreenReader('High contrast mode enabled');
+        } else {
+            localStorage.setItem('highContrastMode', 'disabled');
+            // Announce to screen readers
+            announceToScreenReader('High contrast mode disabled');
+        }
+    });
+
+    // Text Size Controls
+    // Check if text size was previously adjusted
+    const savedTextSize = localStorage.getItem('textSizeAdjustment');
+    if (savedTextSize) {
+        document.documentElement.style.fontSize = savedTextSize;
+    }
+
+    // Get the base font size (default is 16px in most browsers)
+    const getBaseFontSize = () => {
+        const baseFontSize = window.getComputedStyle(document.documentElement).fontSize;
+        return parseFloat(baseFontSize);
+    };
+
+    // Get current font size
+    const getCurrentFontSize = () => {
+        const currentSize = window.getComputedStyle(document.documentElement).fontSize;
+        return parseFloat(currentSize);
+    };
+
+    // Decrease text size
+    textDecreaseBtn.addEventListener('click', () => {
+        const currentSize = getCurrentFontSize();
+        const baseSize = getBaseFontSize();
+
+        // Don't allow smaller than 80% of base size
+        if (currentSize > baseSize * 0.8) {
+            const newSize = Math.max(currentSize - 1, baseSize * 0.8);
+            document.documentElement.style.fontSize = `${newSize}px`;
+            localStorage.setItem('textSizeAdjustment', `${newSize}px`);
+            announceToScreenReader('Text size decreased');
+        } else {
+            announceToScreenReader('Minimum text size reached');
+        }
+    });
+
+    // Reset text size
+    textResetBtn.addEventListener('click', () => {
+        document.documentElement.style.fontSize = '';
+        localStorage.removeItem('textSizeAdjustment');
+        announceToScreenReader('Text size reset to default');
+    });
+
+    // Increase text size
+    textIncreaseBtn.addEventListener('click', () => {
+        const currentSize = getCurrentFontSize();
+        const baseSize = getBaseFontSize();
+
+        // Don't allow larger than 200% of base size
+        if (currentSize < baseSize * 2) {
+            const newSize = Math.min(currentSize + 1, baseSize * 2);
+            document.documentElement.style.fontSize = `${newSize}px`;
+            localStorage.setItem('textSizeAdjustment', `${newSize}px`);
+            announceToScreenReader('Text size increased');
+        } else {
+            announceToScreenReader('Maximum text size reached');
+        }
+    });
+
+    // Helper function to announce changes to screen readers
+    function announceToScreenReader(message) {
+        const announcement = document.createElement('div');
+        announcement.setAttribute('aria-live', 'polite');
+        announcement.setAttribute('aria-atomic', 'true');
+        announcement.classList.add('sr-only'); // Screen reader only
+        announcement.textContent = message;
+
+        document.body.appendChild(announcement);
+
+        // Remove after announcement is read
+        setTimeout(() => {
+            document.body.removeChild(announcement);
+        }, 3000);
+    }
+
+    // Add screen reader only style if it doesn't exist
+    if (!document.querySelector('style#sr-styles')) {
+        const style = document.createElement('style');
+        style.id = 'sr-styles';
+        style.textContent = `
+            .sr-only {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                padding: 0;
+                margin: -1px;
+                overflow: hidden;
+                clip: rect(0, 0, 0, 0);
+                white-space: nowrap;
+                border: 0;
+            }
+        `;
+        document.head.appendChild(style);
     }
 }

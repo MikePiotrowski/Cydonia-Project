@@ -41,6 +41,22 @@
                  <li><a href="live.html">LIVE FEED</a></li>
              </ul>
          </nav>
+         <div class="accessibility-controls">
+             <button aria-label="Toggle high contrast mode" id="high-contrast-toggle">
+                 <i class="fas fa-adjust"></i>
+             </button>
+             <div class="text-size-controls">
+                 <button aria-label="Decrease text size" id="text-decrease">
+                     <i class="fas fa-font"></i><i class="fas fa-minus"></i>
+                 </button>
+                 <button aria-label="Reset text size" id="text-reset">
+                     <i class="fas fa-font"></i>
+                 </button>
+                 <button aria-label="Increase text size" id="text-increase">
+                     <i class="fas fa-font"></i><i class="fas fa-plus"></i>
+                 </button>
+             </div>
+         </div>
      </div>
    </header>
        <main id="main-content">
@@ -288,7 +304,102 @@
            </div>
        </section>
 
-       <section id="mars-anomalies">
+           <section id="mars-sounds">
+               <div class="container">
+                   <h2 class="section-title">Mars Sounds: Listen to the Red Planet</h2>
+                   <p class="section-description">Experience the authentic sounds of Mars recorded by NASA missions.
+                       These audio recordings provide a unique sensory connection to the Martian environment.</p>
+
+                   <div class="sounds-container">
+                       <div class="sound-card">
+                           <h3>Perseverance Rover: Martian Winds</h3>
+                           <div class="audio-player">
+                               <audio id="mars-wind" preload="none">
+                                   <source src="https://mars.nasa.gov/mars2020/multimedia/audio/audio/Mars_Perseverance_Wind.mp3"
+                                           type="audio/mpeg">
+                                   Your browser does not support the audio element.
+                               </audio>
+                               <div class="player-controls">
+                                   <button aria-label="Play Mars wind sounds" class="play-button"
+                                           data-audio="mars-wind">
+                                       <i class="fas fa-play"></i>
+                                   </button>
+                                   <div class="progress-container">
+                                       <div class="progress-bar"></div>
+                                   </div>
+                                   <span class="time-display">0:00</span>
+                                   <button aria-label="Adjust volume" class="volume-button">
+                                       <i class="fas fa-volume-up"></i>
+                                   </button>
+                                   <input class="volume-slider" max="1" min="0" step="0.1" type="range" value="0.7">
+                               </div>
+                               <p class="sound-description">Listen to the winds of Mars as recorded by NASA's
+                                   Perseverance rover in Jezero Crater. These are actual sounds from the Martian
+                                   surface, captured by the rover's microphones.</p>
+                           </div>
+                       </div>
+
+                       <div class="sound-card">
+                           <h3>Ingenuity Helicopter: Blades in Flight</h3>
+                           <div class="audio-player">
+                               <audio id="ingenuity-flight" preload="none">
+                                   <source src="https://mars.nasa.gov/mars2020/multimedia/audio/audio/Ingenuity_Flight_on_Mars.mp3"
+                                           type="audio/mpeg">
+                                   Your browser does not support the audio element.
+                               </audio>
+                               <div class="player-controls">
+                                   <button aria-label="Play Ingenuity helicopter sounds" class="play-button"
+                                           data-audio="ingenuity-flight">
+                                       <i class="fas fa-play"></i>
+                                   </button>
+                                   <div class="progress-container">
+                                       <div class="progress-bar"></div>
+                                   </div>
+                                   <span class="time-display">0:00</span>
+                                   <button aria-label="Adjust volume" class="volume-button">
+                                       <i class="fas fa-volume-up"></i>
+                                   </button>
+                                   <input class="volume-slider" max="1" min="0" step="0.1" type="range" value="0.7">
+                               </div>
+                               <p class="sound-description">Hear the sound of the Ingenuity helicopter's blades spinning
+                                   in the thin Martian atmosphere, as recorded by the Perseverance rover during one of
+                                   Ingenuity's flights.</p>
+                           </div>
+                       </div>
+
+                       <div class="sound-card">
+                           <h3>Mars Interactive Soundscape</h3>
+                           <div class="soundscape-container">
+                               <div class="soundscape-visualization" id="soundscape-visual"></div>
+                               <div class="soundscape-controls">
+                                   <button class="button" id="start-soundscape">Start Experience</button>
+                                   <div class="soundscape-sliders">
+                                       <div class="slider-group">
+                                           <label for="wind-intensity">Wind Intensity</label>
+                                           <input id="wind-intensity" max="1" min="0" step="0.1" type="range"
+                                                  value="0.5">
+                                       </div>
+                                       <div class="slider-group">
+                                           <label for="rover-sounds">Rover Sounds</label>
+                                           <input id="rover-sounds" max="1" min="0" step="0.1" type="range" value="0.3">
+                                       </div>
+                                       <div class="slider-group">
+                                           <label for="dust-storm">Dust Storm</label>
+                                           <input id="dust-storm" max="1" min="0" step="0.1" type="range" value="0">
+                                       </div>
+                                   </div>
+                               </div>
+                               <p class="soundscape-description">Create your own Mars soundscape by adjusting the
+                                   intensity of different Martian sound elements. This interactive experience uses the
+                                   Web Audio API to generate a realistic representation of how different conditions on
+                                   Mars might sound.</p>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </section>
+
+           <section id="mars-anomalies">
            <div class="container">
                <h2 class="section-title">Mars Anomalies: Beyond the Face</h2>
                <p class="section-description">The Cydonia region contains numerous intriguing formations beyond the famous Face. Explore these additional anomalies that have captured researchers' attention.</p>
