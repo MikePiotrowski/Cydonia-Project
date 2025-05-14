@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Explore the mysteries of Cydonia on Mars - home to the famous Face and Pyramid structures that have captivated researchers for decades">
+    <meta name="keywords" content="Mars, Cydonia, Face on Mars, Pyramids on Mars, Cydonia monuments, space exploration, astronomy, red planet, anomalies on Mars, NASA Mars images">
+    <meta name="author" content="Michael Piotrowski">
+    <title>Mars Cydonia Connection | The Face and Pyramids of Mars</title>
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Mars Cydonia Connection | The Face and Pyramids of Mars">
+    <meta property="og:description" content="Explore the mysteries of Cydonia on Mars - home to the famous Face and Pyramid structures">
+    <meta property="og:image" content="../img/Mars.jpg">
+    <meta property="og:url" content="https://www.cydonia-project.net">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Three.js Library for 3D Model -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+   </head>
+   <body>
+    <header>
+     <div class="container">
+       <div id="branding">
+           <h1><span class="highlight">Mars</span> Cydonia Connection</h1>
+       </div>
+         <nav>
+             <ul>
+                 <li><a href="index.html" class="highlight current">HOME</a></li>
+                 <li><a href="about.html">ABOUT MARS</a></li>
+                 <li><a href="services.html">ABOUT CYDONIA</a></li>
+             </ul>
+         </nav>
+     </div>
+   </header>
+       <section id="showcase">
+           <div class="container">
+               <h1>The Mysteries of Cydonia on Mars</h1>
+               <p>Discover the enigmatic region on Mars where NASA's Viking 1 orbiter captured images of what appears to be a humanoid face and pyramid-like structures in 1976. These formations have sparked decades of scientific debate and public fascination about possible ancient civilizations on the Red Planet.</p>
+               <a href="#cydonia-info" class="button showcase-btn">Explore Cydonia</a>
+           </div>
+       </section>
+       <section id="newsletter">
+            <div class="container">
+           <h1>Subscribe to our newsletter</h1>
+                <form>
+                 <input type="email" placeholder="Enter email...">
+                 <button type="submit" class="button">Subscribe</button>
+                </form>
+           </div>
+       </section>
+       <section id="cydonia-info">
+           <div class="container">
+               <h2 class="section-title">Exploring Cydonia's Mysteries</h2>
+               <p class="section-description">The Cydonia region on Mars has captured the imagination of scientists and the public since the discovery of unusual formations that appear artificial in nature.</p>
+           </div>
+       </section>
+
+       <section id="boxes">
+           <div class="container">
+               <div class="box">
+                   <img src="../img/Martian_face_viking_cropped.jpg" alt="Face on Mars">
+                   <h3>The Face on Mars</h3>
+                   <p>Discovered in 1976 by NASA's Viking 1 mission, the "Face on Mars" is a mesa in the Cydonia region that resembles a human face when viewed from above. While initially dismissed as a trick of light and shadow, higher resolution images have continued to show intriguing facial features that some researchers believe may be evidence of intelligent design.</p>
+               </div>
+               <div class="box">
+                   <img src="../img/Sheep2_small.jpg" alt="Pyramids on Mars">
+                   <h3>The Cydonia Pyramids</h3>
+                   <p>Near the Face structure, researchers have identified pyramid-shaped formations that appear to have geometric precision. These structures are arranged in patterns that some analysts suggest may have astronomical significance, similar to ancient monuments on Earth like the Giza pyramids.</p>
+               </div>
+               <div class="box">
+                   <img src="https://www.americaspace.com/wp-content/uploads/2015/03/Curiosity-Sol-926_1a_Ken-Kremer-.jpg" alt="City on Mars">
+                   <h3>The Potential City Complex</h3>
+                   <p>Beyond the Face and Pyramids, the Cydonia region contains what some researchers call "The City" - a collection of formations that appear to be arranged in a geometric pattern consistent with urban planning. These structures have sparked debate about whether they could be remnants of an ancient Martian civilization.</p>
+               </div>
+           </div>
+       </section>
+
+       <section id="model3d-section">
+           <div class="container">
+               <h2 class="section-title">Interactive 3D Model: The Face on Mars</h2>
+               <p class="section-description">Explore the famous "Face on Mars" in three dimensions. Rotate, zoom, and examine the structure from all angles to form your own opinion about this intriguing Martian formation.</p>
+
+               <div class="model-container">
+                   <div id="mars-3d-model"></div>
+                   <div class="model-controls">
+                       <button id="reset-view" class="button">Reset View</button>
+                       <div class="view-options">
+                           <button id="view-viking" class="button view-btn active">Viking View</button>
+                           <button id="view-enhanced" class="button view-btn">Enhanced View</button>
+                           <button id="view-wireframe" class="button view-btn">Wireframe</button>
+                       </div>
+                   </div>
+               </div>
+
+               <div class="model-info">
+                   <h3>About This 3D Model</h3>
+                   <p>This interactive 3D model was created using digital terrain mapping data from various Mars missions. The model allows you to examine the topography of the Face formation from any angle, helping to distinguish between natural geological features and potentially artificial characteristics.</p>
+                   <p>Use your mouse to rotate the model (click and drag), zoom in/out (scroll), and pan (right-click and drag). The control buttons allow you to reset the view or switch between different visualization modes.</p>
+                   <h3>Coming Soon!</h3>
+               </div>
+           </div>
+       </section>
+
+       <section id="image-comparison-section">
+           <div class="container">
+               <h2 class="section-title">Image Comparison: Then vs Now</h2>
+               <p class="section-description">Compare the original 1976 Viking image of the Face on Mars with higher-resolution images captured by later missions. Slide the divider to reveal how our view of this mysterious formation has evolved over time.</p>
+
+               <div class="comparison-container">
+                   <div class="comparison-wrapper">
+                       <div class="comparison-item original">
+                           <img src="https://science.nasa.gov/wp-content/uploads/2023/09/PIA01141.jpg" alt="Original Viking Image of Face on Mars (1976)">
+                           <div class="image-label">Viking 1 (1976)</div>
+                       </div>
+                       <div class="comparison-item new">
+                           <img src="https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA03225.jpg" alt="Mars Global Surveyor Image of Face on Mars (2001)">
+                           <div class="image-label">Mars Global Surveyor (2001)</div>
+                       </div>
+                       <div class="comparison-slider">
+                           <div class="slider-button">
+                               <i class="fas fa-arrows-alt-h"></i>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="comparison-caption">
+                       <p>The image on the left shows the original Viking 1 photograph from 1976 that sparked worldwide interest in the "Face on Mars." The image on the right shows the same formation captured by the Mars Global Surveyor in 2001 with much higher resolution and different lighting conditions.</p>
+                       <p>Scientists explain that the face-like appearance in the original image was due to the low resolution, specific lighting conditions, and human tendency to recognize familiar patterns (pareidolia). However, some researchers continue to point out potentially artificial characteristics that remain visible even in higher-resolution imagery.</p>
+                   </div>
+               </div>
+           </div>
+       </section>
+
+       <section id="discovery-timeline">
+           <div class="container">
+               <h2 class="section-title">Cydonia Discovery Timeline</h2>
+               <div class="timeline">
+                   <div class="timeline-item">
+                       <div class="timeline-date">1976</div>
+                       <div class="timeline-content">
+                           <h3>Viking 1 Discovery</h3>
+                           <p>NASA's Viking 1 orbiter captures the first images of the "Face on Mars" in the Cydonia region, showing what appears to be a humanoid face looking upward.</p>
+                       </div>
+                   </div>
+                   <div class="timeline-item">
+                       <div class="timeline-date">1998</div>
+                       <div class="timeline-content">
+                           <h3>Mars Global Surveyor</h3>
+                           <p>Higher resolution images from the Mars Global Surveyor provide more detailed views of the Face and surrounding structures, showing more detail but maintaining some of the facial features.</p>
+                       </div>
+                   </div>
+                   <div class="timeline-item">
+                       <div class="timeline-date">2001</div>
+                       <div class="timeline-content">
+                           <h3>Mars Odyssey Mission</h3>
+                           <p>The Mars Odyssey mission provides thermal imaging of the Cydonia region, revealing interesting temperature variations in the structures that some researchers suggest could indicate artificial materials.</p>
+                       </div>
+                   </div>
+                   <div class="timeline-item">
+                       <div class="timeline-date">2006</div>
+                       <div class="timeline-content">
+                           <h3>Mars Reconnaissance Orbiter</h3>
+                           <p>The highest resolution images to date are captured by the Mars Reconnaissance Orbiter's HiRISE camera, providing unprecedented detail of the Cydonia formations.</p>
+                       </div>
+                   </div>
+                   <div class="timeline-item">
+                       <div class="timeline-date">Present</div>
+                       <div class="timeline-content">
+                           <h3>Ongoing Research</h3>
+                           <p>Scientists and independent researchers continue to analyze the Cydonia region, using advanced imaging techniques and comparing the structures to both natural and artificial formations on Earth.</p>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </section>
+
+       <section id="faq-section">
+           <div class="container">
+               <h2 class="section-title">Frequently Asked Questions</h2>
+               <div class="faq-container">
+                   <div class="faq-item">
+                       <div class="faq-question">
+                           <h3>What exactly is Cydonia?</h3>
+                           <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                       </div>
+                       <div class="faq-answer">
+                           <p>Cydonia is a region on Mars located in the planet's northern hemisphere, in the transition zone between the heavily cratered southern highlands and the smooth northern plains. It's approximately 950 km from the Martian north pole and is most famous for containing several unusual surface features, including what appears to be a humanoid face and pyramid-like structures.</p>
+                       </div>
+                   </div>
+
+                   <div class="faq-item">
+                       <div class="faq-question">
+                           <h3>Is the Face on Mars real or just a trick of light and shadow?</h3>
+                           <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                       </div>
+                       <div class="faq-answer">
+                           <p>The Face on Mars is a real geological formation, but its appearance as a humanoid face has been a subject of debate. Initial low-resolution images from 1976 showed what strongly resembled a face. Later, higher-resolution images revealed more details that some interpret as natural erosion patterns, while others point to persistent facial features that remain visible even in detailed imagery. The debate continues in scientific and research communities.</p>
+                       </div>
+                   </div>
+
+                   <div class="faq-item">
+                       <div class="faq-question">
+                           <h3>Why do some researchers believe these structures are artificial?</h3>
+                           <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                       </div>
+                       <div class="faq-answer">
+                           <p>Some researchers point to several characteristics that they believe suggest artificial origin: the geometric precision of the pyramid structures, the bilateral symmetry of the Face, the alignment of structures in relation to Martian north, and the mathematical relationships between the positions of various formations. They also note that natural processes typically don't create such complex, organized patterns.</p>
+                       </div>
+                   </div>
+
+                   <div class="faq-item">
+                       <div class="faq-question">
+                           <h3>What does NASA say about the Cydonia formations?</h3>
+                           <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                       </div>
+                       <div class="faq-answer">
+                           <p>NASA's official position is that the formations in Cydonia are natural geological features shaped by erosion, wind, and other natural processes. They attribute the face-like appearance in the original images to pareidolia (the tendency for humans to see familiar patterns, like faces, in random stimuli) combined with the low resolution of the 1976 Viking images.</p>
+                       </div>
+                   </div>
+
+                   <div class="faq-item">
+                       <div class="faq-question">
+                           <h3>Could Mars have supported an ancient civilization?</h3>
+                           <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                       </div>
+                       <div class="faq-answer">
+                           <p>Scientific evidence shows that Mars once had liquid water on its surface and a thicker atmosphere, potentially making it habitable for microbial life billions of years ago. However, there is currently no scientific consensus supporting the existence of an advanced civilization on Mars. The debate about the Cydonia structures continues to inspire research into Mars' past and the possibility of ancient life on the Red Planet.</p>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </section>
+
+       <section id="contact-section">
+           <div class="container">
+               <h2 class="section-title">Contact Us</h2>
+               <p class="section-description">Have questions about Cydonia or want to share your own research? Get in touch with us!</p>
+
+               <div class="contact-container">
+                   <div class="contact-info">
+                       <div class="contact-item">
+                           <i class="fas fa-envelope"></i>
+                           <h3>Email</h3>
+                           <p>info@cydonia-project.net</p>
+                       </div>
+                       <div class="contact-item">
+                           <i class="fas fa-globe"></i>
+                           <h3>Website</h3>
+                           <p>www.cydonia-project.net</p>
+                       </div>
+                       <div class="contact-item">
+                           <i class="fas fa-users"></i>
+                           <h3>Research Community</h3>
+                           <p>Join our community of Cydonia researchers</p>
+                       </div>
+                   </div>
+
+                   <div class="contact-form">
+                       <form id="cydonia-contact-form">
+                           <div class="form-group">
+                               <label for="name">Name</label>
+                               <input type="text" id="name" name="name" required>
+                           </div>
+                           <div class="form-group">
+                               <label for="email">Email</label>
+                               <input type="email" id="email" name="email" required>
+                           </div>
+                           <div class="form-group">
+                               <label for="subject">Subject</label>
+                               <input type="text" id="subject" name="subject" required>
+                           </div>
+                           <div class="form-group">
+                               <label for="message">Message</label>
+                               <textarea id="message" name="message" rows="5" required></textarea>
+                           </div>
+                           <button type="submit" class="button">Send Message</button>
+                       </form>
+                   </div>
+               </div>
+           </div>
+       </section>
+           <footer>
+             <div class="container">
+               <div class="social-icons">
+                 <a href="https://www.facebook.com/mike.piotrowski.9" aria-label="Facebook" target="_blank"><i class="fab fa-facebook"></i></a>
+                 <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                 <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                 <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                 <a href="https://www.linkedin.com/in/michael-lee-piotrowski-552344141/" aria-label="LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a>
+               </div>
+               <p>Mars Cydonia Connection &copy; 2025 | Created by Michael Piotrowski</p>
+             </div>
+           </footer>
+
+     <!-- JavaScript -->
+     <script src="../js/app.js"></script>
+   </body>
+</html>
