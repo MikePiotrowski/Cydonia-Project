@@ -134,6 +134,75 @@
            </div>
        </section>
 
+       <section id="mars-live-data">
+           <div class="container">
+               <h2 class="section-title">Live Mars Data</h2>
+               <p class="section-description">Explore the latest images and data from NASA's Mars missions, updated in real-time as new information becomes available from the Red Planet.</p>
+
+               <div class="mars-data-container">
+                   <div class="mars-data-tabs">
+                       <button class="tab-button active" data-tab="rover-photos">Rover Photos</button>
+                       <button class="tab-button" data-tab="mars-weather">Mars Weather</button>
+                   </div>
+
+                   <div class="tab-content active" id="rover-photos">
+                       <div class="rover-selection">
+                           <label for="rover-select">Select Rover:</label>
+                           <select id="rover-select">
+                               <option value="perseverance">Perseverance</option>
+                               <option value="curiosity">Curiosity</option>
+                               <option value="opportunity">Opportunity</option>
+                               <option value="spirit">Spirit</option>
+                           </select>
+                           <button id="load-photos" class="button">Load Latest Photos</button>
+                       </div>
+
+                       <div class="rover-info">
+                           <div id="rover-status">Select a rover and click "Load Latest Photos" to see the most recent images from Mars.</div>
+                       </div>
+
+                       <div class="photos-container">
+                           <div id="photos-grid"></div>
+                           <div id="photo-loading" class="loading-indicator">
+                               <i class="fas fa-spinner fa-spin"></i> Loading photos from Mars...
+                           </div>
+                           <div id="photo-error" class="error-message"></div>
+                       </div>
+
+                       <div class="photo-modal">
+                           <span class="close-modal">&times;</span>
+                           <img class="modal-content" id="modal-img">
+                           <div id="modal-caption"></div>
+                       </div>
+                   </div>
+
+                   <div class="tab-content" id="mars-weather">
+                       <div class="weather-container">
+                           <div class="weather-header">
+                               <h3>Latest Weather at Elysium Planitia</h3>
+                               <p>Data from NASA's InSight Mars lander</p>
+                           </div>
+
+                           <div class="weather-data">
+                               <div id="weather-loading" class="loading-indicator">
+                                   <i class="fas fa-spinner fa-spin"></i> Loading Mars weather data...
+                               </div>
+                               <div id="weather-error" class="error-message"></div>
+
+                               <div class="weather-grid" id="weather-grid">
+                                   <!-- Weather data will be inserted here by JavaScript -->
+                               </div>
+                           </div>
+
+                           <div class="weather-info">
+                               <p>Note: Mars weather data is provided by NASA's InSight lander, which is equipped with sensors to measure temperature, wind, and atmospheric pressure at its landing site in Elysium Planitia, a flat, smooth plain near Mars' equator.</p>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </section>
+
        <section id="discovery-timeline">
            <div class="container">
                <h2 class="section-title">Cydonia Discovery Timeline</h2>
