@@ -5,6 +5,9 @@ import withMemo from '../hoc/withMemo';
 const Showcase = () => {
   return (
       <section id="showcase" role="region" aria-labelledby="showcase-heading">
+          <div className="parallax-bg stars-bg"></div>
+          <div className="parallax-bg mars-bg"></div>
+          <div className="parallax-bg dust-overlay"></div>
       <div className="container">
         <h1 id="showcase-heading">The Mysteries of Cydonia on Mars</h1>
         <p>

@@ -1,10 +1,37 @@
-import { defineConfig } from 'vite';
+import {defineConfig} from 'vite';
 import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
+import {resolve} from 'path';
+import {visualizer} from 'rollup-plugin-visualizer';
+import critters from 'vite-plugin-critters';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+    plugins: [
+        react(),
+        visualizer({
+            open: true, // Open the visualization after build
+            filename: 'dist/stats.html', // Output file
+            gzipSize: true, // Show gzipped sizes
+            brotliSize: true, // Show brotli sizes
+            template: 'treemap', // Use treemap visualization
+        }),
+        critters({
+            // Inline all styles from external stylesheets
+            preload: 'swap',
+            // Don't inline critical font-face rules, but preload the font urls
+            preloadFonts: true,
+            // Inline critical CSS
+            inlineFonts: false,
+            // Don't remove the original CSS
+            pruneSource: false,
+            // Reduce the size of critical CSS
+            compress: true,
+            // Key for the cache
+            key: 'critters-cache',
+            // Add font-display: swap to all @font-face rules
+            fonts: true,
+        }),
+    ],
   root: './',
   build: {
     outDir: 'dist',

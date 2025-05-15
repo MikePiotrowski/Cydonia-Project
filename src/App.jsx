@@ -2,11 +2,8 @@ import React, {lazy, Suspense, useCallback, useEffect, useState} from 'react';
 import Header from './components/Header';
 import Showcase from './components/Showcase';
 import Footer from './components/Footer';
-import ThemeToggle from './components/ThemeToggle';
-import PreferencesPanel from './components/PreferencesPanel';
 import ErrorBoundary from './components/ErrorBoundary';
 import LoadingFallback from './components/LoadingFallback';
-import ShortcutsHelp from './components/ShortcutsHelp';
 import {useAppContext} from './context/AppContext';
 import useScrollPosition from './hooks/useScrollPosition';
 import useKeyboardShortcuts from './hooks/useKeyboardShortcuts';
@@ -18,6 +15,11 @@ const Forum = lazy(() => import('./components/Forum'));
 const AboutMars = lazy(() => import('./components/AboutMars'));
 const AboutCydonia = lazy(() => import('./components/AboutCydonia'));
 const Links = lazy(() => import('./components/Links'));
+
+// Lazy load UI components that are not critical for initial render
+const ThemeToggle = lazy(() => import('./components/ThemeToggle'));
+const PreferencesPanel = lazy(() => import('./components/PreferencesPanel'));
+const ShortcutsHelp = lazy(() => import('./components/ShortcutsHelp'));
 
 function App() {
     // Get theme and user preferences from context
@@ -156,16 +158,22 @@ function App() {
       </main>
 
       {/* Theme toggle button */}
-      <ThemeToggle />
+          <Suspense fallback={null}>
+              <ThemeToggle/>
+          </Suspense>
 
       {/* Accessibility preferences panel */}
-      <PreferencesPanel />
+          <Suspense fallback={null}>
+              <PreferencesPanel/>
+          </Suspense>
 
           {/* Keyboard shortcuts help dialog */}
-          <ShortcutsHelp
-              isOpen={showShortcutsHelp}
-              onClose={toggleShortcutsHelp}
-          />
+          <Suspense fallback={null}>
+              <ShortcutsHelp
+                  isOpen={showShortcutsHelp}
+                  onClose={toggleShortcutsHelp}
+              />
+          </Suspense>
 
       {/* Scroll to top button - appears when scrolling down */}
       {scrollPosition > 300 && (
