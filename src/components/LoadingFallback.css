@@ -4,36 +4,162 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
-    min-height: 200px;
+    padding: 3rem;
+    min-height: 300px;
+    position: relative;
+    overflow: hidden;
 }
 
+/* Mars-themed loading animation */
 .loading-spinner {
-    width: 50px;
-    height: 50px;
-    border: 5px solid rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-    border-top-color: #c1440e;
-    animation: spin 1s ease-in-out infinite;
-    margin-bottom: 1rem;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 2rem;
 }
 
-[data-theme='dark'] .loading-spinner {
-    border-color: rgba(255, 255, 255, 0.1);
-    border-top-color: #e8491d;
+/* Mars planet */
+.loading-spinner::before {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(var(--primary-rgb), 0.5);
+    animation: pulse 2s ease-in-out infinite;
+    z-index: 1;
+    top: 10px;
+    left: 10px;
+}
+
+/* Orbit ring */
+.loading-spinner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 80px;
+    border: 2px solid rgba(var(--primary-rgb), 0.3);
+    border-radius: 50%;
+    animation: spin 10s linear infinite;
+}
+
+/* Satellite */
+.loading-spinner .satellite {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px var(--accent-color);
+    animation: orbit 3s linear infinite;
 }
 
 .loading-fallback p {
-    font-size: 1rem;
-    color: #666;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    text-align: center;
+    opacity: 0;
+    animation: fadeInOut 2s ease-in-out infinite;
+    margin-top: 1rem;
+    font-weight: 500;
 }
 
-[data-theme='dark'] .loading-fallback p {
-    color: #bbb;
+/* Loading progress dots */
+.loading-dots {
+    display: inline-block;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
 }
 
+.loading-dots::after {
+    content: '...';
+    position: absolute;
+    animation: dots 1.5s infinite;
+    font-weight: bold;
+}
+
+/* Animations */
 @keyframes spin {
     to {
         transform: rotate(360deg);
+    }
+}
+
+@keyframes orbit {
+    0% {
+        transform: rotate(0deg) translateX(40px) rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg) translateX(40px) rotate(-360deg);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes dots {
+    0%, 20% {
+        content: '.';
+    }
+    40% {
+        content: '..';
+    }
+    60%, 100% {
+        content: '...';
+    }
+}
+
+/* Responsive styles */
+@media (max-width: 576px) {
+    .loading-fallback {
+        padding: 2rem;
+        min-height: 250px;
+    }
+
+    .loading-spinner {
+        width: 60px;
+        height: 60px;
+    }
+
+    .loading-spinner::before {
+        width: 45px;
+        height: 45px;
+        top: 7.5px;
+        left: 7.5px;
+    }
+
+    .loading-spinner::after {
+        width: 60px;
+        height: 60px;
+    }
+
+    .loading-spinner .satellite {
+        width: 12px;
+        height: 12px;
     }
 }

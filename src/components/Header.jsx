@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import './Header.css';
 import useScrollPosition from '../hooks/useScrollPosition';
@@ -9,13 +9,73 @@ const Header = ({currentPage, setCurrentPage}) => {
     const scrollPosition = useScrollPosition();
     const isScrolled = scrollPosition > 50;
 
+    // State for mobile menu
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    // Toggle mobile menu
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
+    // Close mobile menu when clicking outside
+    const closeMobileMenu = useCallback(() => {
+        if (isMobileMenuOpen) {
+            setIsMobileMenuOpen(false);
+        }
+    }, [isMobileMenuOpen]);
+
+    // Close mobile menu when window is resized to desktop size
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth > 576 && isMobileMenuOpen) {
+                setIsMobileMenuOpen(false);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [isMobileMenuOpen]);
+
+    // Handle escape key to close mobile menu
+    useEffect(() => {
+        const handleEscKey = (event) => {
+            if (event.key === 'Escape' && isMobileMenuOpen) {
+                setIsMobileMenuOpen(false);
+            }
+        };
+
+        document.addEventListener('keydown', handleEscKey);
+        return () => {
+            document.removeEventListener('keydown', handleEscKey);
+        };
+    }, [isMobileMenuOpen]);
+
     return (
     <header role="banner" className={isScrolled ? 'scrolled' : ''}>
       <div className="container">
         <div id="branding">
           <h1><span className="highlight">Mars</span> Cydonia Connection</h1>
         </div>
-        <nav role="navigation" aria-label="Main navigation">
+
+          {/* Mobile menu button */}
+          <button
+              className="mobile-menu-btn"
+              onClick={toggleMobileMenu}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="main-navigation"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+          >
+              <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+          </button>
+
+          <nav
+              role="navigation"
+              aria-label="Main navigation"
+              className={isMobileMenuOpen ? 'active' : ''}
+              id="main-navigation"
+          >
           <ul>
               <li>
                   <a
@@ -25,6 +85,7 @@ const Header = ({currentPage, setCurrentPage}) => {
                       onClick={() => {
                           setCurrentPage('home');
                           window.scrollTo(0, 0);
+                          closeMobileMenu();
                       }}
                   >
                       HOME
@@ -38,6 +99,7 @@ const Header = ({currentPage, setCurrentPage}) => {
                       onClick={() => {
                           setCurrentPage('about');
                           window.scrollTo(0, 0);
+                          closeMobileMenu();
                       }}
                   >
                       ABOUT MARS
@@ -51,12 +113,23 @@ const Header = ({currentPage, setCurrentPage}) => {
                       onClick={() => {
                           setCurrentPage('cydonia');
                           window.scrollTo(0, 0);
+                          closeMobileMenu();
                       }}
                   >
                       ABOUT CYDONIA
                   </a>
               </li>
-              <li><a href="#community" onClick={() => window.scrollTo(0, 0)}>COMMUNITY</a></li>
+              <li>
+                  <a
+                      href="#community"
+                      onClick={() => {
+                          window.scrollTo(0, 0);
+                          closeMobileMenu();
+                      }}
+                  >
+                      COMMUNITY
+                  </a>
+              </li>
               <li>
                   <a
                       href="#forum"
@@ -65,6 +138,7 @@ const Header = ({currentPage, setCurrentPage}) => {
                       onClick={() => {
                           setCurrentPage('forum');
                           window.scrollTo(0, 0);
+                          closeMobileMenu();
                       }}
                   >
                       FORUM
@@ -78,12 +152,23 @@ const Header = ({currentPage, setCurrentPage}) => {
                       onClick={() => {
                           setCurrentPage('links');
                           window.scrollTo(0, 0);
+                          closeMobileMenu();
                       }}
                   >
                       LINKS
                   </a>
               </li>
-              <li><a href="#live" onClick={() => window.scrollTo(0, 0)}>LIVE FEED</a></li>
+              <li>
+                  <a
+                      href="#live"
+                      onClick={() => {
+                          window.scrollTo(0, 0);
+                          closeMobileMenu();
+                      }}
+                  >
+                      LIVE FEED
+                  </a>
+              </li>
           </ul>
         </nav>
       </div>

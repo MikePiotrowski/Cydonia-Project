@@ -447,6 +447,37 @@ footer .footer-links a:hover::after {
   }
 }
 
+/* Keyboard shortcuts indicator */
+.keyboard-shortcuts-indicator {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 99;
+    transition: all 0.3s ease;
+    font-size: 20px;
+}
+
+.keyboard-shortcuts-indicator:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.keyboard-shortcuts-indicator:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
 /* Media Queries */
 @media (max-width: 768px) {
   header #branding,
@@ -465,6 +496,14 @@ footer .footer-links a:hover::after {
   header li {
     margin: 10px 0;
   }
+
+    .keyboard-shortcuts-indicator {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+        bottom: 15px;
+        left: 15px;
+    }
 
     .section {
         padding: 80px 0;

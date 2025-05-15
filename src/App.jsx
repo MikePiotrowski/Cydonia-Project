@@ -1,4 +1,4 @@
-import React, {lazy, Suspense, useEffect, useState} from 'react';
+import React, {lazy, Suspense, useCallback, useEffect, useState} from 'react';
 import Header from './components/Header';
 import Showcase from './components/Showcase';
 import Footer from './components/Footer';
@@ -6,8 +6,10 @@ import ThemeToggle from './components/ThemeToggle';
 import PreferencesPanel from './components/PreferencesPanel';
 import ErrorBoundary from './components/ErrorBoundary';
 import LoadingFallback from './components/LoadingFallback';
+import ShortcutsHelp from './components/ShortcutsHelp';
 import {useAppContext} from './context/AppContext';
 import useScrollPosition from './hooks/useScrollPosition';
+import useKeyboardShortcuts from './hooks/useKeyboardShortcuts';
 import './App.css';
 
 // Lazy load larger components
@@ -19,13 +21,66 @@ const Links = lazy(() => import('./components/Links'));
 
 function App() {
     // Get theme and user preferences from context
-    const {theme, userPreferences} = useAppContext();
+    const {theme, userPreferences, toggleTheme, updatePreferences} = useAppContext();
 
     // State for managing current page
     const [currentPage, setCurrentPage] = useState('home');
 
+    // State for keyboard shortcuts help dialog
+    const [showShortcutsHelp, setShowShortcutsHelp] = useState(false);
+
     // Use custom hook for scroll position
     const scrollPosition = useScrollPosition();
+
+    // Navigation handler
+    const navigateTo = useCallback((page) => {
+        setCurrentPage(page);
+        window.location.hash = page;
+        window.scrollTo(0, 0);
+    }, []);
+
+    // Toggle shortcuts help dialog
+    const toggleShortcutsHelp = useCallback(() => {
+        setShowShortcutsHelp(prev => !prev);
+    }, []);
+
+    // Toggle font size
+    const cycleFontSize = useCallback(() => {
+        const sizes = ['small', 'medium', 'large'];
+        const currentIndex = sizes.indexOf(userPreferences.fontSize);
+        const nextIndex = (currentIndex + 1) % sizes.length;
+        updatePreferences({fontSize: sizes[nextIndex]});
+    }, [userPreferences.fontSize, updatePreferences]);
+
+    // Toggle animations
+    const toggleAnimations = useCallback(() => {
+        updatePreferences({animations: !userPreferences.animations});
+    }, [userPreferences.animations, updatePreferences]);
+
+    // Toggle high contrast
+    const toggleHighContrast = useCallback(() => {
+        updatePreferences({highContrast: !userPreferences.highContrast});
+    }, [userPreferences.highContrast, updatePreferences]);
+
+    // Scroll to top
+    const scrollToTop = useCallback(() => {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }, []);
+
+    // Register keyboard shortcuts
+    useKeyboardShortcuts({
+        'Alt+t': toggleTheme,
+        'Alt+h': () => navigateTo('home'),
+        'Alt+a': () => navigateTo('about'),
+        'Alt+c': () => navigateTo('cydonia'),
+        'Alt+f': () => navigateTo('forum'),
+        'Alt+l': () => navigateTo('links'),
+        'Alt+s': scrollToTop,
+        'Alt+?': toggleShortcutsHelp,
+        'Alt+z': cycleFontSize,
+        'Alt+x': toggleAnimations,
+        'Alt+v': toggleHighContrast
+    });
 
     // Effect to handle hash changes for navigation
     useEffect(() => {
@@ -106,6 +161,12 @@ function App() {
       {/* Accessibility preferences panel */}
       <PreferencesPanel />
 
+          {/* Keyboard shortcuts help dialog */}
+          <ShortcutsHelp
+              isOpen={showShortcutsHelp}
+              onClose={toggleShortcutsHelp}
+          />
+
       {/* Scroll to top button - appears when scrolling down */}
       {scrollPosition > 300 && (
         <button 
@@ -116,6 +177,16 @@ function App() {
           <i className="fas fa-arrow-up"></i>
         </button>
       )}
+
+          {/* Keyboard shortcuts indicator */}
+          <button
+              className="keyboard-shortcuts-indicator"
+              onClick={toggleShortcutsHelp}
+              aria-label="Show keyboard shortcuts"
+              title="Show keyboard shortcuts (Alt+?)"
+          >
+              <i className="fas fa-keyboard"></i>
+          </button>
     </div>
   );
 }

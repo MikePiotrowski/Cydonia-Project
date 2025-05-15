@@ -108,10 +108,24 @@ header nav {
   font-size: 24px;
   cursor: pointer;
   transition: all 0.3s;
+    padding: 8px;
+    border-radius: 4px;
+    position: relative;
+    z-index: 101;
+    outline: none;
 }
 
 .mobile-menu-btn:hover {
   color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.mobile-menu-btn:focus {
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+.mobile-menu-btn:active {
+    transform: scale(0.95);
 }
 
 /* Media Queries */
@@ -144,26 +158,108 @@ header nav {
   }
 
   header nav {
-    display: none;
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 300px;
+      height: 100vh;
+      background: var(--primary-dark);
+      z-index: 100;
+      padding-top: 70px;
+      transition: right 0.3s ease-in-out;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+      overflow-y: auto;
   }
 
   header nav.active {
-    display: block;
+      right: 0;
+  }
+
+    /* Overlay when menu is open */
+    header nav.active::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
     width: 100%;
-    margin-top: 20px;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        animation: fadeIn 0.3s forwards;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
   }
 
   header nav ul {
     flex-direction: column;
+      padding: 0 20px;
   }
 
   header li {
     margin: 0;
-    text-align: center;
+      text-align: left;
+      opacity: 0;
+      transform: translateX(20px);
   }
 
+    header nav.active li {
+        opacity: 1;
+        transform: translateX(0);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    /* Staggered animation for menu items */
+    header nav.active li:nth-child(1) {
+        transition-delay: 0.1s;
+    }
+
+    header nav.active li:nth-child(2) {
+        transition-delay: 0.15s;
+    }
+
+    header nav.active li:nth-child(3) {
+        transition-delay: 0.2s;
+    }
+
+    header nav.active li:nth-child(4) {
+        transition-delay: 0.25s;
+    }
+
+    header nav.active li:nth-child(5) {
+        transition-delay: 0.3s;
+    }
+
+    header nav.active li:nth-child(6) {
+        transition-delay: 0.35s;
+    }
+
+    header nav.active li:nth-child(7) {
+        transition-delay: 0.4s;
+    }
+
   header li a {
-    padding: 15px;
+      padding: 15px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: block;
+      width: 100%;
+  }
+
+    header li a:hover {
+        padding-left: 5px;
+        color: var(--accent-color);
+    }
+
+    /* Active page indicator in mobile menu */
+    header li a.current {
+        border-left: 3px solid var(--primary-color);
+        padding-left: 10px;
   }
 }
