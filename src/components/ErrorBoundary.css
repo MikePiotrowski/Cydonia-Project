@@ -1,0 +1,73 @@
+/* Error Boundary Styles */
+.error-boundary {
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 800px;
+    background-color: #fff1f0;
+    border: 1px solid #ffccc7;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+[data-theme='dark'] .error-boundary {
+    background-color: #2a1215;
+    border-color: #5c2223;
+    color: #ff7875;
+}
+
+.error-boundary h2 {
+    color: #f5222d;
+    margin-bottom: 1rem;
+}
+
+[data-theme='dark'] .error-boundary h2 {
+    color: #ff7875;
+}
+
+.error-boundary p {
+    margin-bottom: 1.5rem;
+}
+
+.error-boundary details {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    text-align: left;
+}
+
+[data-theme='dark'] .error-boundary details {
+    background-color: #141414;
+    border-color: #303030;
+}
+
+.error-boundary summary {
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.error-reload-btn {
+    background-color: #1890ff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.error-reload-btn:hover {
+    background-color: #40a9ff;
+}
+
+[data-theme='dark'] .error-reload-btn {
+    background-color: #177ddc;
+}
+
+[data-theme='dark'] .error-reload-btn:hover {
+    background-color: #1890ff;
+}

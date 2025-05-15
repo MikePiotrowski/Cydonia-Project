@@ -1,16 +1,21 @@
-import React, {useEffect, useState} from 'react';
+import React, {lazy, Suspense, useEffect, useState} from 'react';
 import Header from './components/Header';
 import Showcase from './components/Showcase';
-import Community from './components/Community';
-import Forum from './components/Forum';
-import AboutMars from './components/AboutMars';
-import AboutCydonia from './components/AboutCydonia';
-import Links from './components/Links';
 import Footer from './components/Footer';
 import ThemeToggle from './components/ThemeToggle';
 import PreferencesPanel from './components/PreferencesPanel';
+import ErrorBoundary from './components/ErrorBoundary';
+import LoadingFallback from './components/LoadingFallback';
 import {useAppContext} from './context/AppContext';
+import useScrollPosition from './hooks/useScrollPosition';
 import './App.css';
+
+// Lazy load larger components
+const Community = lazy(() => import('./components/Community'));
+const Forum = lazy(() => import('./components/Forum'));
+const AboutMars = lazy(() => import('./components/AboutMars'));
+const AboutCydonia = lazy(() => import('./components/AboutCydonia'));
+const Links = lazy(() => import('./components/Links'));
 
 function App() {
     // Get theme and user preferences from context
@@ -19,21 +24,8 @@ function App() {
     // State for managing current page
     const [currentPage, setCurrentPage] = useState('home');
 
-  // State for managing scroll position
-  const [scrollPosition, setScrollPosition] = useState(0);
-
-  // Effect to track scroll position
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollPosition(window.scrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+    // Use custom hook for scroll position
+    const scrollPosition = useScrollPosition();
 
     // Effect to handle hash changes for navigation
     useEffect(() => {
@@ -72,35 +64,40 @@ function App() {
         <Header currentPage={currentPage} setCurrentPage={setCurrentPage}/>
 
       <main id="main-content">
-          {currentPage === 'home' ? (
-              <>
-                  <Showcase/>
+          <ErrorBoundary showDetails={process.env.NODE_ENV === 'development'}>
+              <Suspense fallback={<LoadingFallback/>}>
+                  {currentPage === 'home' ? (
+                      <>
+                          <Showcase/>
 
-                  {/* More sections will be added as components */}
-                  <section id="cydonia-info" className="section">
-                      <div className="container">
-                          <h2 className="section-title">Exploring Cydonia's Mysteries</h2>
-                          <p className="section-description">
-                              The Cydonia region on Mars has captured the imagination of scientists and the public
-                              since the discovery of unusual formations that appear artificial in nature.
-                          </p>
-                      </div>
-                  </section>
+                          {/* More sections will be added as components */}
+                          <section id="cydonia-info" className="section">
+                              <div className="container">
+                                  <h2 className="section-title">Exploring Cydonia's Mysteries</h2>
+                                  <p className="section-description">
+                                      The Cydonia region on Mars has captured the imagination of scientists and the
+                                      public
+                                      since the discovery of unusual formations that appear artificial in nature.
+                                  </p>
+                              </div>
+                          </section>
 
-                  {/* Community Section */}
-                  <Community/>
-              </>
-          ) : currentPage === 'forum' ? (
-              <Forum/>
-          ) : currentPage === 'about' ? (
-              <AboutMars/>
-          ) : currentPage === 'cydonia' ? (
-              <AboutCydonia/>
-          ) : currentPage === 'links' ? (
-              <Links/>
-          ) : null}
+                          {/* Community Section */}
+                          <Community/>
+                      </>
+                  ) : currentPage === 'forum' ? (
+                      <Forum/>
+                  ) : currentPage === 'about' ? (
+                      <AboutMars/>
+                  ) : currentPage === 'cydonia' ? (
+                      <AboutCydonia/>
+                  ) : currentPage === 'links' ? (
+                      <Links/>
+                  ) : null}
+              </Suspense>
 
-        <Footer />
+              <Footer/>
+          </ErrorBoundary>
       </main>
 
       {/* Theme toggle button */}
