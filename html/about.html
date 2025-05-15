@@ -18,6 +18,9 @@
            <h1><span class="highlight">Mars</span> Cydonia Connection</h1>
        </div>
          <nav>
+             <button aria-label="Toggle menu" class="menu-toggle">
+                 <i class="fas fa-bars"></i>
+             </button>
              <ul>
                  <li><a href="index.html">HOME</a></li>
                  <li><a href="about.html" class="highlight current">ABOUT MARS</a></li>
@@ -25,6 +28,73 @@
                  <li><a href="links.html">LINKS</a></li>
                  <li><a href="live.html">LIVE FEED</a></li>
              </ul>
+
+             <!-- NASA-inspired Mega Menu -->
+             <div class="mega-menu-wrapper">
+                 <div class="mega-menu">
+                     <!-- Mars Column -->
+                     <div class="mega-menu-column">
+                         <h3 class="mega-menu-title">Explore Mars</h3>
+                         <div class="mega-menu-links">
+                             <a class="mega-menu-link" href="about.html"><i class="fas fa-globe"></i> Mars Overview</a>
+                             <a class="mega-menu-link" href="#mars-facts"><i class="fas fa-info-circle"></i> Mars Facts</a>
+                             <a class="mega-menu-link" href="#mars-terrain-viewer"><i class="fas fa-mountain"></i> 3D
+                                 Terrain Viewer</a>
+                             <a class="mega-menu-link" href="#discovery-timeline"><i class="fas fa-history"></i>
+                                 Exploration Timeline</a>
+                             <a class="mega-menu-link" href="#faq-section"><i class="fas fa-question-circle"></i> Mars
+                                 FAQ</a>
+                         </div>
+                     </div>
+
+                     <!-- Cydonia Column -->
+                     <div class="mega-menu-column">
+                         <h3 class="mega-menu-title">Cydonia Mysteries</h3>
+                         <div class="mega-menu-links">
+                             <a class="mega-menu-link" href="services.html"><i class="fas fa-landmark"></i> The Face on
+                                 Mars</a>
+                             <a class="mega-menu-link" href="services.html#pyramids"><i class="fas fa-pyramid"></i>
+                                 Pyramids of Cydonia</a>
+                             <a class="mega-menu-link" href="services.html#evidence"><i class="fas fa-search"></i>
+                                 Scientific Evidence</a>
+                             <a class="mega-menu-link" href="services.html#theories"><i class="fas fa-lightbulb"></i>
+                                 Theories & Hypotheses</a>
+                             <a class="mega-menu-link" href="services.html#gallery"><i class="fas fa-images"></i> Image
+                                 Gallery</a>
+                         </div>
+                     </div>
+
+                     <!-- Resources Column -->
+                     <div class="mega-menu-column">
+                         <h3 class="mega-menu-title">Resources</h3>
+                         <div class="mega-menu-links">
+                             <a class="mega-menu-link" href="links.html"><i class="fas fa-external-link-alt"></i>
+                                 External Links</a>
+                             <a class="mega-menu-link" href="links.html#books"><i class="fas fa-book"></i> Recommended
+                                 Books</a>
+                             <a class="mega-menu-link" href="links.html#research"><i class="fas fa-file-alt"></i>
+                                 Research Papers</a>
+                             <a class="mega-menu-link" href="links.html#videos"><i class="fas fa-video"></i> Videos &
+                                 Documentaries</a>
+                             <a class="mega-menu-link" href="live.html"><i class="fas fa-satellite"></i> Live Mars Feed</a>
+                         </div>
+                     </div>
+
+                     <!-- Featured Section -->
+                     <div class="mega-menu-featured">
+                         <h3 class="mega-menu-featured-title">Latest Mars Discovery</h3>
+                         <div class="mega-menu-featured-content">
+                             <img alt="Latest Mars Discovery" class="mega-menu-featured-image" src="../img/Mars.jpg">
+                             <div class="mega-menu-featured-text">
+                                 <p>NASA's Perseverance rover has discovered new evidence of ancient microbial life in
+                                     Jezero Crater, suggesting Mars once had conditions suitable for life as we know
+                                     it.</p>
+                                 <a class="mega-menu-featured-link" href="#">Read More</a>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
          </nav>
          <div class="accessibility-controls">
              <button aria-label="Toggle high contrast mode" id="high-contrast-toggle">
@@ -45,10 +115,13 @@
      </div>
    </header>
        <section id="showcase">
+           <div class="parallax-bg stars-bg"></div>
+           <div class="parallax-bg mars-bg"></div>
+           <div class="parallax-bg dust-overlay"></div>
            <div class="container">
                <h1>The Red Planet: Mars</h1>
                <p>Mars has captivated human imagination for centuries. Named after the Roman god of war, its reddish appearance in the night sky has inspired countless stories, scientific endeavors, and dreams of exploration. Today, Mars stands as our most studied neighboring planet and a potential future home for humanity.</p>
-               <a href="#mars-facts" class="button showcase-btn">Explore Mars</a>
+               <a class="button showcase-btn" href="#mars-facts">Explore Mars <i class="fas fa-rocket"></i></a>
            </div>
        </section>
 
@@ -62,7 +135,32 @@
            </div>
        </section>
 
-       <section id="mars-facts">
+    <section id="mars-terrain-viewer">
+        <div class="container">
+            <h2 class="section-title">Explore Mars in 3D</h2>
+            <p class="section-description">Experience the Martian landscape with our interactive 3D terrain viewer. Drag
+                to rotate, scroll to zoom, and double-click to explore specific features of the Red Planet's
+                surface.</p>
+            <div class="terrain-viewer-container">
+                <div id="mars-3d-model"></div>
+                <div class="terrain-controls">
+                    <button class="terrain-btn" id="olympus-mons-btn"><i class="fas fa-mountain"></i> Olympus Mons
+                    </button>
+                    <button class="terrain-btn" id="valles-marineris-btn"><i class="fas fa-route"></i> Valles Marineris
+                    </button>
+                    <button class="terrain-btn" id="cydonia-btn"><i class="fas fa-landmark"></i> Cydonia Region</button>
+                    <button class="terrain-btn" id="reset-view-btn"><i class="fas fa-sync-alt"></i> Reset View</button>
+                </div>
+                <div class="terrain-info">
+                    <h3 id="terrain-title">Mars Overview</h3>
+                    <p id="terrain-description">Rotate the model to explore the diverse terrain of Mars. Click on the
+                        buttons above to visit notable landmarks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="mars-facts">
            <div class="container">
                <h2 class="section-title">Mars: The Basics</h2>
                <p class="section-description">Mars is the fourth planet from the Sun and the second-smallest planet in our Solar System. Often called the "Red Planet" due to its reddish appearance, Mars has fascinated astronomers and scientists for centuries.</p>
@@ -213,7 +311,119 @@
            </div>
        </section>
 
-       <section id="contact-section">
+    <section id="mars-weather-dashboard">
+        <div class="container">
+            <h2 class="section-title">Mars Weather Dashboard</h2>
+            <p class="section-description">Explore the latest weather data from NASA's Perseverance rover at Jezero
+                Crater</p>
+
+            <div class="dashboard-container">
+                <div class="dashboard-header">
+                    <div class="dashboard-title">
+                        <h3>Jezero Crater</h3>
+                        <p>Last updated: <span id="weather-update-date">Sol 634</span></p>
+                    </div>
+                    <div class="dashboard-controls">
+                        <button class="dashboard-btn active" id="sol-view-btn">Sol View</button>
+                        <button class="dashboard-btn" id="month-view-btn">Month View</button>
+                        <button class="dashboard-btn" id="year-view-btn">Year View</button>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <!-- Current conditions card -->
+                    <div class="weather-card current-conditions">
+                        <h4>Current Conditions</h4>
+                        <div class="weather-icon">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                        <div class="weather-data">
+                            <div class="temp-container">
+                                <div class="current-temp">-23°C</div>
+                                <div class="temp-range">
+                                    <span class="high-temp">-5°C</span> /
+                                    <span class="low-temp">-90°C</span>
+                                </div>
+                            </div>
+                            <div class="weather-details">
+                                <div class="weather-detail">
+                                    <i class="fas fa-wind"></i>
+                                    <span>7 m/s</span>
+                                </div>
+                                <div class="weather-detail">
+                                    <i class="fas fa-compress-alt"></i>
+                                    <span>722 Pa</span>
+                                </div>
+                                <div class="weather-detail">
+                                    <i class="fas fa-tint"></i>
+                                    <span>0%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Temperature chart card -->
+                    <div class="weather-card temperature-chart">
+                        <h4>Temperature Trends</h4>
+                        <div class="chart-container">
+                            <canvas id="temperature-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Pressure chart card -->
+                    <div class="weather-card pressure-chart">
+                        <h4>Atmospheric Pressure</h4>
+                        <div class="chart-container">
+                            <canvas id="pressure-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Wind chart card -->
+                    <div class="weather-card wind-chart">
+                        <h4>Wind Speed & Direction</h4>
+                        <div class="chart-container">
+                            <canvas id="wind-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- UV Index card -->
+                    <div class="weather-card uv-index">
+                        <h4>UV Radiation</h4>
+                        <div class="uv-meter">
+                            <div class="uv-scale">
+                                <div class="uv-level" style="width: 75%;"></div>
+                            </div>
+                            <div class="uv-value">High</div>
+                        </div>
+                        <p class="uv-description">Mars receives significant UV radiation due to its thin atmosphere and
+                            lack of ozone layer.</p>
+                    </div>
+
+                    <!-- Dust levels card -->
+                    <div class="weather-card dust-levels">
+                        <h4>Dust Activity</h4>
+                        <div class="dust-meter">
+                            <div class="dust-indicator" style="height: 40%;"></div>
+                        </div>
+                        <div class="dust-scale">
+                            <span>Low</span>
+                            <span>Medium</span>
+                            <span>High</span>
+                        </div>
+                        <p class="dust-status">Current status: <span>Moderate</span></p>
+                    </div>
+                </div>
+
+                <div class="dashboard-footer">
+                    <p>Data source: NASA/JPL-Caltech/MSSS/CAB(CSIC-INTA)</p>
+                    <a class="more-data-link" href="https://mars.nasa.gov/mars2020/weather/" target="_blank">View more
+                        Mars weather data <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact-section">
            <div class="container">
                <h2 class="section-title">Official Mars Resources</h2>
                <p class="section-description">Explore these official resources to learn more about the Red Planet</p>

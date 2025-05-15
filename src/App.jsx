@@ -1,15 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from './components/Header';
 import Showcase from './components/Showcase';
+import Community from './components/Community';
+import Forum from './components/Forum';
 import Footer from './components/Footer';
 import ThemeToggle from './components/ThemeToggle';
 import PreferencesPanel from './components/PreferencesPanel';
-import { useAppContext } from './context/AppContext';
+import {useAppContext} from './context/AppContext';
 import './App.css';
 
 function App() {
   // Get theme from context
   const { theme } = useAppContext();
+
+    // State for managing current page
+    const [currentPage, setCurrentPage] = useState('home');
 
   // State for managing scroll position
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -27,25 +32,54 @@ function App() {
     };
   }, []);
 
+    // Effect to handle hash changes for navigation
+    useEffect(() => {
+        const handleHashChange = () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash === 'forum') {
+                setCurrentPage('forum');
+            } else {
+                setCurrentPage('home');
+            }
+        };
+
+        // Set initial page based on hash
+        handleHashChange();
+
+        window.addEventListener('hashchange', handleHashChange);
+        return () => {
+            window.removeEventListener('hashchange', handleHashChange);
+        };
+    }, []);
+
   return (
     <div className={`App ${theme}`}>
       <a href="#main-content" className="skip-link">Skip to main content</a>
 
-      <Header />
+        <Header currentPage={currentPage} setCurrentPage={setCurrentPage}/>
 
       <main id="main-content">
-        <Showcase />
+          {currentPage === 'home' ? (
+              <>
+                  <Showcase/>
 
-        {/* More sections will be added as components */}
-        <section id="cydonia-info" className="section">
-          <div className="container">
-            <h2 className="section-title">Exploring Cydonia's Mysteries</h2>
-            <p className="section-description">
-              The Cydonia region on Mars has captured the imagination of scientists and the public 
-              since the discovery of unusual formations that appear artificial in nature.
-            </p>
-          </div>
-        </section>
+                  {/* More sections will be added as components */}
+                  <section id="cydonia-info" className="section">
+                      <div className="container">
+                          <h2 className="section-title">Exploring Cydonia's Mysteries</h2>
+                          <p className="section-description">
+                              The Cydonia region on Mars has captured the imagination of scientists and the public
+                              since the discovery of unusual formations that appear artificial in nature.
+                          </p>
+                      </div>
+                  </section>
+
+                  {/* Community Section */}
+                  <Community/>
+              </>
+          ) : currentPage === 'forum' ? (
+              <Forum/>
+          ) : null}
 
         <Footer />
       </main>

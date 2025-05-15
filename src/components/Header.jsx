@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import './Header.css';
 
-const Header = () => {
+const Header = ({currentPage, setCurrentPage}) => {
   const [isScrolled, setIsScrolled] = useState(false);
-  
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -12,15 +12,15 @@ const Header = () => {
         setIsScrolled(false);
       }
     };
-    
+
     window.addEventListener('scroll', handleScroll);
-    
-    return () => {
+
+      return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  
-  return (
+
+    return (
     <header role="banner" className={isScrolled ? 'scrolled' : ''}>
       <div className="container">
         <div id="branding">
@@ -28,9 +28,29 @@ const Header = () => {
         </div>
         <nav role="navigation" aria-label="Main navigation">
           <ul>
-            <li><a href="#home" className="highlight current" aria-current="page">HOME</a></li>
+              <li>
+                  <a
+                      href="#home"
+                      className={`${currentPage === 'home' ? 'highlight current' : ''}`}
+                      aria-current={currentPage === 'home' ? 'page' : undefined}
+                      onClick={() => setCurrentPage('home')}
+                  >
+                      HOME
+                  </a>
+              </li>
             <li><a href="#about">ABOUT MARS</a></li>
             <li><a href="#cydonia">ABOUT CYDONIA</a></li>
+              <li><a href="#community">COMMUNITY</a></li>
+              <li>
+                  <a
+                      href="#forum"
+                      className={`${currentPage === 'forum' ? 'highlight current' : ''}`}
+                      aria-current={currentPage === 'forum' ? 'page' : undefined}
+                      onClick={() => setCurrentPage('forum')}
+                  >
+                      FORUM
+                  </a>
+              </li>
             <li><a href="#links">LINKS</a></li>
             <li><a href="#live">LIVE FEED</a></li>
           </ul>

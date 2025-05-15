@@ -18,6 +18,10 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeInteractiveMarsMap(); // Initialize the interactive Mars map
     initializeMarsSounds(); // Initialize the Mars sounds section with Web Audio API
     initializeAccessibilityControls(); // Initialize accessibility controls
+    initializeParallaxEffect(); // Initialize NASA-inspired parallax effect
+    initializeMarsTerrainViewer(); // Initialize the Mars terrain viewer
+    initializeNasaInspiredNavigation(); // Initialize NASA-inspired navigation
+    initializeMarsWeatherDashboard(); // Initialize Mars Weather Dashboard
 });
 
 // Scroll to Top Button
@@ -3112,3 +3116,966 @@ function initializeAccessibilityControls() {
     }
 }
 
+// NASA-inspired Parallax Effect
+function initializeParallaxEffect() {
+    const showcase = document.getElementById('showcase');
+    if (!showcase) return;
+
+    const starsBg = document.querySelector('.stars-bg');
+    const marsBg = document.querySelector('.mars-bg');
+    const dustOverlay = document.querySelector('.dust-overlay');
+    const container = document.querySelector('#showcase .container');
+
+    // Add subtle floating animation to the container
+    if (container) {
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0% { transform: translate3d(0, 0, 50px); }
+                50% { transform: translate3d(0, -10px, 50px); }
+                100% { transform: translate3d(0, 0, 50px); }
+            }
+            #showcase .container {
+                animation: float 6s ease-in-out infinite;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // Parallax effect on scroll
+    window.addEventListener('scroll', function () {
+        const scrollPosition = window.pageYOffset;
+
+        if (starsBg) {
+            starsBg.style.transform = `translateY(${scrollPosition * 0.1}px) translateZ(-300px) scale(1.3)`;
+        }
+
+        if (marsBg) {
+            marsBg.style.transform = `translateY(${scrollPosition * 0.05}px) translateZ(-100px) scale(1.1)`;
+        }
+
+        if (dustOverlay) {
+            dustOverlay.style.transform = `translateY(${scrollPosition * 0.02}px) translateZ(-50px) scale(1.05)`;
+        }
+
+        if (container) {
+            container.style.transform = `translateY(${scrollPosition * -0.01}px) translateZ(50px)`;
+        }
+    });
+
+    // Mouse parallax effect
+    showcase.addEventListener('mousemove', function (e) {
+        const mouseX = e.clientX / window.innerWidth - 0.5;
+        const mouseY = e.clientY / window.innerHeight - 0.5;
+
+        if (starsBg) {
+            starsBg.style.transform = `translate3d(${mouseX * 20}px, ${mouseY * 20}px, -300px) scale(1.3)`;
+        }
+
+        if (marsBg) {
+            marsBg.style.transform = `translate3d(${mouseX * 10}px, ${mouseY * 10}px, -100px) scale(1.1)`;
+        }
+
+        if (dustOverlay) {
+            dustOverlay.style.transform = `translate3d(${mouseX * 5}px, ${mouseY * 5}px, -50px) scale(1.05)`;
+        }
+
+        if (container) {
+            container.style.transform = `translate3d(${mouseX * -15}px, ${mouseY * -15}px, 50px)`;
+        }
+    });
+
+    // Add particle effect for stars
+    createStarParticles();
+}
+
+// Create star particles for the showcase background
+function createStarParticles() {
+    const showcase = document.getElementById('showcase');
+    if (!showcase) return;
+
+    const particlesContainer = document.createElement('div');
+    particlesContainer.className = 'particles-container';
+    showcase.appendChild(particlesContainer);
+
+    // Add CSS for particles
+    const style = document.createElement('style');
+    style.textContent = `
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2;
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Create particles
+    for (let i = 0; i < 100; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+
+        // Random size between 1-3px
+        const size = Math.random() * 2 + 1;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+
+        // Random position
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+
+        // Random opacity
+        particle.style.opacity = Math.random() * 0.8 + 0.2;
+
+        // Random animation duration between 20-60s
+        const duration = Math.random() * 40 + 20;
+        particle.style.animation = `twinkle ${duration}s infinite`;
+
+        particlesContainer.appendChild(particle);
+    }
+
+    // Add twinkling animation
+    const twinkleStyle = document.createElement('style');
+    twinkleStyle.textContent = `
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.2); }
+        }
+    `;
+    document.head.appendChild(twinkleStyle);
+}
+
+/**
+ * Mars Terrain Viewer
+ *
+ * This function initializes an interactive 3D Mars terrain viewer with NASA-inspired
+ * features. It allows users to explore different Martian landmarks including
+ * Olympus Mons, Valles Marineris, and the Cydonia region.
+ */
+function initializeMarsTerrainViewer() {
+    const terrainContainer = document.getElementById('mars-3d-model');
+    if (!terrainContainer) return;
+
+    // Create loading indicator
+    const loadingElement = document.createElement('div');
+    loadingElement.className = 'model-loading';
+    loadingElement.innerHTML = `
+        <div class="spinner"></div>
+        <p>Loading Mars terrain data...</p>
+    `;
+    terrainContainer.appendChild(loadingElement);
+
+    // Variables for Three.js
+    let scene, camera, renderer, controls;
+    let terrain;
+    let currentLocation = 'overview';
+
+    // Terrain information for different locations
+    const locationInfo = {
+        'overview': {
+            title: 'Mars Overview',
+            description: 'Rotate the model to explore the diverse terrain of Mars. Click on the buttons above to visit notable landmarks.',
+            cameraPosition: {x: 0, y: 10, z: 20}
+        },
+        'olympus': {
+            title: 'Olympus Mons',
+            description: 'The largest volcano in the solar system, Olympus Mons stands 22 km (13.6 miles) high and is about the size of Arizona. Its base is surrounded by a cliff that can be up to 6 km (4 miles) tall.',
+            cameraPosition: {x: -5, y: 8, z: 15}
+        },
+        'valles': {
+            title: 'Valles Marineris',
+            description: 'This vast canyon system stretches over 4,000 km (2,500 miles) across the Martian surface. It can reach depths of up to 7 km (4 miles) and is the largest canyon in the solar system.',
+            cameraPosition: {x: 5, y: 5, z: 15}
+        },
+        'cydonia': {
+            title: 'Cydonia Region',
+            description: 'Famous for the "Face on Mars" and other unusual formations, Cydonia has been the subject of scientific study and speculation since the Viking 1 orbiter photographed it in 1976.',
+            cameraPosition: {x: 0, y: 5, z: 10}
+        }
+    };
+
+    // Initialize the scene
+    function initScene() {
+        // Create scene with Mars-like atmosphere
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x000000);
+        scene.fog = new THREE.Fog(0x771111, 20, 100);
+
+        // Create camera
+        camera = new THREE.PerspectiveCamera(60, terrainContainer.clientWidth / terrainContainer.clientHeight, 0.1, 1000);
+        camera.position.set(0, 10, 20);
+
+        // Create renderer
+        renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
+        renderer.setSize(terrainContainer.clientWidth, terrainContainer.clientHeight);
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.outputEncoding = THREE.sRGBEncoding;
+        terrainContainer.appendChild(renderer.domElement);
+
+        // Add orbit controls
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.screenSpacePanning = false;
+        controls.minDistance = 5;
+        controls.maxDistance = 50;
+        controls.maxPolarAngle = Math.PI / 2;
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.5;
+
+        // Add lights
+        const ambientLight = new THREE.AmbientLight(0x887766, 0.5);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(5, 10, 7.5);
+        directionalLight.castShadow = true;
+        directionalLight.shadow.mapSize.width = 1024;
+        directionalLight.shadow.mapSize.height = 1024;
+        directionalLight.shadow.camera.near = 0.5;
+        directionalLight.shadow.camera.far = 50;
+        directionalLight.shadow.bias = -0.0005;
+        scene.add(directionalLight);
+
+        // Add Mars-like hemisphere light
+        const hemisphereLight = new THREE.HemisphereLight(0xff5500, 0x771111, 0.3);
+        scene.add(hemisphereLight);
+
+        // Add stars background
+        addStarsBackground();
+
+        // Handle window resize
+        window.addEventListener('resize', onWindowResize);
+    }
+
+    // Create Mars terrain
+    function createTerrain() {
+        // Load Mars texture
+        const textureLoader = new THREE.TextureLoader();
+        const marsTexture = textureLoader.load('../img/Mars.jpg', function () {
+            // Remove loading indicator when texture is loaded
+            if (loadingElement.parentNode) {
+                loadingElement.parentNode.removeChild(loadingElement);
+            }
+        });
+
+        const marsNormalMap = textureLoader.load('../img/Mars_normal_map.jpg');
+        const marsHeightMap = textureLoader.load('../img/Mars_height_map.jpg');
+
+        // Create a sphere geometry for Mars
+        const geometry = new THREE.SphereGeometry(10, 128, 128);
+
+        // Create material with textures
+        const material = new THREE.MeshStandardMaterial({
+            map: marsTexture,
+            normalMap: marsNormalMap,
+            displacementMap: marsHeightMap,
+            displacementScale: 0.5,
+            roughness: 0.8,
+            metalness: 0.1
+        });
+
+        // Create the terrain mesh
+        terrain = new THREE.Mesh(geometry, material);
+        terrain.castShadow = true;
+        terrain.receiveShadow = true;
+        terrain.rotation.y = Math.PI;
+        scene.add(terrain);
+
+        // Add landmarks
+        addLandmarks();
+    }
+
+    // Add landmark indicators to the terrain
+    function addLandmarks() {
+        // Olympus Mons
+        addLandmark(-30, 18, 0, 0xff3300, 'olympus');
+
+        // Valles Marineris
+        addLandmark(0, -10, 8, 0xffaa00, 'valles');
+
+        // Cydonia Region
+        addLandmark(40, 10, 5, 0x00ffff, 'cydonia');
+    }
+
+    // Add a single landmark indicator
+    function addLandmark(longitude, latitude, height, color, location) {
+        // Convert lat/long to 3D coordinates on sphere
+        const phi = (90 - latitude) * (Math.PI / 180);
+        const theta = (longitude + 180) * (Math.PI / 180);
+
+        const x = -10 * Math.sin(phi) * Math.cos(theta);
+        const z = 10 * Math.sin(phi) * Math.sin(theta);
+        const y = 10 * Math.cos(phi);
+
+        // Create marker geometry
+        const markerGeometry = new THREE.SphereGeometry(0.2, 16, 16);
+        const markerMaterial = new THREE.MeshBasicMaterial({color: color});
+        const marker = new THREE.Mesh(markerGeometry, markerMaterial);
+
+        marker.position.set(x, y + height, z);
+        marker.userData = {location: location};
+        scene.add(marker);
+
+        // Add pulsing effect
+        const pulse = new THREE.PointLight(color, 1, 3);
+        pulse.position.copy(marker.position);
+        scene.add(pulse);
+
+        // Animate pulse
+        const pulseIntensity = {value: 0};
+        const pulseAnimation = new TWEEN.Tween(pulseIntensity)
+            .to({value: 1}, 1000)
+            .repeat(Infinity)
+            .yoyo(true)
+            .onUpdate(() => {
+                pulse.intensity = pulseIntensity.value;
+            })
+            .start();
+    }
+
+    // Add stars background
+    function addStarsBackground() {
+        const starsGeometry = new THREE.BufferGeometry();
+        const starsMaterial = new THREE.PointsMaterial({
+            color: 0xffffff,
+            size: 0.1,
+            transparent: true
+        });
+
+        const starsVertices = [];
+        for (let i = 0; i < 5000; i++) {
+            const x = (Math.random() - 0.5) * 2000;
+            const y = (Math.random() - 0.5) * 2000;
+            const z = (Math.random() - 0.5) * 2000;
+            starsVertices.push(x, y, z);
+        }
+
+        starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starsVertices, 3));
+        const stars = new THREE.Points(starsGeometry, starsMaterial);
+        scene.add(stars);
+    }
+
+    // Handle window resize
+    function onWindowResize() {
+        camera.aspect = terrainContainer.clientWidth / terrainContainer.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(terrainContainer.clientWidth, terrainContainer.clientHeight);
+    }
+
+    // Animation loop
+    function animate() {
+        requestAnimationFrame(animate);
+
+        // Update controls
+        controls.update();
+
+        // Update TWEEN animations
+        TWEEN.update();
+
+        // Render scene
+        renderer.render(scene, camera);
+    }
+
+    // Initialize event listeners for terrain controls
+    function initializeControls() {
+        // Olympus Mons button
+        const olympusBtn = document.getElementById('olympus-mons-btn');
+        if (olympusBtn) {
+            olympusBtn.addEventListener('click', function () {
+                navigateToLocation('olympus');
+            });
+        }
+
+        // Valles Marineris button
+        const vallesBtn = document.getElementById('valles-marineris-btn');
+        if (vallesBtn) {
+            vallesBtn.addEventListener('click', function () {
+                navigateToLocation('valles');
+            });
+        }
+
+        // Cydonia button
+        const cydoniaBtn = document.getElementById('cydonia-btn');
+        if (cydoniaBtn) {
+            cydoniaBtn.addEventListener('click', function () {
+                navigateToLocation('cydonia');
+            });
+        }
+
+        // Reset view button
+        const resetBtn = document.getElementById('reset-view-btn');
+        if (resetBtn) {
+            resetBtn.addEventListener('click', function () {
+                navigateToLocation('overview');
+            });
+        }
+    }
+
+    // Navigate to a specific location on Mars
+    function navigateToLocation(location) {
+        if (!locationInfo[location]) return;
+
+        currentLocation = location;
+
+        // Update info panel
+        updateLocationInfo(location);
+
+        // Animate camera to new position
+        const targetPosition = locationInfo[location].cameraPosition;
+
+        new TWEEN.Tween(camera.position)
+            .to({
+                x: targetPosition.x,
+                y: targetPosition.y,
+                z: targetPosition.z
+            }, 1500)
+            .easing(TWEEN.Easing.Cubic.InOut)
+            .start();
+
+        // Rotate terrain to show the location
+        if (location !== 'overview') {
+            // Calculate rotation based on location
+            let rotationY = 0;
+
+            if (location === 'olympus') rotationY = Math.PI * 0.5;
+            else if (location === 'valles') rotationY = Math.PI * 1.5;
+            else if (location === 'cydonia') rotationY = Math.PI;
+
+            new TWEEN.Tween(terrain.rotation)
+                .to({y: rotationY}, 1500)
+                .easing(TWEEN.Easing.Cubic.InOut)
+                .start();
+        }
+    }
+
+    // Update the information panel with location details
+    function updateLocationInfo(location) {
+        const info = locationInfo[location];
+
+        const titleElement = document.getElementById('terrain-title');
+        const descriptionElement = document.getElementById('terrain-description');
+
+        if (titleElement) titleElement.textContent = info.title;
+        if (descriptionElement) descriptionElement.textContent = info.description;
+
+        // Highlight active button
+        const buttons = document.querySelectorAll('.terrain-btn');
+        buttons.forEach(btn => {
+            btn.classList.remove('active');
+        });
+
+        if (location === 'overview') {
+            const resetBtn = document.getElementById('reset-view-btn');
+            if (resetBtn) resetBtn.classList.add('active');
+        } else {
+            const activeBtn = document.getElementById(`${location}-btn`);
+            if (activeBtn) activeBtn.classList.add('active');
+        }
+    }
+
+    // Initialize the terrain viewer
+    initScene();
+    createTerrain();
+    initializeControls();
+    animate();
+}
+
+/**
+ * NASA-inspired Navigation
+ *
+ * This function initializes the modern, NASA-inspired navigation system with a mega menu.
+ * It handles both desktop hover interactions and mobile touch interactions.
+ */
+function initializeNasaInspiredNavigation() {
+    // Get navigation elements
+    const navItems = document.querySelectorAll('header nav ul li');
+    const megaMenuWrapper = document.querySelector('.mega-menu-wrapper');
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('header nav ul');
+
+    // Check if elements exist
+    if (!navItems.length || !megaMenuWrapper) return;
+
+    // Function to show mega menu
+    function showMegaMenu() {
+        megaMenuWrapper.classList.add('active');
+    }
+
+    // Function to hide mega menu
+    function hideMegaMenu() {
+        megaMenuWrapper.classList.remove('active');
+    }
+
+    // Add event listeners for desktop navigation
+    navItems.forEach(item => {
+        // Show mega menu on hover
+        item.addEventListener('mouseenter', showMegaMenu);
+
+        // Add click event for touch devices
+        item.addEventListener('click', function (e) {
+            // Only show mega menu if it's not already visible
+            if (!megaMenuWrapper.classList.contains('active')) {
+                e.preventDefault();
+                showMegaMenu();
+            }
+        });
+    });
+
+    // Hide mega menu when mouse leaves the navigation or mega menu
+    document.querySelector('header nav').addEventListener('mouseleave', hideMegaMenu);
+
+    // Mobile menu toggle
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', function () {
+            navMenu.classList.toggle('active');
+
+            // Update icon
+            const icon = this.querySelector('i');
+            if (icon) {
+                if (navMenu.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
+        });
+    }
+
+    // Close mega menu when clicking outside
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('header nav') && megaMenuWrapper.classList.contains('active')) {
+            hideMegaMenu();
+        }
+    });
+
+    // Add smooth scrolling for anchor links in mega menu
+    const anchorLinks = document.querySelectorAll('.mega-menu-link[href^="#"]');
+    anchorLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            // Hide mega menu
+            hideMegaMenu();
+
+            // Get the target element
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+                // Smooth scroll to target
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100, // Offset for header
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Add animation effects to mega menu items
+    const menuColumns = document.querySelectorAll('.mega-menu-column');
+    menuColumns.forEach((column, index) => {
+        column.style.opacity = '0';
+        column.style.transform = 'translateY(20px)';
+        column.style.transition = `all 0.3s ease ${0.1 + (index * 0.1)}s`;
+    });
+
+    // Featured section animation
+    const featuredSection = document.querySelector('.mega-menu-featured');
+    if (featuredSection) {
+        featuredSection.style.opacity = '0';
+        featuredSection.style.transform = 'translateY(20px)';
+        featuredSection.style.transition = 'all 0.3s ease 0.4s';
+    }
+
+    // Animate menu items when menu becomes active
+    const observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+            if (mutation.attributeName === 'class') {
+                if (megaMenuWrapper.classList.contains('active')) {
+                    // Animate columns
+                    menuColumns.forEach(column => {
+                        column.style.opacity = '1';
+                        column.style.transform = 'translateY(0)';
+                    });
+
+                    // Animate featured section
+                    if (featuredSection) {
+                        featuredSection.style.opacity = '1';
+                        featuredSection.style.transform = 'translateY(0)';
+                    }
+                } else {
+                    // Reset animations
+                    menuColumns.forEach((column, index) => {
+                        column.style.opacity = '0';
+                        column.style.transform = 'translateY(20px)';
+                    });
+
+                    if (featuredSection) {
+                        featuredSection.style.opacity = '0';
+                        featuredSection.style.transform = 'translateY(20px)';
+                    }
+                }
+            }
+        });
+    });
+
+    // Start observing the mega menu wrapper
+    observer.observe(megaMenuWrapper, {attributes: true});
+}
+
+/**
+ * Mars Weather Dashboard
+ *
+ * This function initializes the NASA-inspired Mars Weather Dashboard with interactive
+ * charts and visualizations of Mars weather data.
+ */
+function initializeMarsWeatherDashboard() {
+    // Check if the dashboard exists
+    const dashboardContainer = document.getElementById('mars-weather-dashboard');
+    if (!dashboardContainer) return;
+
+    // Get dashboard elements
+    const solViewBtn = document.getElementById('sol-view-btn');
+    const monthViewBtn = document.getElementById('month-view-btn');
+    const yearViewBtn = document.getElementById('year-view-btn');
+
+    // Get chart canvases
+    const temperatureChartCanvas = document.getElementById('temperature-chart');
+    const pressureChartCanvas = document.getElementById('pressure-chart');
+    const windChartCanvas = document.getElementById('wind-chart');
+
+    // Check if Chart.js is available
+    if (typeof Chart === 'undefined') {
+        // Load Chart.js dynamically if not available
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js';
+        script.onload = initializeCharts;
+        document.head.appendChild(script);
+    } else {
+        initializeCharts();
+    }
+
+    // Initialize dashboard view buttons
+    if (solViewBtn && monthViewBtn && yearViewBtn) {
+        solViewBtn.addEventListener('click', function () {
+            setActiveButton(this);
+            updateCharts('sol');
+        });
+
+        monthViewBtn.addEventListener('click', function () {
+            setActiveButton(this);
+            updateCharts('month');
+        });
+
+        yearViewBtn.addEventListener('click', function () {
+            setActiveButton(this);
+            updateCharts('year');
+        });
+    }
+
+    // Set active button
+    function setActiveButton(button) {
+        const buttons = document.querySelectorAll('.dashboard-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+    }
+
+    // Sample data for Mars weather
+    const weatherData = {
+        sol: {
+            labels: ['Morning', 'Noon', 'Afternoon', 'Evening', 'Night'],
+            temperature: [-80, -23, -5, -40, -90],
+            pressure: [720, 722, 723, 721, 718],
+            windSpeed: [2, 5, 7, 4, 1],
+            windDirection: [45, 90, 120, 180, 270]
+        },
+        month: {
+            labels: ['Sol 620', 'Sol 622', 'Sol 624', 'Sol 626', 'Sol 628', 'Sol 630', 'Sol 632', 'Sol 634'],
+            temperature: [-60, -55, -40, -30, -45, -50, -35, -23],
+            pressure: [715, 718, 720, 723, 722, 719, 720, 722],
+            windSpeed: [3, 4, 6, 8, 5, 3, 4, 7],
+            windDirection: [60, 75, 90, 120, 150, 180, 210, 240]
+        },
+        year: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            temperature: [-90, -85, -70, -50, -30, -20, -25, -40, -60, -75, -85, -90],
+            pressure: [710, 712, 715, 718, 722, 725, 723, 720, 718, 715, 712, 710],
+            windSpeed: [2, 3, 5, 7, 8, 6, 5, 4, 6, 7, 4, 2],
+            windDirection: [30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360]
+        }
+    };
+
+    // Chart instances
+    let temperatureChart, pressureChart, windChart;
+
+    // Initialize charts
+    function initializeCharts() {
+        if (!temperatureChartCanvas || !pressureChartCanvas || !windChartCanvas) return;
+
+        // Set Chart.js defaults
+        Chart.defaults.color = '#6d6d6d';
+        Chart.defaults.font.family = "'Roboto', sans-serif";
+
+        // Temperature chart
+        temperatureChart = new Chart(temperatureChartCanvas, {
+            type: 'line',
+            data: {
+                labels: weatherData.sol.labels,
+                datasets: [{
+                    label: 'Temperature (°C)',
+                    data: weatherData.sol.temperature,
+                    borderColor: '#e85c3a',
+                    backgroundColor: 'rgba(232, 92, 58, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    fill: true,
+                    pointBackgroundColor: '#e85c3a',
+                    pointBorderColor: '#fff',
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        borderColor: 'rgba(255, 255, 255, 0.2)',
+                        borderWidth: 1
+                    }
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            callback: function (value) {
+                                return value + '°C';
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Pressure chart
+        pressureChart = new Chart(pressureChartCanvas, {
+            type: 'line',
+            data: {
+                labels: weatherData.sol.labels,
+                datasets: [{
+                    label: 'Pressure (Pa)',
+                    data: weatherData.sol.pressure,
+                    borderColor: '#f39c12',
+                    backgroundColor: 'rgba(243, 156, 18, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    fill: true,
+                    pointBackgroundColor: '#f39c12',
+                    pointBorderColor: '#fff',
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        borderColor: 'rgba(255, 255, 255, 0.2)',
+                        borderWidth: 1
+                    }
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            callback: function (value) {
+                                return value + ' Pa';
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Wind chart
+        windChart = new Chart(windChartCanvas, {
+            type: 'radar',
+            data: {
+                labels: ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'],
+                datasets: [{
+                    label: 'Wind Speed (m/s)',
+                    data: [3, 5, 7, 4, 2, 1, 3, 4],
+                    backgroundColor: 'rgba(124, 35, 5, 0.2)',
+                    borderColor: 'rgba(124, 35, 5, 0.8)',
+                    borderWidth: 2,
+                    pointBackgroundColor: 'rgba(124, 35, 5, 1)',
+                    pointBorderColor: '#fff',
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        borderColor: 'rgba(255, 255, 255, 0.2)',
+                        borderWidth: 1
+                    }
+                },
+                scales: {
+                    r: {
+                        angleLines: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        pointLabels: {
+                            color: '#6d6d6d',
+                            font: {
+                                size: 12
+                            }
+                        },
+                        ticks: {
+                            backdropColor: 'transparent',
+                            color: '#6d6d6d'
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Update charts based on selected view
+    function updateCharts(view) {
+        if (!temperatureChart || !pressureChart || !windChart) return;
+
+        // Update temperature chart
+        temperatureChart.data.labels = weatherData[view].labels;
+        temperatureChart.data.datasets[0].data = weatherData[view].temperature;
+        temperatureChart.update();
+
+        // Update pressure chart
+        pressureChart.data.labels = weatherData[view].labels;
+        pressureChart.data.datasets[0].data = weatherData[view].pressure;
+        pressureChart.update();
+
+        // Update wind chart for sol and month views
+        if (view === 'sol' || view === 'month') {
+            // Convert wind speed and direction to radar chart format
+            const windData = convertWindToRadar(weatherData[view].windSpeed, weatherData[view].windDirection);
+            windChart.data.datasets[0].data = windData;
+            windChart.update();
+        } else {
+            // For year view, use average wind data
+            windChart.data.datasets[0].data = [4, 5, 6, 5, 4, 3, 4, 5];
+            windChart.update();
+        }
+
+        // Update dashboard title
+        const updateDateElement = document.getElementById('weather-update-date');
+        if (updateDateElement) {
+            if (view === 'sol') {
+                updateDateElement.textContent = 'Sol 634';
+            } else if (view === 'month') {
+                updateDateElement.textContent = 'Last 30 Sols';
+            } else {
+                updateDateElement.textContent = 'Martian Year 36';
+            }
+        }
+    }
+
+    // Convert wind speed and direction to radar chart format
+    function convertWindToRadar(speeds, directions) {
+        // Initialize data array for 8 directions (N, NE, E, SE, S, SW, W, NW)
+        const radarData = [0, 0, 0, 0, 0, 0, 0, 0];
+
+        // Map each wind measurement to the appropriate direction bin
+        for (let i = 0; i < speeds.length; i++) {
+            const dir = directions[i];
+            const speed = speeds[i];
+
+            // Convert direction to index (0-7)
+            // North = 0°/360°, East = 90°, South = 180°, West = 270°
+            const index = Math.round(dir / 45) % 8;
+
+            // Add speed to the appropriate direction bin
+            radarData[index] += speed;
+        }
+
+        return radarData;
+    }
+
+    // Add animation to weather cards
+    function animateWeatherCards() {
+        const weatherCards = document.querySelectorAll('.weather-card');
+
+        weatherCards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+
+            setTimeout(() => {
+                card.style.transition = 'all 0.5s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 100 * index);
+        });
+    }
+
+    // Initialize animations
+    animateWeatherCards();
+}
