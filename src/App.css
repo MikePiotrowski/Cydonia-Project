@@ -5,19 +5,57 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    background-image: linear-gradient(to bottom, var(--background-color), var(--background-alt));
+    background-attachment: fixed;
+    color: var(--text-color);
+    position: relative;
+}
+
+/* Add subtle Mars texture overlay */
+.App::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/img/mars-texture.png');
+    background-size: 200px;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: -1;
 }
 
 /* Theme-specific styles */
 .App.dark {
-  background-color: var(--background-color);
+    background-image: linear-gradient(to bottom, var(--background-color), var(--background-alt));
   color: var(--text-color);
+}
+
+.App.dark::before {
+    opacity: 0.05;
 }
 
 /* Section styles */
 .section {
     padding: 100px 0;
   border-bottom: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add subtle section divider */
+.section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 3px;
+    background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+    border-radius: 3px;
 }
 
 .section-title {
@@ -25,6 +63,23 @@
     margin-bottom: 30px;
   color: var(--primary-color);
   text-align: center;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    border-radius: 2px;
 }
 
 .section-description {
@@ -33,19 +88,55 @@
     margin: 0 auto 40px;
   text-align: center;
   line-height: 1.8;
+    color: var(--text-muted);
+}
+
+.App.dark .section-description {
+    color: var(--text-muted);
+    opacity: 0.9;
 }
 
 /* Header styles */
 header {
-  background: var(--header-bg);
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
   color: var(--header-text);
   padding: 20px 0;
-  border-bottom: 3px solid var(--primary-color);
+    border-bottom: 3px solid var(--accent-color);
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 10px var(--card-shadow);
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), transparent);
+    pointer-events: none;
+}
+
+header.scrolled {
+    padding: 10px 0;
+    background: var(--primary-dark);
+    opacity: 0.97;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.App.dark header {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+}
+
+.App.dark header.scrolled {
+    background: var(--primary-dark);
+    opacity: 0.97;
 }
 
 header a {
@@ -53,6 +144,8 @@ header a {
   text-decoration: none;
   text-transform: uppercase;
   font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
 }
 
 header ul {
@@ -67,20 +160,53 @@ header li {
   position: relative;
 }
 
+header li:last-child {
+    margin-right: 0;
+}
+
 header li a {
   padding: 10px;
   display: block;
   transition: all 0.3s;
+    position: relative;
+}
+
+header li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+    opacity: 0;
 }
 
 header li a:hover {
-  color: var(--primary-color);
+    color: var(--primary-light);
   transform: translateY(-2px);
+}
+
+header li a:hover::after {
+    width: 70%;
+    opacity: 1;
 }
 
 header li a.current {
   color: var(--primary-color);
   font-weight: bold;
+}
+
+header li a.current::after {
+    width: 90%;
+    opacity: 1;
+    height: 3px;
+}
+
+header li a.highlight {
+    color: var(--primary-color);
 }
 
 header #branding {
@@ -90,6 +216,35 @@ header #branding {
 header #branding h1 {
   margin: 0;
   font-size: 2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: inline-block;
+    background: linear-gradient(to right, var(--text-light), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+header #branding h1 .highlight {
+    color: var(--primary-color);
+    position: relative;
+    z-index: 1;
+    background: none;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: var(--primary-color);
+}
+
+header #branding h1 .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: rgba(var(--primary-rgb), 0.2);
+    z-index: -1;
+    transform: skewX(-15deg);
 }
 
 header nav {
@@ -144,29 +299,122 @@ header nav {
 
 /* Footer styles */
 footer {
-    background: var(--footer-bg);
+    background: linear-gradient(to bottom, rgba(53, 66, 74, 0.95), rgba(53, 66, 74, 0.98));
     color: var(--footer-text);
-  padding: 20px 0;
+    padding: 40px 0 30px;
   text-align: center;
-  margin-top: 40px;
+    margin-top: 60px;
     border-top: 3px solid var(--primary-color);
-    box-shadow: 0 -2px 10px var(--card-shadow);
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Mars-themed footer decoration */
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/img/mars-texture.png');
+    background-size: 200px;
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+.App.dark footer {
+    background: linear-gradient(to bottom, rgba(26, 37, 48, 0.95), rgba(26, 37, 48, 0.98));
+}
+
+footer .footer-content {
+    position: relative;
+    z-index: 1;
 }
 
 footer .social-icons {
-  margin-bottom: 20px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
 footer .social-icons a {
     color: var(--footer-text);
-  margin: 0 10px;
   font-size: 24px;
-  transition: all 0.3s;
+    transition: all 0.3s ease;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+footer .social-icons a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
 }
 
 footer .social-icons a:hover {
-  color: var(--primary-color);
-  transform: translateY(-3px);
+    color: white;
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 6px 15px rgba(var(--primary-rgb), 0.3);
+}
+
+footer .social-icons a:hover::before {
+    opacity: 1;
+}
+
+footer .copyright {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+footer .footer-links {
+    margin: 20px 0;
+}
+
+footer .footer-links a {
+    color: var(--footer-text);
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+footer .footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+footer .footer-links a:hover {
+    color: var(--primary-light);
+}
+
+footer .footer-links a:hover::after {
+    width: 100%;
 }
 
 /* Animations */

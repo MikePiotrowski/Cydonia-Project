@@ -3,6 +3,8 @@ import Header from './components/Header';
 import Showcase from './components/Showcase';
 import Community from './components/Community';
 import Forum from './components/Forum';
+import AboutMars from './components/AboutMars';
+import AboutCydonia from './components/AboutCydonia';
 import Footer from './components/Footer';
 import ThemeToggle from './components/ThemeToggle';
 import PreferencesPanel from './components/PreferencesPanel';
@@ -38,6 +40,10 @@ function App() {
             const hash = window.location.hash.replace('#', '');
             if (hash === 'forum') {
                 setCurrentPage('forum');
+            } else if (hash === 'about') {
+                setCurrentPage('about');
+            } else if (hash === 'cydonia') {
+                setCurrentPage('cydonia');
             } else {
                 setCurrentPage('home');
             }
@@ -79,6 +85,10 @@ function App() {
               </>
           ) : currentPage === 'forum' ? (
               <Forum/>
+          ) : currentPage === 'about' ? (
+              <AboutMars/>
+          ) : currentPage === 'cydonia' ? (
+              <AboutCydonia/>
           ) : null}
 
         <Footer />

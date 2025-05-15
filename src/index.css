@@ -1,12 +1,23 @@
 :root {
-  /* Light theme (default) */
-  --scroll-speed-color: #8b4513; /* Default scrollbar color, will be updated by JS */
-  --scrollbar-cursor-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='%23e8491d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 19V5'%3E%3C/path%3E%3Cpath d='M5 12l7-7 7 7'%3E%3C/path%3E%3C/svg%3E");
-  --primary-color: #e8491d;
-  --secondary-color: #8b4513;
-  --background-color: #f8f4f1;
-  --text-color: #333;
-  --accent-color: #c1440e;
+    /* Light theme (default) - Mars theme colors */
+    /* Main color palette */
+    --primary-dark: #7c2305; /* Deep rust red */
+    --primary-color: #c13e1b; /* Rich Mars red */
+    --primary-light: #e85c3a; /* Bright Mars orange */
+    --accent-color: #f39c12; /* Mars sand/gold */
+    --accent-dark: #d35400; /* Deep orange */
+    --secondary-color: #8b4513; /* Brown */
+
+    /* Background colors */
+    --background-color: #f8f4f1; /* Light sand/beige */
+    --background-alt: #f0e6e0; /* Slightly darker sand */
+
+    /* Text colors */
+    --text-color: #2d2d2d; /* Almost black */
+    --text-light: #ffffff; /* White */
+    --text-muted: #6d6d6d; /* Medium gray */
+
+    /* UI elements */
   --header-bg: #35424a;
   --header-text: #fff;
   --footer-bg: #35424a;
@@ -15,25 +26,62 @@
   --card-shadow: rgba(0, 0, 0, 0.1);
   --border-color: #ddd;
 
+    /* Scrollbar colors */
+    --scroll-speed-color: #7c2305; /* Default scrollbar color, will be updated by JS */
+    --scrollbar-cursor-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='%23e85c3a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 19V5'%3E%3C/path%3E%3Cpath d='M5 12l7-7 7 7'%3E%3C/path%3E%3C/svg%3E");
+    --scrollbar-track: #f8f4f1;
+    --scrollbar-thumb: linear-gradient(to bottom, #7c2305, #c13e1b);
+    --scrollbar-thumb-hover: linear-gradient(to bottom, #c13e1b, #e85c3a);
+
+    /* RGB values for rgba usage */
+    --primary-rgb: 193, 62, 27; /* RGB for #c13e1b */
+    --primary-dark-rgb: 124, 35, 5; /* RGB for #7c2305 */
+    --primary-light-rgb: 232, 92, 58; /* RGB for #e85c3a */
+    --accent-rgb: 243, 156, 18; /* RGB for #f39c12 */
+
     /* Smooth transition for theme changes */
     transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
 }
 
-/* Dark theme - Classic style */
+/* Dark theme - Mars dark style */
 [data-theme="dark"] {
-  --primary-color: #e8491d; /* Keep the same primary color as light mode for consistent branding */
-  --secondary-color: #7e57c2;
-  --background-color: #2c3e50;
-  --text-color: #f8f4f1; /* Changed to light color for better visibility on dark background */
-  --accent-color: #e8491d; /* Keep the same accent color as primary for consistent branding */
-  --header-bg: #1a2530;
+    /* Main color palette - keep Mars colors but adjust for dark theme */
+    --primary-dark: #5a1a04; /* Darker rust red */
+    --primary-color: #e85c3a; /* Use the brighter Mars orange as primary for dark mode */
+    --primary-light: #ff7f50; /* Brighter orange for dark mode */
+    --accent-color: #ffa726; /* Brighter gold for dark mode */
+    --accent-dark: #ff5722; /* Brighter deep orange */
+    --secondary-color: #bf6c3e; /* Lighter brown for dark mode */
+
+    /* Background colors */
+    --background-color: #1a1a1a; /* Dark background */
+    --background-alt: #2d2d2d; /* Slightly lighter dark background */
+
+    /* Text colors */
+    --text-color: #f8f4f1; /* Light sand color for text */
+    --text-light: #ffffff; /* White */
+    --text-muted: #b0b0b0; /* Light gray */
+
+    /* UI elements */
+    --header-bg: #1a1a1a;
   --header-text: #fff;
-  --footer-bg: #1a2530;
+    --footer-bg: #1a1a1a;
   --footer-text: #fff;
-  --card-bg: #34495e;
+    --card-bg: #2d2d2d;
   --card-shadow: rgba(0, 0, 0, 0.3);
-  --border-color: #546e7a;
-  --scroll-speed-color: #7e57c2;
+    --border-color: #444;
+
+    /* Scrollbar colors */
+    --scroll-speed-color: #e85c3a;
+    --scrollbar-track: #1a1a1a;
+    --scrollbar-thumb: linear-gradient(to bottom, #5a1a04, #e85c3a);
+    --scrollbar-thumb-hover: linear-gradient(to bottom, #e85c3a, #ff7f50);
+
+    /* RGB values for rgba usage */
+    --primary-rgb: 232, 92, 58; /* RGB for #e85c3a */
+    --primary-dark-rgb: 90, 26, 4; /* RGB for #5a1a04 */
+    --primary-light-rgb: 255, 127, 80; /* RGB for #ff7f50 */
+    --accent-rgb: 255, 167, 38; /* RGB for #ffa726 */
 }
 
 /* High contrast theme */
@@ -62,68 +110,113 @@ body {
   color: var(--text-color);
   scroll-behavior: smooth;
   overflow-x: hidden;
+    background-image: linear-gradient(to bottom, var(--background-color), var(--background-alt));
+    background-attachment: fixed;
 }
 
 /* Scrollbar Customization */
 /* For Webkit browsers (Chrome, Safari, newer versions of Opera) */
 ::-webkit-scrollbar {
-  width: 14px;
-  height: 14px;
+    width: 16px; /* Slightly wider scrollbar */
+    height: 16px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background-color);
+    background: var(--scrollbar-track, var(--background-color));
   border-radius: 10px;
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.15);
   cursor: var(--scrollbar-cursor-url), pointer;
+    background-image: linear-gradient(to right,
+    rgba(255, 255, 255, 0.05) 1px,
+    transparent 1px
+    );
+    background-size: 4px 100%;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, var(--secondary-color), #a0522d);
-  border-radius: 10px;
-  border: 2px solid var(--background-color);
-  box-shadow: 0 0 8px rgba(0,0,0,0.3), 0 0 5px var(--scroll-speed-color);
-  transition: all 0.3s ease, box-shadow 0.1s ease;
+    /* Metallic gradient with Mars colors */
+    background: var(--scrollbar-thumb, linear-gradient(135deg,
+    var(--primary-dark) 0%,
+    var(--primary-color) 30%,
+    rgba(230, 120, 80, 0.9) 45%,
+    var(--primary-color) 60%,
+    var(--primary-dark) 100%
+    ));
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.4),
+    inset 0 -1px 3px rgba(0, 0, 0, 0.4),
+    0 0 8px rgba(0, 0, 0, 0.3);
   cursor: grab;
+    transition: all 0.3s ease;
+    /* Subtle metallic texture */
+    background-image: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 2px,
+            rgba(255, 255, 255, 0.03) 2px,
+            rgba(255, 255, 255, 0.03) 4px
+    );
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, var(--accent-color), var(--primary-color));
-  border: 2px solid var(--background-color);
-  box-shadow: 0 0 12px rgba(232, 73, 29, 0.5);
+    background: var(--scrollbar-thumb-hover, linear-gradient(135deg,
+    var(--primary-color) 0%,
+    var(--primary-light) 40%,
+    rgba(255, 150, 100, 0.9) 50%,
+    var(--primary-light) 60%,
+    var(--primary-color) 100%
+    ));
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.5),
+    inset 0 -1px 3px rgba(0, 0, 0, 0.3),
+    0 0 12px rgba(0, 0, 0, 0.4);
   cursor: grabbing;
 }
 
 ::-webkit-scrollbar-thumb:active {
-  background: linear-gradient(to bottom, var(--primary-color), #ff6b35);
+    background: linear-gradient(135deg,
+    var(--primary-light) 0%,
+    var(--primary-color) 100%
+    );
   cursor: grabbing;
   transform: scale(0.98);
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.5),
+    0 0 8px rgba(0, 0, 0, 0.5);
 }
 
 ::-webkit-scrollbar-corner {
   background: var(--background-color);
+    background-image: linear-gradient(
+            135deg,
+            rgba(var(--primary-rgb), 0.1),
+            transparent
+    );
 }
 
 /* Scrollbar button styles (arrows at the ends) */
 ::-webkit-scrollbar-button {
   display: block;
-  height: 10px;
-  width: 10px;
-  background: var(--secondary-color);
+    height: 12px;
+    width: 12px;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 ::-webkit-scrollbar-button:hover {
-  background: var(--accent-color);
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
   transform: scale(1.2);
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
 }
 
 /* For Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--secondary-color) var(--background-color);
+    scrollbar-color: var(--primary-color) var(--background-color);
 }
 
 /* Global styles */
@@ -135,19 +228,71 @@ body {
 
 .button {
   display: inline-block;
-  padding: 10px 20px;
-  background: var(--primary-color);
+    padding: 12px 25px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
   color: white;
   text-decoration: none;
   border: none;
-  border-radius: 5px;
+    border-radius: 30px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0));
+    transition: all 0.5s ease;
+    z-index: -1;
 }
 
 .button:hover {
-  background: var(--accent-color);
-  transform: translateY(-2px);
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.4);
+}
+
+.button:hover::before {
+    left: 100%;
+}
+
+.button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(var(--primary-rgb), 0.3);
+}
+
+/* Secondary button style */
+.button.secondary {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.15);
+}
+
+.button.secondary:hover {
+    background: rgba(var(--primary-rgb), 0.1);
+    box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.25);
+}
+
+/* Large button style */
+.button.large {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    border-radius: 35px;
 }
 
 .highlight {

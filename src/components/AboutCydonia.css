@@ -1,0 +1,557 @@
+/* About Cydonia Section Styles */
+.about-cydonia-section {
+    padding: 100px 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add subtle Mars texture overlay */
+.about-cydonia-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/img/mars-texture.png');
+    background-size: 200px;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.about-cydonia-section.dark {
+    background-image: linear-gradient(to bottom, var(--background-color), var(--background-alt));
+    color: var(--text-light);
+}
+
+.about-cydonia-section.dark::before {
+    opacity: 0.05;
+}
+
+.about-cydonia-section .container {
+    position: relative;
+    z-index: 1;
+}
+
+.about-cydonia-section .section-title {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 3.2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.about-cydonia-section .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    border-radius: 2px;
+}
+
+.about-cydonia-section .section-description {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 20px;
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+}
+
+.about-cydonia-section.dark .section-description {
+    color: var(--text-muted);
+    opacity: 0.9;
+}
+
+/* Cydonia Info Grid */
+.cydonia-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.cydonia-info-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.about-cydonia-section.dark .cydonia-info-card {
+    background: linear-gradient(135deg, rgba(50, 50, 50, 0.8), rgba(40, 40, 40, 0.6));
+    border: 1px solid rgba(80, 80, 80, 0.3);
+}
+
+.cydonia-info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.cydonia-info-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.cydonia-info-card h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    border-radius: 2px;
+}
+
+.about-cydonia-section.dark .cydonia-info-card h3 {
+    color: var(--primary-light);
+}
+
+.cydonia-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.cydonia-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.image-gallery .single-image {
+    grid-column: span 2;
+}
+
+.image-gallery img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.image-gallery img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.cydonia-info-card p {
+    margin-top: auto;
+    line-height: 1.6;
+    font-size: 1.05rem;
+}
+
+/* NASA Research Section */
+.nasa-research, .alternative-research {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 60px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.about-cydonia-section.dark .nasa-research,
+.about-cydonia-section.dark .alternative-research {
+    background: linear-gradient(135deg, rgba(50, 50, 50, 0.8), rgba(40, 40, 40, 0.6));
+    border: 1px solid rgba(80, 80, 80, 0.3);
+}
+
+.nasa-research:hover, .alternative-research:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.subsection-title {
+    color: var(--primary-color);
+    font-size: 2.4rem;
+    margin-bottom: 20px;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.subsection-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    border-radius: 2px;
+}
+
+.about-cydonia-section.dark .subsection-title {
+    color: var(--primary-light);
+}
+
+.subsection-description {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 30px;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+.about-cydonia-section.dark .subsection-description {
+    color: var(--text-muted);
+    opacity: 0.9;
+}
+
+.research-content {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.research-item {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--primary-color);
+}
+
+.about-cydonia-section.dark .research-item {
+    background: rgba(60, 60, 60, 0.5);
+    border-left: 4px solid var(--primary-light);
+}
+
+.research-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.research-item h4 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.about-cydonia-section.dark .research-item h4 {
+    color: var(--primary-light);
+}
+
+.research-item p {
+    margin-bottom: 15px;
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+.research-item p:last-child {
+    margin-bottom: 0;
+}
+
+/* Cydonia Timeline */
+.cydonia-timeline {
+    margin-bottom: 60px;
+}
+
+.timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    background: linear-gradient(to bottom, var(--primary-dark), var(--primary-color), var(--primary-light));
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -3px;
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.3);
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.timeline-item:nth-child(odd) {
+    left: 0;
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
+}
+
+.timeline-date {
+    position: absolute;
+    width: 80px;
+    height: 30px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    top: 15px;
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+    box-shadow: 0 3px 10px rgba(var(--primary-rgb), 0.3);
+}
+
+.timeline-item:nth-child(odd) .timeline-date {
+    right: -40px;
+}
+
+.timeline-item:nth-child(even) .timeline-date {
+    left: -40px;
+}
+
+.timeline-content {
+    padding: 20px 30px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
+    position: relative;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.about-cydonia-section.dark .timeline-content {
+    background: linear-gradient(135deg, rgba(50, 50, 50, 0.8), rgba(40, 40, 40, 0.6));
+    border: 1px solid rgba(80, 80, 80, 0.3);
+}
+
+.timeline-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.timeline-content h4 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+}
+
+.about-cydonia-section.dark .timeline-content h4 {
+    color: var(--primary-light);
+}
+
+.timeline-content p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Cydonia FAQ Section */
+.cydonia-faq {
+    margin-bottom: 40px;
+}
+
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.faq-item {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.about-cydonia-section.dark .faq-item {
+    background: linear-gradient(135deg, rgba(50, 50, 50, 0.8), rgba(40, 40, 40, 0.6));
+    border: 1px solid rgba(80, 80, 80, 0.3);
+}
+
+.faq-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.faq-item h4 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    position: relative;
+    padding-left: 25px;
+}
+
+.faq-item h4::before {
+    content: '?';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.about-cydonia-section.dark .faq-item h4 {
+    color: var(--primary-light);
+}
+
+.faq-item p {
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .timeline::after {
+        left: 31px;
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+
+    .timeline-item:nth-child(even) {
+        left: 0;
+    }
+
+    .timeline-date {
+        left: -9px !important;
+        right: auto !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-cydonia-section {
+        padding: 80px 0;
+    }
+
+    .about-cydonia-section .section-title {
+        font-size: 2.8rem;
+    }
+
+    .about-cydonia-section .section-description {
+        font-size: 1.3rem;
+    }
+
+    .subsection-title {
+        font-size: 2.2rem;
+    }
+
+    .cydonia-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .image-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .image-gallery img {
+        height: 120px;
+    }
+
+    .research-item {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .about-cydonia-section {
+        padding: 60px 0;
+    }
+
+    .about-cydonia-section .section-title {
+        font-size: 2.4rem;
+    }
+
+    .about-cydonia-section .section-description {
+        font-size: 1.2rem;
+        padding: 0 20px;
+    }
+
+    .subsection-title {
+        font-size: 2rem;
+    }
+
+    .cydonia-info-card {
+        padding: 20px;
+    }
+
+    .cydonia-info-card h3 {
+        font-size: 1.6rem;
+    }
+
+    .image-gallery {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .image-gallery img {
+        height: 180px;
+    }
+
+    .image-gallery .single-image {
+        grid-column: span 1;
+    }
+
+    .timeline-content {
+        padding: 15px 20px;
+    }
+
+    .timeline-content h4 {
+        font-size: 1.3rem;
+    }
+
+    .faq-item {
+        padding: 20px;
+    }
+
+    .faq-item h4 {
+        font-size: 1.2rem;
+    }
+
+    .research-item h4 {
+        font-size: 1.3rem;
+    }
+}

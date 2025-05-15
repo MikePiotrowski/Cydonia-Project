@@ -38,8 +38,26 @@ const Header = ({currentPage, setCurrentPage}) => {
                       HOME
                   </a>
               </li>
-            <li><a href="#about">ABOUT MARS</a></li>
-            <li><a href="#cydonia">ABOUT CYDONIA</a></li>
+              <li>
+                  <a
+                      href="#about"
+                      className={`${currentPage === 'about' ? 'highlight current' : ''}`}
+                      aria-current={currentPage === 'about' ? 'page' : undefined}
+                      onClick={() => setCurrentPage('about')}
+                  >
+                      ABOUT MARS
+                  </a>
+              </li>
+              <li>
+                  <a
+                      href="#cydonia"
+                      className={`${currentPage === 'cydonia' ? 'highlight current' : ''}`}
+                      aria-current={currentPage === 'cydonia' ? 'page' : undefined}
+                      onClick={() => setCurrentPage('cydonia')}
+                  >
+                      ABOUT CYDONIA
+                  </a>
+              </li>
               <li><a href="#community">COMMUNITY</a></li>
               <li>
                   <a

@@ -1,21 +1,64 @@
 /* Community Component Styles */
 .community-section {
     padding: 100px 0;
-    background-color: var(--background);
-    color: var(--text-dark);
+    background-color: var(--background-color);
+    background-image: linear-gradient(to bottom, var(--background-color), var(--background-alt));
+    color: var(--text-color);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add subtle Mars texture overlay */
+.community-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/img/mars-texture.png');
+    background-size: 200px;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 0;
 }
 
 .community-section.dark {
-    background-color: #1a1a1a;
+    background-image: linear-gradient(to bottom, var(--background-color), var(--background-alt));
     color: var(--text-light);
 }
 
+.community-section.dark::before {
+    opacity: 0.05;
+}
+
+.community-section .container {
+    position: relative;
+    z-index: 1;
+}
+
 .community-section .section-title {
-    color: var(--primary);
+    color: var(--primary-color);
     text-align: center;
     margin-bottom: 30px;
     font-size: 3.2rem;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.community-section .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    border-radius: 2px;
 }
 
 .community-section .section-description {
@@ -24,10 +67,12 @@
     margin: 0 auto 40px;
     font-size: 1.5rem;
     color: var(--text-muted);
+    line-height: 1.8;
 }
 
 .community-section.dark .section-description {
-    color: #b0b0b0;
+    color: var(--text-muted);
+    opacity: 0.9;
 }
 
 /* Tab Navigation */
@@ -37,21 +82,38 @@
     margin-bottom: 30px;
     border-bottom: 2px solid var(--primary-light);
     padding-bottom: 10px;
+    position: relative;
+}
+
+/* Add subtle glow effect to tab navigation */
+.community-tabs::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+    filter: blur(2px);
+    opacity: 0.7;
 }
 
 .tab-button {
     background: transparent;
     border: none;
-    padding: 12px 24px;
-    margin: 0 5px;
+    padding: 14px 28px;
+    margin: 0 8px;
     font-size: 1.1rem;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--text-muted);
     cursor: pointer;
     transition: all 0.3s ease;
-    border-radius: 8px 8px 0 0;
+    border-radius: 10px 10px 0 0;
     position: relative;
     overflow: hidden;
+    letter-spacing: 0.5px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .tab-button:before {
@@ -61,13 +123,14 @@
     left: 0;
     width: 100%;
     height: 3px;
-    background-color: var(--primary);
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
     transform: scaleX(0);
     transition: transform 0.3s ease;
 }
 
 .tab-button:hover {
-    color: var(--primary);
+    color: var(--primary-color);
+    transform: translateY(-3px);
 }
 
 .tab-button:hover:before {
@@ -75,20 +138,29 @@
 }
 
 .tab-button.active {
-    color: var(--primary);
+    color: var(--primary-color);
     font-weight: 700;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .tab-button.active:before {
     transform: scaleX(1);
+    height: 4px;
 }
 
 .tab-button i {
-    margin-right: 8px;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+}
+
+.tab-button:hover i {
+    transform: scale(1.2);
 }
 
 .community-section.dark .tab-button {
-    color: #b0b0b0;
+    color: var(--text-muted);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .community-section.dark .tab-button:hover,
@@ -96,19 +168,49 @@
     color: var(--primary-light);
 }
 
+.community-section.dark .tab-button.active {
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.3);
+}
+
 /* Tab Content Container */
 .tab-content {
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
+    border-radius: 15px;
+    padding: 35px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Add subtle Mars-themed decoration to tab content */
+.tab-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, var(--primary-dark), var(--primary-color), var(--primary-light));
+    opacity: 0.8;
+}
+
+.tab-content:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
 }
 
 .community-section.dark .tab-content {
-    background-color: rgba(40, 40, 40, 0.8);
+    background: linear-gradient(135deg, rgba(40, 40, 40, 0.9), rgba(30, 30, 30, 0.7));
     border: 1px solid rgba(80, 80, 80, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.community-section.dark .tab-content:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
 }
 
 /* Forum Section Styles */
@@ -151,7 +253,7 @@
 }
 
 .new-post-form h4, .submission-form h4 {
-    color: var(--primary);
+    color: var(--primary-color);
     margin-bottom: 20px;
     font-size: 1.4rem;
     border-bottom: 2px solid var(--primary-light);
@@ -166,11 +268,11 @@
     display: block;
     margin-bottom: 8px;
     font-weight: 500;
-    color: var(--text-dark);
+    color: var(--text-color);
 }
 
 .community-section.dark .form-group label {
-    color: #e0e0e0;
+    color: var(--text-light);
 }
 
 .form-group input[type="text"],
@@ -210,23 +312,50 @@
 }
 
 .submit-button {
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
     color: white;
     border: none;
     padding: 12px 25px;
-    border-radius: 8px;
+    border-radius: 30px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(var(--primary-rgb), 0.3);
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
     display: inline-block;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.submit-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0));
+    transition: all 0.5s ease;
+    z-index: -1;
 }
 
 .submit-button:hover {
-    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(var(--primary-rgb), 0.4);
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.4);
+}
+
+.submit-button:hover::before {
+    left: 100%;
+}
+
+.submit-button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(var(--primary-rgb), 0.3);
 }
 
 /* Forum Posts */
@@ -235,11 +364,23 @@
 }
 
 .forum-posts h4 {
-    color: var(--primary);
+    color: var(--primary-color);
     margin-bottom: 20px;
     font-size: 1.4rem;
     border-bottom: 2px solid var(--primary-light);
     padding-bottom: 10px;
+    position: relative;
+}
+
+.forum-posts h4::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    border-radius: 2px;
 }
 
 .forum-post {
@@ -270,6 +411,11 @@
     color: var(--primary-dark);
     font-size: 1.3rem;
     margin-bottom: 8px;
+    transition: all 0.3s ease;
+}
+
+.forum-post:hover .post-header h5 {
+    color: var(--primary-color);
 }
 
 .community-section.dark .post-header h5 {
@@ -297,16 +443,40 @@
 }
 
 .tag {
-    background-color: rgba(var(--primary-rgb), 0.1);
-    color: var(--primary);
-    padding: 4px 10px;
+    background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.1), rgba(var(--primary-rgb), 0.05));
+    color: var(--primary-color);
+    padding: 6px 15px;
     border-radius: 20px;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.tag::before {
+    content: '#';
+    margin-right: 5px;
+    font-weight: 700;
+    opacity: 0.7;
+}
+
+.tag:hover {
+    background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.15), rgba(var(--primary-rgb), 0.1));
+    transform: translateY(-3px);
+    box-shadow: 0 3px 8px rgba(var(--primary-rgb), 0.2);
+    border-color: rgba(var(--primary-rgb), 0.2);
 }
 
 .community-section.dark .tag {
-    background-color: rgba(var(--primary-rgb), 0.2);
+    background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.15), rgba(var(--primary-rgb), 0.1));
+}
+
+.community-section.dark .tag:hover {
+    background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.25), rgba(var(--primary-rgb), 0.15));
+    box-shadow: 0 3px 8px rgba(var(--primary-rgb), 0.3);
 }
 
 .post-actions {
@@ -316,22 +486,47 @@
 
 .action-button {
     background: transparent;
-    border: 1px solid var(--primary);
-    color: var(--primary);
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 0.9rem;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.action-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    transition: all 0.3s ease;
+    z-index: -1;
+    opacity: 0.9;
 }
 
 .action-button:hover {
-    background-color: var(--primary);
     color: white;
 }
 
+.action-button:hover::before {
+    width: 100%;
+}
+
 .action-button i {
-    margin-right: 5px;
+    margin-right: 8px;
+    transition: all 0.3s ease;
+}
+
+.action-button:hover i {
+    transform: scale(1.2);
 }
 
 /* Submissions Section Styles */
@@ -417,19 +612,44 @@
 }
 
 .view-details-button {
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
     color: white;
     border: none;
-    padding: 8px 15px;
-    border-radius: 6px;
-    font-size: 0.9rem;
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-size: 0.95rem;
     width: 100%;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.2);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.view-details-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0));
+    transition: all 0.5s ease;
+    z-index: -1;
 }
 
 .view-details-button:hover {
-    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.3);
+}
+
+.view-details-button:hover::before {
+    left: 100%;
 }
 
 /* Mapping Section Styles */
@@ -468,23 +688,47 @@
 }
 
 .map-button {
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
     color: white;
     border: none;
-    padding: 12px 25px;
-    border-radius: 8px;
-    font-size: 1rem;
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-size: 1.1rem;
     font-weight: 600;
     margin-top: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(var(--primary-rgb), 0.3);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.map-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0));
+    transition: all 0.5s ease;
+    z-index: -1;
 }
 
 .map-button:hover {
-    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(var(--primary-rgb), 0.4);
+}
+
+.map-button:hover::before {
+    left: 100%;
 }
 
 .map-controls {
@@ -602,18 +846,40 @@
 
 .view-on-map-button {
     background: transparent;
-    border: 1px solid var(--primary);
-    color: var(--primary);
-    padding: 8px 15px;
-    border-radius: 6px;
-    font-size: 0.9rem;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.view-on-map-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    transition: all 0.3s ease;
+    z-index: -1;
+    opacity: 0.9;
 }
 
 .view-on-map-button:hover {
-    background-color: var(--primary);
     color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.2);
+}
+
+.view-on-map-button:hover::before {
+    width: 100%;
 }
 
 /* Join Mapping Section */
@@ -643,33 +909,68 @@
 }
 
 .join-button, .tutorial-button {
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
     color: white;
     border: none;
-    padding: 12px 25px;
-    border-radius: 8px;
-    font-size: 1rem;
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-size: 1.1rem;
     font-weight: 600;
-    margin: 0 10px;
+    margin: 0 15px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(var(--primary-rgb), 0.3);
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.join-button::before, .tutorial-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0));
+    transition: all 0.5s ease;
+    z-index: -1;
 }
 
 .join-button:hover, .tutorial-button:hover {
-    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(var(--primary-rgb), 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(var(--primary-rgb), 0.4);
+}
+
+.join-button:hover::before, .tutorial-button:hover::before {
+    left: 100%;
+}
+
+.join-button:active, .tutorial-button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(var(--primary-rgb), 0.3);
 }
 
 .tutorial-button {
     background: transparent;
-    border: 2px solid var(--primary);
-    color: var(--primary);
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.15);
 }
 
 .tutorial-button:hover {
     background: rgba(var(--primary-rgb), 0.1);
+    box-shadow: 0 8px 25px rgba(var(--primary-rgb), 0.25);
+}
+
+.tutorial-button:hover::before {
+    background: linear-gradient(90deg,
+    rgba(var(--primary-rgb), 0),
+    rgba(var(--primary-rgb), 0.1),
+    rgba(var(--primary-rgb), 0));
 }
 
 /* Responsive Adjustments */
