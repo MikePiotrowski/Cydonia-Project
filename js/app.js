@@ -3111,3 +3111,4 @@ function initializeAccessibilityControls() {
         document.head.appendChild(style);
     }
 }
+

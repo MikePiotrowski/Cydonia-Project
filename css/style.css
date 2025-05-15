@@ -1,6 +1,22 @@
 :root {
-  --scroll-speed-color: #8b4513; /* Default scrollbar color, will be updated by JS */
-  --scrollbar-cursor-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='%23e8491d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 19V5'%3E%3C/path%3E%3Cpath d='M5 12l7-7 7 7'%3E%3C/path%3E%3C/svg%3E");
+  /* Main color palette */
+  --primary-dark: #7c2305; /* Deep rust red */
+  --primary: #c13e1b; /* Rich Mars red */
+  --primary-light: #e85c3a; /* Bright Mars orange */
+  --accent: #f39c12; /* Mars sand/gold */
+  --accent-dark: #d35400; /* Deep orange */
+  --background: #f8f4f1; /* Light sand/beige */
+  --background-alt: #f0e6e0; /* Slightly darker sand */
+  --text-dark: #2d2d2d; /* Almost black */
+  --text-light: #ffffff; /* White */
+  --text-muted: #6d6d6d; /* Medium gray */
+
+  /* Scrollbar colors */
+  --scroll-speed-color: #7c2305; /* Default scrollbar color, will be updated by JS */
+  --scrollbar-cursor-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='%23e85c3a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 19V5'%3E%3C/path%3E%3Cpath d='M5 12l7-7 7 7'%3E%3C/path%3E%3C/svg%3E");
+  --scrollbar-track: #f8f4f1;
+  --scrollbar-thumb: linear-gradient(to bottom, #7c2305, #c13e1b);
+  --scrollbar-thumb-hover: linear-gradient(to bottom, #c13e1b, #e85c3a);
 }
 
 body{
@@ -9,72 +25,147 @@ body{
   line-height: 1.6;
   padding: 0;
   margin: 0;
-  background-color: #f8f4f1;
-  color: #333;
+  background-color: var(--background);
+  color: var(--text-dark);
   scroll-behavior: smooth;
   overflow-x: hidden;
+  background-image: linear-gradient(to bottom, var(--background), var(--background-alt));
+  background-attachment: fixed;
 }
 
 /* Scrollbar Customization */
 /* For Webkit browsers (Chrome, Safari, newer versions of Opera) */
 ::-webkit-scrollbar {
-  width: 14px;
-  height: 14px;
+  width: 16px; /* Slightly wider scrollbar */
+  height: 16px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f8f4f1;
+  background: var(--background);
   border-radius: 10px;
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.15);
   cursor: var(--scrollbar-cursor-url), pointer;
+  background-image: linear-gradient(to right,
+  rgba(255, 255, 255, 0.05) 1px,
+  transparent 1px
+  );
+  background-size: 4px 100%;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #8b4513, #a0522d);
-  border-radius: 10px;
-  border: 2px solid #f8f4f1;
-  box-shadow: 0 0 8px rgba(0,0,0,0.3), 0 0 5px var(--scroll-speed-color);
-  transition: all 0.3s ease, box-shadow 0.1s ease;
+  /* Metallic gradient with Mars colors */
+  background: linear-gradient(135deg,
+  var(--primary-dark) 0%,
+  var(--primary) 30%,
+  rgba(230, 120, 80, 0.9) 45%,
+  var(--primary) 60%,
+  var(--primary-dark) 100%
+  );
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.4),
+  inset 0 -1px 3px rgba(0, 0, 0, 0.4),
+  0 0 8px rgba(0, 0, 0, 0.3);
   cursor: grab;
+  transition: all 0.3s ease;
+  /* Subtle metallic texture */
+  background-image: repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 2px,
+          rgba(255, 255, 255, 0.03) 2px,
+          rgba(255, 255, 255, 0.03) 4px
+  );
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #c1440e, #e8491d);
-  border: 2px solid #f8f4f1;
-  box-shadow: 0 0 12px rgba(232, 73, 29, 0.5);
+  background: linear-gradient(135deg,
+  var(--primary) 0%,
+  var(--primary-light) 40%,
+  rgba(255, 150, 100, 0.9) 50%,
+  var(--primary-light) 60%,
+  var(--primary) 100%
+  );
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.5),
+  inset 0 -1px 3px rgba(0, 0, 0, 0.3),
+  0 0 12px rgba(0, 0, 0, 0.4);
   cursor: grabbing;
 }
 
 ::-webkit-scrollbar-thumb:active {
-  background: linear-gradient(to bottom, #e8491d, #ff6b35);
+  background: linear-gradient(135deg,
+  var(--primary-light) 0%,
+  var(--primary) 100%
+  );
   cursor: grabbing;
   transform: scale(0.98);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3),
+  inset 0 -1px 2px rgba(0, 0, 0, 0.5),
+  0 0 8px rgba(0, 0, 0, 0.5);
 }
 
 ::-webkit-scrollbar-corner {
-  background: #f8f4f1;
+  background: var(--background);
+  background-image: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.05) 25%,
+          transparent 25%,
+          transparent 50%,
+          rgba(0, 0, 0, 0.05) 50%,
+          rgba(0, 0, 0, 0.05) 75%,
+          transparent 75%
+  );
+  background-size: 10px 10px;
 }
 
 /* Scrollbar button styles (arrows at the ends) */
 ::-webkit-scrollbar-button {
   display: block;
-  height: 10px;
-  width: 10px;
-  background: #8b4513;
+  height: 12px;
+  width: 12px;
+  background: linear-gradient(to bottom,
+  var(--primary-dark) 0%,
+  var(--primary) 100%
+  );
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.2s ease;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3),
+  0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 ::-webkit-scrollbar-button:hover {
-  background: #c1440e;
+  background: linear-gradient(to bottom,
+  var(--primary) 0%,
+  var(--primary-light) 100%
+  );
   transform: scale(1.2);
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.4),
+  0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 /* For Firefox */
 * {
-  scrollbar-width: thin;
-  scrollbar-color: #8b4513 #f8f4f1;
+  scrollbar-width: auto; /* Changed from thin to auto for wider scrollbar */
+  scrollbar-color: var(--primary) var(--background);
+}
+
+/* Additional Firefox scrollbar customization using media queries */
+@supports (-moz-appearance:none) {
+  /* This targets only Firefox */
+  html {
+    /* Create a more metallic appearance for Firefox scrollbars */
+    --firefox-scrollbar-color: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    scrollbar-color: var(--primary) rgba(248, 244, 241, 0.8);
+  }
+
+  /* Add a custom scrollbar track for Firefox using pseudo-elements where possible */
+  .scrollbar-track-firefox {
+    background: var(--background);
+    border-radius: 10px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.15);
+  }
 }
 
 /* Custom scrollbar progress indicator */
@@ -84,16 +175,17 @@ body{
   left: 0;
   width: 100%;
   height: 5px;
-  background: rgba(139, 69, 19, 0.2);
+  background: rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }
 
 .scroll-progress-bar {
   height: 100%;
-  background: linear-gradient(to right, #8b4513, #e8491d);
+  background: linear-gradient(to right, var(--primary-dark), var(--primary-light));
   width: 0%;
   transition: width 0.2s ease;
-  box-shadow: 0 0 10px rgba(232, 73, 29, 0.5);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 0 3px 3px 0;
 }
 
 /* Section indicators on scrollbar - made more subtle and only visible on hover */
@@ -112,7 +204,7 @@ body{
   right: 0;
   width: 4px;
   height: 4px;
-  background: rgba(139, 69, 19, 0.3);
+  background: rgba(124, 35, 5, 0.3); /* primary-dark with opacity */
   border-radius: 2px 0 0 2px;
   z-index: 999;
   transform: translateX(4px);
@@ -125,23 +217,23 @@ body{
   transform: translateX(0);
   width: 8px;
   height: 6px;
-  background: rgba(232, 73, 29, 0.7);
+  background: rgba(193, 62, 27, 0.7); /* primary with opacity */
   opacity: 1;
-  box-shadow: 0 0 5px rgba(232, 73, 29, 0.3);
+  box-shadow: 0 0 5px rgba(193, 62, 27, 0.3);
 }
 
 .section-indicator.active {
-  background: rgba(232, 73, 29, 0.4);
+  background: rgba(232, 92, 58, 0.4); /* primary-light with opacity */
   width: 6px;
   opacity: 0.5;
 }
 
 .scrollbar-hover-area:hover ~ .section-indicator.active,
 .section-indicator.active:hover {
-  background: #e8491d;
+  background: var(--primary-light);
   width: 10px;
   opacity: 1;
-  box-shadow: 0 0 8px rgba(232, 73, 29, 0.5);
+  box-shadow: 0 0 8px rgba(232, 92, 58, 0.5);
 }
 
 /* Accessibility */
@@ -157,17 +249,20 @@ body{
 }
 
 :focus {
-  outline: 3px solid #e8491d;
+  outline: 3px solid var(--primary);
   outline-offset: 2px;
+  box-shadow: 0 0 0 1px var(--background), 0 0 0 4px rgba(193, 62, 27, 0.3);
 }
 
 :focus:not(:focus-visible) {
   outline: none;
+  box-shadow: none;
 }
 
 :focus-visible {
-  outline: 3px solid #e8491d;
+  outline: 3px solid var(--primary);
   outline-offset: 2px;
+  box-shadow: 0 0 0 1px var(--background), 0 0 0 4px rgba(193, 62, 27, 0.3);
 }
 
 /* High contrast mode adjustments */
@@ -185,15 +280,22 @@ body{
   position: absolute;
   top: -40px;
   left: 0;
-  background: #e8491d;
-  color: white;
-  padding: 8px;
+  background: var(--primary);
+  color: var(--text-light);
+  padding: 10px 15px;
   z-index: 100;
-  transition: top 0.3s;
+  transition: top 0.3s ease, background-color 0.2s ease;
+  border-radius: 0 0 4px 0;
+  font-weight: 500;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .skip-link:focus {
   top: 0;
+}
+
+.skip-link:hover {
+  background: var(--primary-light);
 }
 
 /* Global */
@@ -210,61 +312,136 @@ ul{
 
 .button_1, button.button {
   height: 40px;
-  background: #c1440e;
+  background: var(--primary);
   border: 0;
   border-radius: 4px;
   padding-left: 20px;
   padding-right: 20px;
-  color: #ffffff;
+  color: var(--text-light);
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
 }
 
 .button_1:hover, button.button:hover {
-  background: #e8491d;
+  background: var(--primary-light);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+.button_1:active, button.button:active {
+  background: var(--primary-dark);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transform: translateY(1px);
+}
+
+.button_1::before, button.button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.7s ease;
+}
+
+.button_1:hover::before, button.button:hover::before {
+  left: 100%;
 }
 
 .dark{
   padding: 20px;
-  background: #8b4513;
-  color: #ffffff;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  color: var(--text-light);
   margin-top: 15px;
   margin-bottom: 15px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  border-left: 4px solid var(--accent);
+  position: relative;
+  overflow: hidden;
+}
+
+.dark::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.1), transparent 70%);
+  pointer-events: none;
 }
 
 /* Header **/
 header{
-  background: linear-gradient(to right, #8b4513, #a0522d);
-  color: #ffffff;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  color: var(--text-light);
   padding-top: 20px;
   padding-bottom: 20px;
   min-height: 70px;
-  border-bottom: #e8491d 3px solid;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  border-bottom: var(--accent) 3px solid;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   position: sticky;
   top: 0;
   z-index: 100;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), transparent);
+  pointer-events: none;
 }
 
 header.scrolled {
   padding-top: 10px;
   padding-bottom: 10px;
-  background: rgba(139, 69, 19, 0.95);
-  backdrop-filter: blur(5px);
+  background: var(--primary-dark);
+  opacity: 0.97;
+  backdrop-filter: blur(8px);
 }
 
 header a{
-  color: #ffffff;
+  color: var(--text-light);
   text-decoration: none;
   text-transform: uppercase;
   font-size: 16px;
   font-weight: 500;
   transition: all 0.3s ease;
   position: relative;
+}
+
+header a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--accent);
+  transition: width 0.3s ease;
+  opacity: 0.7;
+}
+
+header a:hover::after {
+  width: 100%;
+}
+
+header a:hover {
+  color: var(--accent);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
 
 header li{
@@ -282,17 +459,39 @@ header #branding h1{
   margin: 0;
   font-size: 28px;
   letter-spacing: 1px;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-  transition: transform 0.3s ease;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  background: linear-gradient(to right, var(--text-light), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
 header #branding h1:hover {
   transform: scale(1.05);
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
 }
 
 header nav{
   float: right;
   margin-top: 10px;
+}
+
+/* Current page indicator */
+header a.current,
+header a.highlight.current {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+header a.current::after,
+header a.highlight.current::after {
+  width: 100%;
+  height: 3px;
+  background-color: var(--accent);
+  opacity: 1;
+  box-shadow: 0 0 5px rgba(243, 156, 18, 0.5);
 }
 
 /* Accessibility Controls */
@@ -307,27 +506,30 @@ header nav{
 }
 
 .accessibility-controls button {
-  background: rgba(139, 69, 19, 0.8);
-  color: white;
+  background: rgba(255, 255, 255, 0.15);
   border: none;
-  border-radius: 4px;
-  width: 36px;
-  height: 36px;
+  color: var(--text-light);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
+  backdrop-filter: blur(2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .accessibility-controls button:hover {
-  background: #e8491d;
+  background: var(--accent);
   transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.accessibility-controls button:focus-visible {
-  outline: 3px solid white;
-  outline-offset: 2px;
+.accessibility-controls button:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .text-size-controls {
@@ -335,10 +537,20 @@ header nav{
   gap: 5px;
 }
 
-#high-contrast-toggle.active {
-  background: #e8491d;
-  box-shadow: 0 0 10px rgba(232, 73, 29, 0.7);
+/* Styles for accessibility controls buttons are defined above */
+
+.accessibility-controls button:focus-visible {
+  outline: 2px solid var(--text-light);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
 }
+
+#high-contrast-toggle.active {
+  background: var(--accent);
+  box-shadow: 0 0 10px rgba(243, 156, 18, 0.4);
+  transform: scale(1.05);
+}
+
 
 /* High Contrast Mode Styles */
 body.high-contrast {
@@ -440,7 +652,7 @@ header a:hover{
   background-size: cover;
   text-align: center;
   position: relative;
-  color: #ffffff;
+  color: var(--text-light);
 }
 
 #showcase::before {
@@ -450,51 +662,100 @@ header a:hover{
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: linear-gradient(135deg, rgba(124, 35, 5, 0.7), rgba(193, 62, 27, 0.7));
+}
+
+#showcase::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, transparent, rgba(0, 0, 0, 0.5));
+  z-index: 1;
 }
 
 #showcase .container {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 #showcase h1{
   margin-top: 120px;
   font-size: 60px;
   margin-bottom: 20px;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
   font-weight: 700;
+  background: linear-gradient(to right, var(--text-light), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  background-size: 200% auto;
+  animation: textShimmer 3s infinite alternate;
+}
+
+@keyframes textShimmer {
+  from {
+    background-position: 0% center;
+  }
+  to {
+    background-position: 100% center;
+  }
 }
 
 #showcase p{
-    font-size: 22px;
-    max-width: 800px;
-    margin: 0 auto 30px auto;
-    line-height: 1.6;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+  font-size: 22px;
+  max-width: 800px;
+  margin: 0 auto 30px auto;
+  line-height: 1.6;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 
 .showcase-btn {
     display: inline-block;
-    background: #c1440e;
-    color: #ffffff;
+  background: var(--accent);
+  color: var(--text-light);
     padding: 15px 30px;
-    border-radius: 5px;
+  border-radius: 30px;
     font-size: 18px;
     font-weight: bold;
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     border: 2px solid transparent;
     margin-top: 20px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.showcase-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, var(--primary), var(--primary-light));
+  z-index: -1;
+  transition: all 0.5s ease;
+  transform: scaleX(0);
+  transform-origin: left;
 }
 
 .showcase-btn:hover {
-    background: #e8491d;
+  color: var(--text-light);
     transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  border-color: var(--accent);
+}
+
+.showcase-btn:hover::before {
+  transform: scaleX(1);
 }
 
 .showcase-btn:active {
@@ -505,11 +766,13 @@ header a:hover{
 /* Newsletter */
 #newsletter{
   padding: 40px 0;
-  color: #ffffff;
-  background: linear-gradient(to right, #8b4513, #a0522d);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  color: var(--text-light);
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
   position: relative;
   overflow: hidden;
+  border-top: 3px solid var(--accent);
+  border-bottom: 3px solid var(--accent);
 }
 
 #newsletter::before {
@@ -519,7 +782,7 @@ header a:hover{
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
   animation: pulse 15s infinite linear;
   z-index: 1;
 }
@@ -551,9 +814,11 @@ header a:hover{
 #newsletter h1{
   margin: 0;
   font-size: 28px;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
   position: relative;
   display: inline-block;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 #newsletter h1::after {
@@ -563,12 +828,15 @@ header a:hover{
   left: 0;
   width: 50px;
   height: 3px;
-  background: #ffd700;
-  transition: width 0.3s ease;
+  background: var(--accent);
+  transition: all 0.3s ease;
+  border-radius: 3px;
+  box-shadow: 0 0 8px rgba(243, 156, 18, 0.5);
 }
 
 #newsletter h1:hover::after {
   width: 100%;
+  background: linear-gradient(to right, var(--accent), var(--accent-dark));
 }
 
 #newsletter form {
@@ -578,35 +846,57 @@ header a:hover{
 }
 
 #newsletter input[type="email"]{
-  padding: 12px 15px;
-  height: 46px;
+  padding: 12px 20px;
+  height: 50px;
   width: 320px;
   border: none;
-  border-radius: 4px 0 0 4px;
+  border-radius: 25px 0 0 25px;
   font-size: 16px;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1), 0 0 0 2px transparent;
   transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.95);
 }
 
 #newsletter input[type="email"]:focus {
   outline: none;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.2), 0 0 8px rgba(255, 215, 0, 0.6);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1), 0 0 0 2px var(--accent);
+  background-color: #ffffff;
 }
 
 #newsletter button {
-  height: 46px;
-  border-radius: 0 4px 4px 0;
+  height: 50px;
+  border-radius: 0 25px 25px 0;
   margin-left: -1px;
-  padding: 0 25px;
+  padding: 0 30px;
   font-size: 16px;
   text-transform: uppercase;
   letter-spacing: 1px;
+  font-weight: 600;
   transition: all 0.3s ease;
+  background: var(--accent);
+  position: relative;
+  overflow: hidden;
+}
+
+#newsletter button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.7s ease;
 }
 
 #newsletter button:hover {
-  background: #ff6b35;
+  background: var(--accent-dark);
   transform: translateX(3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+#newsletter button:hover::before {
+  left: 100%;
 }
 
 /* Coming Soon Section */
