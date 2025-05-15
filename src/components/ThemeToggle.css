@@ -57,9 +57,9 @@
 }
 
 .theme-toggle-btn.dark {
-    background: linear-gradient(135deg, #f8c630, #ffb700);
-  color: #333;
-    border: 2px solid rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #4d9de0, #7e57c2);
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Animation for icon */
@@ -105,6 +105,11 @@
     transform: translateY(10px);
     animation: fadeInTooltip 0.3s forwards;
     z-index: 100;
+}
+
+/* Ensure tooltip text is readable in dark mode */
+[data-theme="dark"] .theme-tooltip {
+    color: #fff;
 }
 
 .theme-tooltip::after {

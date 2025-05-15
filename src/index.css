@@ -19,21 +19,21 @@
     transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
 }
 
-/* Dark theme */
+/* Dark theme - Classic style */
 [data-theme="dark"] {
-  --primary-color: #ff6b35;
-  --secondary-color: #f8c630;
-    --background-color: #121212;
-    --text-color: #ffffff;
-  --accent-color: #ff8c42;
-    --header-bg: #0a0a0a;
-    --header-text: #ffffff;
-    --footer-bg: #0a0a0a;
-    --footer-text: #ffffff;
-    --card-bg: #1e1e1e;
-    --card-shadow: rgba(0, 0, 0, 0.5);
-    --border-color: #333;
-  --scroll-speed-color: #f8c630;
+  --primary-color: #e8491d; /* Keep the same primary color as light mode for consistent branding */
+  --secondary-color: #7e57c2;
+  --background-color: #2c3e50;
+  --text-color: #f8f4f1; /* Changed to light color for better visibility on dark background */
+  --accent-color: #e8491d; /* Keep the same accent color as primary for consistent branding */
+  --header-bg: #1a2530;
+  --header-text: #fff;
+  --footer-bg: #1a2530;
+  --footer-text: #fff;
+  --card-bg: #34495e;
+  --card-shadow: rgba(0, 0, 0, 0.3);
+  --border-color: #546e7a;
+  --scroll-speed-color: #7e57c2;
 }
 
 /* High contrast theme */
