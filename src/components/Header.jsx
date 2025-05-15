@@ -1,24 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import './Header.css';
+import useScrollPosition from '../hooks/useScrollPosition';
+import withMemo from '../hoc/withMemo';
 
 const Header = ({currentPage, setCurrentPage}) => {
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-      return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+    // Use custom hook for scroll position
+    const scrollPosition = useScrollPosition();
+    const isScrolled = scrollPosition > 50;
 
     return (
     <header role="banner" className={isScrolled ? 'scrolled' : ''}>
@@ -102,4 +91,11 @@ const Header = ({currentPage, setCurrentPage}) => {
   );
 };
 
-export default Header;
+// PropTypes validation
+Header.propTypes = {
+    currentPage: PropTypes.string.isRequired,
+    setCurrentPage: PropTypes.func.isRequired
+};
+
+// Export memoized component to prevent unnecessary re-renders
+export default withMemo(Header);

@@ -1,5 +1,6 @@
 import React from 'react';
 import './Showcase.css';
+import withMemo from '../hoc/withMemo';
 
 const Showcase = () => {
   return (
@@ -18,4 +19,5 @@ const Showcase = () => {
   );
 };
 
-export default Showcase;
+// Export memoized component to prevent unnecessary re-renders
+export default withMemo(Showcase);

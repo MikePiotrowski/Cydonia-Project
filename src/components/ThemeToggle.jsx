@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useAppContext} from '../context/AppContext';
 import './ThemeToggle.css';
+import withMemo from '../hoc/withMemo';
 
 const ThemeToggle = () => {
   const { theme, toggleTheme } = useAppContext();
@@ -51,4 +52,5 @@ const ThemeToggle = () => {
   );
 };
 
-export default ThemeToggle;
+// Export memoized component to prevent unnecessary re-renders
+export default withMemo(ThemeToggle);

@@ -1,5 +1,6 @@
 import React from 'react';
 import './Footer.css';
+import withMemo from '../hoc/withMemo';
 
 const Footer = () => {
   return (
@@ -37,4 +38,5 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+// Export memoized component to prevent unnecessary re-renders
+export default withMemo(Footer);

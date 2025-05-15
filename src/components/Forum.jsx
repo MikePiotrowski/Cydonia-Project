@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './Forum.css';
 import {useAppContext} from '../context/AppContext';
+import useDebounce from '../hooks/useDebounce';
 
 const Forum = () => {
     const {theme} = useAppContext();
@@ -69,7 +70,8 @@ const Forum = () => {
     ]);
 
     const [activeCategory, setActiveCategory] = useState('all');
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchInput, setSearchInput] = useState('');
+    const [searchTerm, setSearchTerm] = useDebounce('', 300);
 
     const handleInputChange = (e) => {
         const {name, value} = e.target;
