@@ -55,11 +55,28 @@ header li a {
   padding: 10px;
   display: block;
   transition: all 0.3s;
+    position: relative;
+}
+
+header li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+    opacity: 0.7;
 }
 
 header li a:hover {
-  color: var(--primary-color);
+    color: var(--accent-color);
   transform: translateY(-2px);
+}
+
+header li a:hover::after {
+    width: 100%;
 }
 
 header li a.current {

@@ -1,7 +1,9 @@
 /* Showcase section */
 #showcase {
     min-height: 700px;
-  background: url('/img/showcase.jpg') no-repeat center center/cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
   text-align: center;
   color: white;
     padding: 150px 0;
@@ -111,6 +113,7 @@
     position: relative;
     overflow: hidden;
     z-index: 1;
+    border-bottom: 3px solid var(--accent-color);
 }
 
 .showcase-btn::before {
