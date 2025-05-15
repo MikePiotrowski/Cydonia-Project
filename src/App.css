@@ -325,7 +325,7 @@ footer::before {
 }
 
 .App.dark footer {
-    background: linear-gradient(to bottom, rgba(26, 37, 48, 0.95), rgba(26, 37, 48, 0.98));
+    background: linear-gradient(to bottom, rgba(90, 26, 4, 0.95), rgba(90, 26, 4, 0.98)); /* Darker Mars theme for dark mode */
 }
 
 footer .footer-content {

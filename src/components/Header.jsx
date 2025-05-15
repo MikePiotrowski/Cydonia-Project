@@ -33,7 +33,10 @@ const Header = ({currentPage, setCurrentPage}) => {
                       href="#home"
                       className={`${currentPage === 'home' ? 'highlight current' : ''}`}
                       aria-current={currentPage === 'home' ? 'page' : undefined}
-                      onClick={() => setCurrentPage('home')}
+                      onClick={() => {
+                          setCurrentPage('home');
+                          window.scrollTo(0, 0);
+                      }}
                   >
                       HOME
                   </a>
@@ -43,7 +46,10 @@ const Header = ({currentPage, setCurrentPage}) => {
                       href="#about"
                       className={`${currentPage === 'about' ? 'highlight current' : ''}`}
                       aria-current={currentPage === 'about' ? 'page' : undefined}
-                      onClick={() => setCurrentPage('about')}
+                      onClick={() => {
+                          setCurrentPage('about');
+                          window.scrollTo(0, 0);
+                      }}
                   >
                       ABOUT MARS
                   </a>
@@ -53,18 +59,24 @@ const Header = ({currentPage, setCurrentPage}) => {
                       href="#cydonia"
                       className={`${currentPage === 'cydonia' ? 'highlight current' : ''}`}
                       aria-current={currentPage === 'cydonia' ? 'page' : undefined}
-                      onClick={() => setCurrentPage('cydonia')}
+                      onClick={() => {
+                          setCurrentPage('cydonia');
+                          window.scrollTo(0, 0);
+                      }}
                   >
                       ABOUT CYDONIA
                   </a>
               </li>
-              <li><a href="#community">COMMUNITY</a></li>
+              <li><a href="#community" onClick={() => window.scrollTo(0, 0)}>COMMUNITY</a></li>
               <li>
                   <a
                       href="#forum"
                       className={`${currentPage === 'forum' ? 'highlight current' : ''}`}
                       aria-current={currentPage === 'forum' ? 'page' : undefined}
-                      onClick={() => setCurrentPage('forum')}
+                      onClick={() => {
+                          setCurrentPage('forum');
+                          window.scrollTo(0, 0);
+                      }}
                   >
                       FORUM
                   </a>
@@ -74,12 +86,15 @@ const Header = ({currentPage, setCurrentPage}) => {
                       href="#links"
                       className={`${currentPage === 'links' ? 'highlight current' : ''}`}
                       aria-current={currentPage === 'links' ? 'page' : undefined}
-                      onClick={() => setCurrentPage('links')}
+                      onClick={() => {
+                          setCurrentPage('links');
+                          window.scrollTo(0, 0);
+                      }}
                   >
                       LINKS
                   </a>
               </li>
-            <li><a href="#live">LIVE FEED</a></li>
+              <li><a href="#live" onClick={() => window.scrollTo(0, 0)}>LIVE FEED</a></li>
           </ul>
         </nav>
       </div>

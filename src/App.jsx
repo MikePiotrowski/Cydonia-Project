@@ -41,12 +41,16 @@ function App() {
             const hash = window.location.hash.replace('#', '');
             if (hash === 'forum') {
                 setCurrentPage('forum');
+                window.scrollTo(0, 0); // Scroll to top when navigating to forum
             } else if (hash === 'about') {
                 setCurrentPage('about');
+                window.scrollTo(0, 0); // Scroll to top when navigating to about
             } else if (hash === 'cydonia') {
                 setCurrentPage('cydonia');
+                window.scrollTo(0, 0); // Scroll to top when navigating to cydonia
             } else if (hash === 'links') {
                 setCurrentPage('links');
+                window.scrollTo(0, 0); // Scroll to top when navigating to links
             } else {
                 setCurrentPage('home');
             }
