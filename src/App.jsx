@@ -5,6 +5,7 @@ import Community from './components/Community';
 import Forum from './components/Forum';
 import AboutMars from './components/AboutMars';
 import AboutCydonia from './components/AboutCydonia';
+import Links from './components/Links';
 import Footer from './components/Footer';
 import ThemeToggle from './components/ThemeToggle';
 import PreferencesPanel from './components/PreferencesPanel';
@@ -12,8 +13,8 @@ import {useAppContext} from './context/AppContext';
 import './App.css';
 
 function App() {
-  // Get theme from context
-  const { theme } = useAppContext();
+    // Get theme and user preferences from context
+    const {theme, userPreferences} = useAppContext();
 
     // State for managing current page
     const [currentPage, setCurrentPage] = useState('home');
@@ -44,6 +45,8 @@ function App() {
                 setCurrentPage('about');
             } else if (hash === 'cydonia') {
                 setCurrentPage('cydonia');
+            } else if (hash === 'links') {
+                setCurrentPage('links');
             } else {
                 setCurrentPage('home');
             }
@@ -59,7 +62,7 @@ function App() {
     }, []);
 
   return (
-    <div className={`App ${theme}`}>
+      <div className={`App ${theme} ${userPreferences.highContrast ? 'high-contrast' : ''}`}>
       <a href="#main-content" className="skip-link">Skip to main content</a>
 
         <Header currentPage={currentPage} setCurrentPage={setCurrentPage}/>
@@ -89,6 +92,8 @@ function App() {
               <AboutMars/>
           ) : currentPage === 'cydonia' ? (
               <AboutCydonia/>
+          ) : currentPage === 'links' ? (
+              <Links/>
           ) : null}
 
         <Footer />

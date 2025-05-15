@@ -69,7 +69,16 @@ const Header = ({currentPage, setCurrentPage}) => {
                       FORUM
                   </a>
               </li>
-            <li><a href="#links">LINKS</a></li>
+              <li>
+                  <a
+                      href="#links"
+                      className={`${currentPage === 'links' ? 'highlight current' : ''}`}
+                      aria-current={currentPage === 'links' ? 'page' : undefined}
+                      onClick={() => setCurrentPage('links')}
+                  >
+                      LINKS
+                  </a>
+              </li>
             <li><a href="#live">LIVE FEED</a></li>
           </ul>
         </nav>

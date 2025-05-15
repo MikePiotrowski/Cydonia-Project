@@ -4,7 +4,7 @@ import './Footer.css';
 const Footer = () => {
   return (
     <footer>
-      <div className="container">
+        <div className="footer-content">
         <div className="social-icons">
           <a href="https://www.facebook.com/mike.piotrowski.9" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
             <i className="fab fa-facebook"></i>
@@ -22,7 +22,16 @@ const Footer = () => {
             <i className="fab fa-linkedin"></i>
           </a>
         </div>
-        <p>Mars Cydonia Connection &copy; {new Date().getFullYear()} | Created by Michael Piotrowski</p>
+            <div className="footer-links">
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/services">Services</a>
+                <a href="/links">Resources</a>
+                <a href="/forum">Forum</a>
+            </div>
+            <div className="copyright">
+                <p>Mars Cydonia Connection &copy; {new Date().getFullYear()} | Created by Michael Piotrowski</p>
+            </div>
       </div>
     </footer>
   );
