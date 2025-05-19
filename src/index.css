@@ -1,16 +1,16 @@
 :root {
-    /* Light theme (default) - Mars theme colors */
+    /* Light theme (default) - Modern Mars theme colors */
     /* Main color palette */
-    --primary-dark: #7c2305; /* Deep rust red */
-    --primary-color: #c13e1b; /* Rich Mars red */
-    --primary-light: #e85c3a; /* Bright Mars orange */
-    --accent-color: #f39c12; /* Mars sand/gold */
-    --accent-dark: #d35400; /* Deep orange */
-    --secondary-color: #8b4513; /* Brown */
+    --primary-dark: #8c1c03; /* Deeper rust red */
+    --primary-color: #e94e1b; /* Vibrant Mars red */
+    --primary-light: #ff7f50; /* Coral orange */
+    --accent-color: #ffd166; /* Bright gold */
+    --accent-dark: #ef8354; /* Warm orange */
+    --secondary-color: #2d3142; /* Dark blue-gray */
 
     /* Background colors */
-    --background-color: #f8f4f1; /* Light sand/beige */
-    --background-alt: #f0e6e0; /* Slightly darker sand */
+    --background-color: #faf9f8; /* Clean off-white */
+    --background-alt: #f5f5f5; /* Light gray */
 
     /* Text colors */
     --text-color: #2d2d2d; /* Almost black */
@@ -18,70 +18,72 @@
     --text-muted: #6d6d6d; /* Medium gray */
 
     /* UI elements */
-  --header-bg: #35424a;
-  --header-text: #fff;
-  --footer-bg: #35424a;
-  --footer-text: #fff;
-  --card-bg: #fff;
-  --card-shadow: rgba(0, 0, 0, 0.1);
-  --border-color: #ddd;
+    --header-bg: #2d3142; /* Dark blue-gray */
+    --header-text: #fff;
+    --footer-bg: #2d3142; /* Dark blue-gray */
+    --footer-text: #fff;
+    --card-bg: #fff;
+    --card-shadow: rgba(0, 0, 0, 0.08);
+    --border-color: #eaeaea;
 
     /* Scrollbar colors */
-    --scroll-speed-color: #7c2305; /* Default scrollbar color, will be updated by JS */
-    --scrollbar-cursor-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='%23e85c3a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 19V5'%3E%3C/path%3E%3Cpath d='M5 12l7-7 7 7'%3E%3C/path%3E%3C/svg%3E");
-    --scrollbar-track: #f8f4f1;
-    --scrollbar-thumb: linear-gradient(to bottom, #7c2305, #c13e1b);
-    --scrollbar-thumb-hover: linear-gradient(to bottom, #c13e1b, #e85c3a);
+    --scroll-speed-color: #8c1c03; /* Default scrollbar color, will be updated by JS */
+    --scrollbar-cursor-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='%23ff7f50' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 19V5'%3E%3C/path%3E%3Cpath d='M5 12l7-7 7 7'%3E%3C/path%3E%3C/svg%3E");
+    --scrollbar-track: #f5f5f5;
+    --scrollbar-thumb: linear-gradient(135deg, #8c1c03, #e94e1b);
+    --scrollbar-thumb-hover: linear-gradient(135deg, #e94e1b, #ff7f50);
 
     /* RGB values for rgba usage */
-    --primary-rgb: 193, 62, 27; /* RGB for #c13e1b */
-    --primary-dark-rgb: 124, 35, 5; /* RGB for #7c2305 */
-    --primary-light-rgb: 232, 92, 58; /* RGB for #e85c3a */
-    --accent-rgb: 243, 156, 18; /* RGB for #f39c12 */
+    --primary-rgb: 233, 78, 27; /* RGB for #e94e1b */
+    --primary-dark-rgb: 140, 28, 3; /* RGB for #8c1c03 */
+    --primary-light-rgb: 255, 127, 80; /* RGB for #ff7f50 */
+    --accent-rgb: 255, 209, 102; /* RGB for #ffd166 */
+    --secondary-rgb: 45, 49, 66; /* RGB for #2d3142 */
 
     /* Smooth transition for theme changes */
     transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
 }
 
-/* Dark theme - Enhanced Mars dark style */
+/* Dark theme - Modern Mars dark style */
 [data-theme="dark"] {
     /* Main color palette - refined Mars colors for dark theme with better contrast */
-    --primary-dark: #6b1f05; /* Slightly brighter dark rust red for better visibility */
-    --primary-color: #ff6347; /* Tomato red - brighter and more vibrant */
-    --primary-light: #ff8c69; /* Salmon - softer and more visible on dark backgrounds */
-    --accent-color: #ffd700; /* Gold - higher contrast against dark backgrounds */
-    --accent-dark: #ff6e40; /* Brighter deep orange for better visibility */
-    --secondary-color: #d4845f; /* Lighter brown with better contrast */
+    --primary-dark: #7a1702; /* Deep rust red for better visibility */
+    --primary-color: #ff5a36; /* Bright Mars red - vibrant and modern */
+    --primary-light: #ff8c69; /* Coral - softer and more visible on dark backgrounds */
+    --accent-color: #ffd166; /* Bright gold - high contrast against dark backgrounds */
+    --accent-dark: #ff7f50; /* Coral orange - better visibility */
+    --secondary-color: #9baec8; /* Light blue-gray with better contrast */
 
-    /* Background colors - slightly adjusted for better contrast and reduced eye strain */
-    --background-color: #121212; /* Darker background for better contrast */
-    --background-alt: #1e1e1e; /* Slightly lighter dark background */
+    /* Background colors - adjusted for better contrast and reduced eye strain */
+    --background-color: #1a1a2e; /* Dark blue-tinted background */
+    --background-alt: #242444; /* Slightly lighter dark blue background */
 
     /* Text colors - improved for better readability */
     --text-color: #ffffff; /* Pure white for main text for maximum contrast */
     --text-light: #ffffff; /* White */
-    --text-muted: #cccccc; /* Lighter gray for better readability of secondary text */
+    --text-muted: #d0d0d0; /* Light gray for better readability of secondary text */
 
     /* UI elements - enhanced for better visibility */
-    --header-bg: #1a1a1a;
+    --header-bg: #16213e; /* Dark navy blue */
     --header-text: #ffffff;
-    --footer-bg: #1a1a1a;
+    --footer-bg: #16213e; /* Dark navy blue */
     --footer-text: #ffffff;
-    --card-bg: #2d2d2d;
-    --card-shadow: rgba(0, 0, 0, 0.5); /* Darker shadow for better depth */
-    --border-color: #555; /* Slightly lighter border for better definition */
+    --card-bg: #242444;
+    --card-shadow: rgba(0, 0, 0, 0.3); /* Softer shadow for better depth */
+    --border-color: #444464; /* Slightly lighter border for better definition */
 
     /* Scrollbar colors - enhanced for better visibility */
-    --scroll-speed-color: #ff6347;
-    --scrollbar-track: #1a1a1a;
-    --scrollbar-thumb: linear-gradient(to bottom, #6b1f05, #ff6347);
-    --scrollbar-thumb-hover: linear-gradient(to bottom, #ff6347, #ff8c69);
+    --scroll-speed-color: #ff5a36;
+    --scrollbar-track: #1a1a2e;
+    --scrollbar-thumb: linear-gradient(to bottom, #7a1702, #ff5a36);
+    --scrollbar-thumb-hover: linear-gradient(to bottom, #ff5a36, #ff8c69);
 
     /* RGB values for rgba usage - updated to match new colors */
-    --primary-rgb: 255, 99, 71; /* RGB for #ff6347 */
-    --primary-dark-rgb: 107, 31, 5; /* RGB for #6b1f05 */
+    --primary-rgb: 255, 90, 54; /* RGB for #ff5a36 */
+    --primary-dark-rgb: 122, 23, 2; /* RGB for #7a1702 */
     --primary-light-rgb: 255, 140, 105; /* RGB for #ff8c69 */
-    --accent-rgb: 255, 215, 0; /* RGB for #ffd700 */
+    --accent-rgb: 255, 209, 102; /* RGB for #ffd166 */
+    --secondary-rgb: 155, 174, 200; /* RGB for #9baec8 */
 }
 
 /* High contrast theme */
@@ -117,61 +119,36 @@ body {
 /* Scrollbar Customization */
 /* For Webkit browsers (Chrome, Safari, newer versions of Opera) */
 ::-webkit-scrollbar {
-    width: 16px; /* Slightly wider scrollbar */
-    height: 16px;
+    width: 12px; /* Thinner scrollbar for modern look */
+    height: 12px;
 }
 
 ::-webkit-scrollbar-track {
     background: var(--scrollbar-track, var(--background-color));
-  border-radius: 10px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.15);
-  cursor: var(--scrollbar-cursor-url), pointer;
-    background-image: linear-gradient(to right,
-    rgba(255, 255, 255, 0.05) 1px,
-    transparent 1px
-    );
-    background-size: 4px 100%;
+    border-radius: 8px;
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.1);
+    cursor: var(--scrollbar-cursor-url), pointer;
 }
 
 ::-webkit-scrollbar-thumb {
-    /* Metallic gradient with Mars colors */
+    /* Modern gradient with Mars colors */
     background: var(--scrollbar-thumb, linear-gradient(135deg,
     var(--primary-dark) 0%,
-    var(--primary-color) 30%,
-    rgba(230, 120, 80, 0.9) 45%,
-    var(--primary-color) 60%,
-    var(--primary-dark) 100%
+    var(--primary-color) 100%
     ));
     border-radius: 8px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.4),
-    inset 0 -1px 3px rgba(0, 0, 0, 0.4),
-    0 0 8px rgba(0, 0, 0, 0.3);
-  cursor: grab;
+    border: 2px solid var(--scrollbar-track);
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2);
+    cursor: grab;
     transition: all 0.3s ease;
-    /* Subtle metallic texture */
-    background-image: repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 2px,
-            rgba(255, 255, 255, 0.03) 2px,
-            rgba(255, 255, 255, 0.03) 4px
-    );
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--scrollbar-thumb-hover, linear-gradient(135deg,
     var(--primary-color) 0%,
-    var(--primary-light) 40%,
-    rgba(255, 150, 100, 0.9) 50%,
-    var(--primary-light) 60%,
-    var(--primary-color) 100%
+    var(--primary-light) 100%
     ));
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.5),
-    inset 0 -1px 3px rgba(0, 0, 0, 0.3),
-    0 0 12px rgba(0, 0, 0, 0.4);
-  cursor: grabbing;
+    cursor: grabbing;
 }
 
 ::-webkit-scrollbar-thumb:active {
@@ -179,38 +156,16 @@ body {
     var(--primary-light) 0%,
     var(--primary-color) 100%
     );
-  cursor: grabbing;
-  transform: scale(0.98);
-    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3),
-    inset 0 -1px 2px rgba(0, 0, 0, 0.5),
-    0 0 8px rgba(0, 0, 0, 0.5);
+    cursor: grabbing;
 }
 
 ::-webkit-scrollbar-corner {
-  background: var(--background-color);
-    background-image: linear-gradient(
-            135deg,
-            rgba(var(--primary-rgb), 0.1),
-            transparent
-    );
+    background: var(--background-color);
 }
 
 /* Scrollbar button styles (arrows at the ends) */
 ::-webkit-scrollbar-button {
-  display: block;
-    height: 12px;
-    width: 12px;
-    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.2s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-::-webkit-scrollbar-button:hover {
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-  transform: scale(1.2);
-    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    display: none; /* Hide buttons for cleaner look */
 }
 
 /* For Firefox */
@@ -227,52 +182,52 @@ body {
 }
 
 .button {
-  display: inline-block;
-    padding: 12px 25px;
+    display: inline-block;
+    padding: 14px 32px;
     background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-  color: white;
-  text-decoration: none;
-  border: none;
-    border-radius: 30px;
-  cursor: pointer;
-    transition: all 0.3s ease;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     font-weight: 600;
     font-size: 1rem;
     text-align: center;
-    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
+    box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.25);
     position: relative;
     overflow: hidden;
     z-index: 1;
+    letter-spacing: 0.5px;
 }
 
 .button::before {
     content: '';
     position: absolute;
     top: 0;
-    left: -100%;
+    left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg,
-    rgba(255, 255, 255, 0),
-    rgba(255, 255, 255, 0.2),
-    rgba(255, 255, 255, 0));
-    transition: all 0.5s ease;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
     z-index: -1;
+    transition: opacity 0.4s ease;
+    opacity: 0;
+    border-radius: 50px;
 }
 
 .button:hover {
-    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.4);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(var(--primary-rgb), 0.35);
 }
 
 .button:hover::before {
-    left: 100%;
+    opacity: 1;
 }
 
 .button:active {
-    transform: translateY(-1px);
-    box-shadow: 0 3px 10px rgba(var(--primary-rgb), 0.3);
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 0 5px 15px rgba(var(--primary-rgb), 0.3);
+    transition: all 0.2s ease;
 }
 
 /* Secondary button style */
@@ -280,19 +235,21 @@ body {
     background: transparent;
     border: 2px solid var(--primary-color);
     color: var(--primary-color);
-    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.15);
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.1);
 }
 
 .button.secondary:hover {
-    background: rgba(var(--primary-rgb), 0.1);
-    box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.25);
+    background: rgba(var(--primary-rgb), 0.08);
+    box-shadow: 0 8px 20px rgba(var(--primary-rgb), 0.2);
+    border-color: var(--primary-dark);
+    color: var(--primary-dark);
 }
 
 /* Large button style */
 .button.large {
-    padding: 15px 30px;
+    padding: 16px 36px;
     font-size: 1.1rem;
-    border-radius: 35px;
+    letter-spacing: 0.8px;
 }
 
 .highlight {

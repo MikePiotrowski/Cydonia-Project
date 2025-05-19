@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
    <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
@@ -15,26 +15,24 @@
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="../img/Martian_face_viking_cropped.jpg" type="image/jpeg">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+       <link href="../lib/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
       /* Custom styles for the live feed page */
       #live-feed-showcase {
-        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://mars.nasa.gov/system/resources/detail_files/25640_PIA24937-web.jpg');
-        background-size: cover;
-        background-position: center;
+          background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://mars.nasa.gov/system/resources/detail_files/25640_PIA24937-web.jpg') center / cover;
         color: #fff;
         padding: 100px 0;
         text-align: center;
       }
-      
+
       #live-feed-showcase h1 {
         font-size: 60px;
         margin-bottom: 20px;
         text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
         font-weight: 700;
       }
-      
+
       #live-feed-showcase p {
         font-size: 22px;
         max-width: 800px;
@@ -42,7 +40,7 @@
         line-height: 1.6;
         text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
       }
-      
+
       .live-feed-container {
         background: rgba(20, 20, 20, 0.9);
         border-radius: 15px;
@@ -51,7 +49,7 @@
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         border: 1px solid #e8491d;
       }
-      
+
       .video-container {
         position: relative;
         padding-bottom: 56.25%; /* 16:9 aspect ratio */
@@ -59,7 +57,7 @@
         overflow: hidden;
         margin-bottom: 30px;
       }
-      
+
       .video-container iframe {
         position: absolute;
         top: 0;
@@ -69,7 +67,7 @@
         border: none;
         border-radius: 8px;
       }
-      
+
       .feed-info {
         background: rgba(30, 30, 30, 0.8);
         padding: 20px;
@@ -77,14 +75,14 @@
         margin-top: 20px;
         border-left: 4px solid #e8491d;
       }
-      
+
       .feed-status {
         display: flex;
         justify-content: space-between;
         margin-bottom: 20px;
         flex-wrap: wrap;
       }
-      
+
       .status-item {
         background: rgba(40, 40, 40, 0.7);
         padding: 15px;
@@ -96,27 +94,27 @@
         border-bottom: 3px solid #8b4513;
         transition: transform 0.3s ease;
       }
-      
+
       .status-item:hover {
         transform: translateY(-5px);
         border-bottom-color: #e8491d;
       }
-      
+
       .status-item i {
         font-size: 24px;
         color: #e8491d;
         margin-bottom: 10px;
       }
-      
+
       .status-item h3 {
         margin: 10px 0;
         color: #ffd700;
       }
-      
+
       .mission-updates {
         margin-top: 40px;
       }
-      
+
       .update-item {
         background: rgba(40, 40, 40, 0.7);
         padding: 20px;
@@ -125,46 +123,36 @@
         border-left: 4px solid #8b4513;
         transition: transform 0.3s ease;
       }
-      
+
       .update-item:hover {
         transform: translateX(5px);
         border-left-color: #e8491d;
       }
-      
+
       .update-time {
         color: #ffd700;
         font-weight: bold;
         margin-bottom: 10px;
       }
-      
-      .mars-time {
-        font-family: 'Courier New', monospace;
-        font-size: 24px;
-        color: #ffd700;
-        background: rgba(0, 0, 0, 0.5);
-        padding: 10px;
-        border-radius: 5px;
-        display: inline-block;
-        margin-top: 20px;
-      }
-      
+
+
       .data-section {
         margin-top: 60px;
       }
-      
+
       .data-section h2 {
         color: #e8491d;
         margin-bottom: 30px;
         text-align: center;
         font-size: 36px;
       }
-      
+
       .data-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 30px;
       }
-      
+
       .data-card {
         background: rgba(30, 30, 30, 0.8);
         border-radius: 10px;
@@ -172,36 +160,36 @@
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         border: 1px solid #8b4513;
       }
-      
+
       .data-card:hover {
         transform: translateY(-10px);
         box-shadow: 0 15px 30px rgba(232, 73, 29, 0.3);
         border-color: #e8491d;
       }
-      
+
       .data-card-header {
         background: linear-gradient(to right, #8b4513, #a0522d);
         padding: 15px;
         color: white;
       }
-      
+
       .data-card-body {
         padding: 20px;
       }
-      
+
       .data-card img {
         width: 100%;
         height: 200px;
         object-fit: cover;
       }
-      
+
       /* Pulse animation for live indicator */
       @keyframes pulse {
         0% { opacity: 0.5; }
         50% { opacity: 1; }
         100% { opacity: 0.5; }
       }
-      
+
       .live-indicator {
         display: inline-block;
         background-color: #e8491d;
@@ -212,7 +200,7 @@
         margin-bottom: 20px;
         animation: pulse 2s infinite;
       }
-      
+
       .live-indicator i {
         margin-right: 5px;
       }
@@ -235,33 +223,35 @@
          </nav>
      </div>
    </header>
-   
-   <section id="live-feed-showcase">
+
+    <section id="live-feed-showcase">
      <div class="container">
        <h1>Mars Live Feed</h1>
        <p>Experience Mars in real-time through NASA's live video feeds and up-to-the-minute mission data from the Red Planet.</p>
        <div class="live-indicator"><i class="fas fa-broadcast-tower"></i> LIVE</div>
      </div>
    </section>
-   
-   <section id="mars-live-video">
+
+    <section id="mars-live-video">
      <div class="container">
        <div class="live-feed-container">
          <h2 class="section-title">NASA Live: Mars Video Feed</h2>
          <p class="section-description">Watch live footage from NASA's Mars missions, including rover operations and orbital views of the Red Planet.</p>
-         
-         <div class="video-container">
+
+           <div class="video-container">
            <!-- NASA Live TV embed -->
-           <iframe src="https://www.youtube.com/embed/21X5lGlDOfg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+               <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                       allowfullscreen
+                       src="https://www.youtube.com/embed/21X5lGlDOfg"></iframe>
          </div>
-         
-         <div class="feed-info">
+
+           <div class="feed-info">
            <h3>About This Feed</h3>
            <p>This live feed provides real-time video from NASA's Mars missions. When rovers are actively transmitting, you'll see footage directly from the Martian surface. During quiet periods, the feed may show orbital views, mission control activities, or educational content about Mars exploration.</p>
            <p>Due to the distance between Earth and Mars, there is a communication delay of approximately 5-20 minutes depending on the planets' relative positions.</p>
          </div>
-         
-         <div class="feed-status">
+
+           <div class="feed-status">
            <div class="status-item">
              <i class="fas fa-satellite"></i>
              <h3>Signal Strength</h3>
@@ -286,8 +276,8 @@
        </div>
      </div>
    </section>
-   
-   <section id="mission-control">
+
+    <section id="mission-control">
      <div class="container">
        <div class="data-section">
          <h2>Mission Control Updates</h2>
@@ -305,14 +295,15 @@
            <div class="update-item">
              <div class="update-time">Yesterday, 22:45 UTC</div>
              <h3>Dust Storm Detected in Northern Hemisphere</h3>
-             <p>Orbital instruments have detected a regional dust storm forming in Mars' northern hemisphere. Mission controllers are monitoring the situation and may adjust rover operations if the storm expands.</p>
+               <p>Orbital instruments have detected a regional dust storm forming in Mars' Northern Hemisphere. Mission
+                   controllers are monitoring the situation and may adjust rover operations if the storm expands.</p>
            </div>
          </div>
        </div>
      </div>
    </section>
-   
-   <section id="real-time-data">
+
+    <section id="real-time-data">
      <div class="container">
        <div class="data-section">
          <h2>Real-Time Mars Data</h2>
@@ -355,8 +346,8 @@
        </div>
      </div>
    </section>
-   
-   <section id="upcoming-events">
+
+    <section id="upcoming-events">
      <div class="container">
        <div class="data-section">
          <h2>Upcoming Mars Mission Events</h2>
@@ -385,21 +376,22 @@
              </div>
              <div class="data-card-body">
                <p><i class="far fa-calendar-alt"></i> Date: January 16, 2025</p>
-               <p>Mars will be at opposition, meaning it will be closest to Earth and fully illuminated by the Sun, providing optimal viewing conditions.</p>
+                 <p>Mars will be in opposition, meaning it will be closest to Earth and fully illuminated by the Sun,
+                     providing optimal viewing conditions.</p>
              </div>
            </div>
          </div>
        </div>
      </div>
    </section>
-   
-   <section id="interactive-mars">
+
+    <section id="interactive-mars">
      <div class="container">
        <div class="data-section">
          <h2>Interactive Mars Experience</h2>
          <p class="section-description">Explore Mars through these interactive features that bring the Red Planet to life.</p>
-         
-         <div class="data-grid">
+
+           <div class="data-grid">
            <div class="data-card">
              <div class="data-card-header">
                <h3>Mars in 3D</h3>
@@ -431,8 +423,8 @@
        </div>
      </div>
    </section>
-   
-   <footer>
+
+    <footer>
      <div class="container">
        <div class="social-icons">
          <a href="https://www.facebook.com/mike.piotrowski.9" aria-label="Facebook" target="_blank"><i class="fab fa-facebook"></i></a>
@@ -444,8 +436,8 @@
        <p>Mars Cydonia Connection &copy; 2025 | Created by Michael Piotrowski</p>
      </div>
    </footer>
-   
-   <script>
+
+    <script>
      // Update Mars time
      function updateMarsTime() {
        const now = new Date();
@@ -453,37 +445,36 @@
        const julianDate = now / 86400000 + 2440587.5;
        const marsSol = Math.floor((julianDate - 2451549.5) / 1.027491252) + 44796;
        document.getElementById('mars-time').textContent = `Sol ${marsSol}`;
-       
-       // Update random stats for demo purposes
+
+         // Update random stats for demo purposes
        const signalStrengths = ['Excellent', 'Good', 'Fair', 'Poor'];
-       const randomSignal = signalStrengths[Math.floor(Math.random() * signalStrengths.length)];
-       document.getElementById('signal-strength').textContent = randomSignal;
-       
+         document.getElementById('signal-strength').textContent = signalStrengths[Math.floor(Math.random() * signalStrengths.length)];
+
        const roverPower = Math.floor(Math.random() * 20) + 80; // 80-100%
        document.getElementById('rover-power').textContent = `${roverPower}%`;
-       
-       const surfaceTemp = Math.floor(Math.random() * 15) - 30; // -30 to -15°C
+
+         const surfaceTemp = Math.floor(Math.random() * 15) - 30; // -30 to -15°C
        document.getElementById('surface-temp').textContent = `${surfaceTemp}°C`;
      }
-     
+
      // Update times
      function updateTimes() {
        const imageTime = Math.floor(Math.random() * 5) + 1;
        document.getElementById('image-time').textContent = `${imageTime} hours ago`;
-       
-       const mapTime = Math.floor(Math.random() * 3) + 1;
+
+         const mapTime = Math.floor(Math.random() * 3) + 1;
        document.getElementById('map-time').textContent = `${mapTime} hour${mapTime > 1 ? 's' : ''} ago`;
      }
-     
+
      // Initialize
      document.addEventListener('DOMContentLoaded', function() {
        updateMarsTime();
        updateTimes();
-       
-       // Update Mars time every minute
+
+         // Update Mars time every minute
        setInterval(updateMarsTime, 60000);
-       
-       // Update times every 5 minutes
+
+         // Update times every 5 minutes
        setInterval(updateTimes, 300000);
      });
    </script>

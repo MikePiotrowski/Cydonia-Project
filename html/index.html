@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
    <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
@@ -18,12 +18,12 @@
     <meta name="theme-color" content="#e8491d">
     <link rel="manifest" href="../manifest.json">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+       <link href="../lib/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <!-- Three.js Library for 3D Model -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+       <script src="../lib/js/three.min.js"></script>
+       <script src="../lib/js/OrbitControls.js"></script>
+       <script src="../lib/js/GLTFLoader.js"></script>
    </head>
    <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -73,7 +73,7 @@
                 <form aria-label="Newsletter subscription form">
                  <label for="newsletter-email" class="visually-hidden">Email address</label>
                  <input type="email" id="newsletter-email" placeholder="Enter email..." aria-required="true">
-                 <button type="submit" class="button" aria-label="Subscribe to newsletter">Subscribe</button>
+                    <button aria-label="Subscribe to our newsletter" class="button" type="submit">Subscribe</button>
                 </form>
            </div>
        </section>
@@ -165,7 +165,7 @@
 
        <section id="image-comparison-section">
            <div class="container">
-               <h2 class="section-title">Image Comparison: Then vs Now</h2>
+               <h2 class="section-title">Image Comparison: Then vs. Now</h2>
                <p class="section-description">Compare the original 1976 Viking image of the Face on Mars with higher-resolution images captured by later missions. Slide the divider to reveal how our view of this mysterious formation has evolved over time.</p>
 
                <div class="comparison-container">
@@ -229,7 +229,8 @@
 
                        <div class="photo-modal">
                            <span class="close-modal">&times;</span>
-                           <img class="modal-content" id="modal-img">
+                           <img alt="Mars rover photo modal" class="modal-content" id="modal-img"
+                                src="../img/Martian_face_viking_cropped.jpg">
                            <div id="modal-caption"></div>
                        </div>
                    </div>
@@ -331,7 +332,9 @@
                                    <button aria-label="Adjust volume" class="volume-button">
                                        <i class="fas fa-volume-up"></i>
                                    </button>
-                                   <input class="volume-slider" max="1" min="0" step="0.1" type="range" value="0.7">
+                                   <label class="visually-hidden" for="mars-wind-volume">Mars wind volume</label>
+                                   <input class="volume-slider" id="mars-wind-volume" max="1" min="0" step="0.1"
+                                          type="range" value="0.7">
                                </div>
                                <p class="sound-description">Listen to the winds of Mars as recorded by NASA's
                                    Perseverance rover in Jezero Crater. These are actual sounds from the Martian
@@ -359,7 +362,10 @@
                                    <button aria-label="Adjust volume" class="volume-button">
                                        <i class="fas fa-volume-up"></i>
                                    </button>
-                                   <input class="volume-slider" max="1" min="0" step="0.1" type="range" value="0.7">
+                                   <label class="visually-hidden" for="ingenuity-flight-volume">Ingenuity helicopter
+                                       volume</label>
+                                   <input class="volume-slider" id="ingenuity-flight-volume" max="1" min="0" step="0.1"
+                                          type="range" value="0.7">
                                </div>
                                <p class="sound-description">Hear the sound of the Ingenuity helicopter's blades spinning
                                    in the thin Martian atmosphere, as recorded by the Perseverance rover during one of
@@ -523,7 +529,11 @@
                            <span class="faq-toggle" aria-hidden="true"><i class="fas fa-plus"></i></span>
                        </div>
                        <div class="faq-answer" id="faq-answer-1">
-                           <p>Cydonia is a region on Mars located in the planet's northern hemisphere, in the transition zone between the heavily cratered southern highlands and the smooth northern plains. It's approximately 950 km from the Martian north pole and is most famous for containing several unusual surface features, including what appears to be a humanoid face and pyramid-like structures.</p>
+                           <p>Cydonia is a region on Mars located in the planet's Northern Hemisphere, in the transition
+                               zone between the heavily cratered southern highlands and the smooth northern plains. It's
+                               approximately 950 km from the Martian north pole and is most famous for containing
+                               several unusual surface features, including what appears to be a humanoid face and
+                               pyramid-like structures.</p>
                        </div>
                    </div>
 
